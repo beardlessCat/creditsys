@@ -190,7 +190,7 @@
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>druid</artifactId>
 		    <version>1.1.2</version>
-		</dependency>
+		</dependency> 
 		<dependency>
 		    <groupId>aspectj</groupId>
 		    <artifactId>aspectjweaver</artifactId>
@@ -280,11 +280,16 @@
   	  <!-- ehcache 相关依赖  -->
         <!-- https://mvnrepository.com/artifact/net.sf.ehcache/ehcache-web -->
 	
- <dependency>
-  <groupId>org.ehcache</groupId>
-  <artifactId>ehcache</artifactId>
-  <version>3.0.1</version>
- </dependency>
- 
+		 <dependency>
+		  <groupId>org.ehcache</groupId>
+		  <artifactId>ehcache</artifactId>
+		  <version>3.0.1</version>
+		 </dependency>
+		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+		<dependency>
+		    <groupId>org.freemarker</groupId>
+		    <artifactId>freemarker</artifactId>
+		    <version>2.3.26-incubating</version>
+		</dependency>
 	</dependencies>
 </project>

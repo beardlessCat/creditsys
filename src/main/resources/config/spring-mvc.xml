@@ -22,18 +22,47 @@
 	<!-- 配置多个视图管理器，重写checkResource方法 -->
 	<bean id="htmlviewResolver"  class="org.springframework.web.servlet.view.InternalResourceViewResolver">   
         <property name="viewClass" value="com.creidtsys.utils.HtmlResourceView"/>  
-        <property name="order" value="0" />  
+        <property name="order" value="1" />  
         <property name="prefix" value="/WEB-INF/"/>  
         <property name="suffix" value=".html" />    
         <property name="contentType" value="text/html;charset=UTF-8"></property>    
     </bean>  
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-		<property name="order" value="1" />  
+		<property name="order" value="2" />  
 		<property name="prefix" value="/WEB-INF/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
+	<!-- 设置freeMarker的配置文件路径 -->  
+    <bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">  
+        <property name="location" value="classpath:config/freemarker.properties" />  
+    </bean>  
+  
+    <!-- 配置freeMarker的模板路径 -->  
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />  
+    <bean id="freemarkerConfig"  
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
+        <property name="freemarkerSettings" ref="freemarkerConfiguration" />  
+        <property name="templateLoaderPath" value="/WEB-INF/freemarker/" />  
+        <property name="freemarkerVariables">  
+            <map>  
+                <!-- 设置一些常用全局变量 -->  
+                <entry key="xml_escape" value-ref="fmXmlEscape" />  
+            </map>  
+        </property>  
+    </bean>  
+  
+    <!-- 配置freeMarker视图解析器 -->  
+    <bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">  
+        <property name="contentType" value="text/html; charset=utf-8" />  
+        <property name="cache" value="true" />  
+        <property name="suffix" value=".ftl" />  
+        <property name="exposeRequestAttributes" value="true" />  
+        <property name="exposeSessionAttributes" value="true" />  
+        <property name="exposeSpringMacroHelpers" value="true" />  
+        <property name="requestContextAttribute" value="request" />  
+        <property name="order" value="0" />  
+    </bean>  
 	<!-- 静态资源访问 -->
 	<mvc:resources mapping="/static/**" location="/static/" />
 
