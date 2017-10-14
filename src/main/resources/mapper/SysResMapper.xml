@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.creidtsys.apps.auth.dao.SysResDao">
+	<resultMap id="BaseResultMap" type="com.creidtsys.apps.auth.entity.SysRes">
+		<id column="res_id" property="resId" jdbcType="VARCHAR" />
+		<result column="res_name" property="resName" jdbcType="VARCHAR" />
+		<result column="res_parent_id" property="resParentId" jdbcType="VARCHAR" />
+		<result column="res_url" property="resUrl" jdbcType="VARCHAR" />
+		<result column="res_code" property="resCode" jdbcType="VARCHAR" />
+		
+		<result column="res_type" property="resType" jdbcType="VARCHAR" />
+		<result column="res_order" property="resOrder" jdbcType="VARCHAR" />
+		<result column="res_desc" property="resDesc" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		res_id,res_name,res_url	,res_code,res_parent_id,res_type,res_order,	res_desc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+	</sql>
+
+	<select id="getRes" resultMap="BaseResultMap" parameterType="String">
+		select
+			res_id,res_name,res_url	,res_code,res_parent_id,res_type,res_order,	res_desc
+		from sys_res_info  order by res_order 
+	</select>
+	<insert id="addRes" parameterType="com.creidtsys.apps.auth.entity.SysRes">
+		insert into sys_res_info(res_id,res_name,res_url	,res_code,res_parent_id,res_type,res_order,	res_desc)
+					values(#{resId,jdbcType=VARCHAR},#{resName,jdbcType=VARCHAR} ,#{resUrl,jdbcType=VARCHAR},#{resCode,jdbcType=VARCHAR},#{resParentId,jdbcType=VARCHAR} ,#{resType,jdbcType=INTEGER} ,#{resOrder,jdbcType=INTEGER} ,#{resDesc,jdbcType=VARCHAR})
+	</insert>
+	<select id="getTreeDate" parameterType="map" resultMap="BaseResultMap">
+	     SELECT  
+        <include refid="Base_Column_List" />  
+        FROM  
+        sys_res_info  
+        WHERE  1=1 
+        <if test="resId != null">  
+            AND res_id like #{resId,jdbcType=VARCHAR}  
+        </if>  
+        <if test="resParentId != null">                
+            AND res_parent_id like #{resParentId,jdbcType=VARCHAR}  
+        </if> 
+	</select>
+	<update id="editRes" parameterType="com.creidtsys.apps.auth.entity.SysRes">
+		update sys_res_info set res_name=#{resName,jdbcType=VARCHAR},res_url =	#{resUrl,jdbcType=VARCHAR},res_code=#{resCode,jdbcType=VARCHAR},res_parent_id=#{resParentId,jdbcType=VARCHAR},res_type=#{resType,jdbcType=VARCHAR},res_order=#{resOrder,jdbcType=VARCHAR},	res_desc=#{resDesc,jdbcType=VARCHAR} where res_id =#{resId,jdbcType=VARCHAR} 
+	</update>
+	<delete id="delRes" parameterType="String">
+		delete from sys_res_info where res_id in(  
+			SELECT res_id  
+			FROM  
+			sys_res_info  
+				CONNECT BY PRIOR res_id = res_parent_id start WITH res_id = #{resId} )
+	</delete>
+</mapper>

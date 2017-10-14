@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.creidtsys.apps.auth.dao.SysUserDao">
+	<resultMap id="BaseResultMap" type="com.creidtsys.apps.auth.entity.SysUser">
+		<id column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="user_dept_id" property="userDeptId" jdbcType="VARCHAR" />
+		<result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="card_id" property="cardId" jdbcType="VARCHAR" />
+		<result column="user_addr" property="userAddr" jdbcType="VARCHAR" />
+		<result column="user_contact" property="userContact" jdbcType="VARCHAR" />
+		<result column="enter_date" property="enterDate" jdbcType="VARCHAR" />
+		<result column="leave_date" property="leaveDate" jdbcType="VARCHAR" />
+		<result column="user_profess" property="userProfess" jdbcType="VARCHAR" />
+		<result column="user_status" property="userStatus" jdbcType="VARCHAR" />
+		<result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+		<result column="last_login" property="lastLogin" jdbcType="DATE" />
+		<result column="school_year" property="schoolYear" jdbcType="INTEGER" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="user_no" property="userNo" jdbcType="VARCHAR" />
+		<result column="user_sex" property="userSex" jdbcType="VARCHAR" />
+		<result column="ur_user_id" property="urUserId" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		user_id,user_dept_id,user_pwd,user_name,card_id	,user_addr,	user_contact,enter_date,leave_date,	user_profess,	
+		user_status	,user_email,last_login,	school_year,remark,	user_no	,user_sex	
+	</sql>
+
+	<!-- 查询所有用户 -->
+	<select id="getAllUser" resultMap="BaseResultMap" parameterType="com.creidtsys.apps.auth.entity.SysUser">
+		select p.user_id,
+       p.user_dept_id,
+       p.user_pwd,
+       p.user_name,
+       p.card_id,
+       p.user_addr,
+       p.user_contact,
+       p.enter_date, 
+       p.leave_date, 
+       p.user_profess,
+       p.user_status,
+       p.user_email,
+       p.last_login,
+       p.school_year,
+       p.remark,
+       p.user_no,
+       p.user_sex
+  from sys_user_info p where 1 = 1
+		 <if test="userDeptId !=null and userDeptId !=''">
+	      and p.user_dept_id=#{userDeptId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<insert id="addUser" parameterType="com.creidtsys.apps.auth.entity.SysUser">
+		insert into sys_user_info(
+			user_id,
+			user_dept_id,
+			user_pwd,
+			user_name,
+			card_id,
+			user_addr,	
+			user_contact,
+			enter_date,
+			leave_date,	
+			user_profess,	
+			user_status	,
+			user_email,
+			last_login,	
+			school_year,
+			remark,	
+			user_no	,
+			user_sex)
+		values(
+			#{userId,jdbcType=VARCHAR},
+			#{userDeptId,jdbcType=VARCHAR},
+			#{userPwd,jdbcType=VARCHAR},
+			#{userName,jdbcType=VARCHAR},
+			#{cardId,jdbcType=VARCHAR},
+			#{userAddr,jdbcType=VARCHAR},
+			#{userContact,jdbcType=VARCHAR},
+			to_date(#{enterDate,jdbcType=VARCHAR},'yyyy-mm-dd'),
+			to_date(#{leaveDate,jdbcType=VARCHAR},'yyyy-mm-dd'),
+			#{userProfess,jdbcType=VARCHAR},
+			#{userStatus,jdbcType=VARCHAR},
+			#{userEmail,jdbcType=VARCHAR},
+			sysdate,#{schoolYear,jdbcType=VARCHAR},
+			#{remark,jdbcType=VARCHAR},
+			#{userNo,jdbcType=VARCHAR},
+			#{userSex,jdbcType=VARCHAR})
+	</insert>
+	<delete id="delUser" parameterType="String">
+		delete from sys_user_info where user_id = #{userId,jdbcType=VARCHAR}
+	</delete>
+	<update id="editUser" parameterType="com.creidtsys.apps.auth.entity.SysUser">
+		update sys_user_info set  
+			user_pwd = #{userPwd,jdbcType=VARCHAR},
+			user_name = #{userName,jdbcType=VARCHAR},
+			card_id = #{cardId,jdbcType=VARCHAR},
+			user_addr = #{userAddr,jdbcType=VARCHAR},	
+			user_contact = #{userContact,jdbcType=VARCHAR},
+			enter_date = to_date(#{enterDate,jdbcType=VARCHAR},'yyyy-mm-dd'),
+			leave_date = to_date(#{leaveDate,jdbcType=VARCHAR},'yyyy-mm-dd'),	
+			user_profess = #{userProfess,jdbcType=VARCHAR},	
+			user_status	= #{userStatus,jdbcType=VARCHAR},
+			user_email = #{userEmail,jdbcType=VARCHAR},
+			last_login = #{lastLogin,jdbcType=VARCHAR},	
+			school_year = #{schoolYear,jdbcType=VARCHAR},
+			remark = #{remark,jdbcType=VARCHAR},	
+			user_no = #{userNo,jdbcType=VARCHAR},
+			user_sex = #{userSex,jdbcType=VARCHAR}
+		where 
+			user_dept_id = #{userDeptId,jdbcType=VARCHAR}
+	</update>
+	<select id="getUserByLoginName" parameterType="String" resultMap="BaseResultMap">
+		select * from sys_user_info where user_no = #{userNo,jdbcType=VARCHAR}
+	</select>
+</mapper>

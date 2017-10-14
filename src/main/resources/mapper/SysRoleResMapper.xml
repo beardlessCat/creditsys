@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.creidtsys.apps.auth.dao.SysRoleResDao">
+	<resultMap id="BaseResultMap" type="com.creidtsys.apps.auth.entity.SysRoleRes">
+		<id column="rr_role_id" property="rrRoleId" jdbcType="VARCHAR" />
+		<id column="rr_res_id" property="rrResId" jdbcType="VARCHAR" />
+		<result column="checked" property="isChecked" jdbcType="VARCHAR" />
+		<result column="res_id" property="resId" jdbcType="VARCHAR" />
+		<result column="res_name" property="resName" jdbcType="VARCHAR" />
+		<result column="res_parent_id" property="resParentId" jdbcType="VARCHAR" />
+		<result column="res_url" property="resUrl" jdbcType="VARCHAR" />
+		<result column="res_code" property="resCode" jdbcType="VARCHAR" />
+		<result column="res_type" property="resType" jdbcType="VARCHAR" />
+		<result column="res_order" property="resOrder" jdbcType="VARCHAR" />
+		<result column="res_desc" property="resDesc" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		 rr_role_id,rr_res_id 
+	</sql>
+
+	<!-- 根据上级组织查询所有组织机构， -->
+	<select id="getAllRole" resultMap="BaseResultMap" parameterType="String">
+		select
+		<include refid="Base_Column_List" />
+		from sys_role_info where 1=1 
+		 <if test="_parameter !=null and _parameter !=''">
+	      and role_parent_id=#{_parameter,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<insert id="addRoleRes" parameterType="com.creidtsys.apps.auth.entity.SysRoleRes">
+		insert into sys_role_res_info( rr_role_id,rr_res_id ,is_checked )
+			values(#{rrRoleId,jdbcType=VARCHAR},#{rrResId,jdbcType=VARCHAR},#{isChecked,jdbcType=VARCHAR})
+	</insert>
+	<delete id="delRoles" parameterType="String">
+		delete  from sys_role_info where role_id = #{roleId,jdbcType=VARCHAR}
+	</delete>
+	<update id="editRole" parameterType="com.creidtsys.apps.auth.entity.SysRole">
+		update sys_role_info set role_name =#{roleName,jdbcType=VARCHAR},role_is_valid=#{roleIsValid,jdbcType=VARCHAR},role_parent_id=#{roleParentId,jdbcType=VARCHAR} ,
+			remake=#{remake,jdbcType=VARCHAR} 
+		where role_id = #{roleId,jdbcType=VARCHAR} 
+	</update>	
+	<select id="getResByRole" parameterType="String" resultMap="BaseResultMap">
+		select t.res_id, t.res_name, t.res_parent_id, t.res_url ,'' checked
+		  from sys_res_info t
+		 where t.res_id not in
+		       (SELECT sri.res_id
+		  FROM sys_res_info sri, sys_role_res_info suri
+		 where sri.res_id = suri.rr_res_id
+	   		and rr_role_id=#{_parameter,jdbcType=VARCHAR})
+	   		
+	   	union
+	   	
+		SELECT sri.res_id, sri.res_name, sri.res_parent_id, sri.res_url ,'true' checked
+		  FROM sys_res_info sri, sys_role_res_info suri
+		 where sri.res_id = suri.rr_res_id
+	   		and rr_role_id=#{_parameter,jdbcType=VARCHAR}
+	</select>
+	<delete id="delResByRole" parameterType="String">
+		delete from sys_role_res_info where rr_role_id = #{rrRoleId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="addRes" parameterType="com.creidtsys.apps.auth.entity.SysRes">
+		insert into  sys_role_res_info (rr_role_id,rr_res_id)values( #{rrRoleId,jdbcType=VARCHAR},#{rrResId,jdbcType=VARCHAR})
+	</insert>
+</mapper>

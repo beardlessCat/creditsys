@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.creidtsys.apps.auth.dao.SysUserResDao">
+	<resultMap id="BaseResultMap" type="com.creidtsys.apps.auth.entity.SysUserRes">
+		<id column="ur_user_id" property="urUserId" jdbcType="VARCHAR" />
+		<id column="ur_res_id" property="urResId" jdbcType="VARCHAR" />
+		<result column="checked" property="isChecked" jdbcType="VARCHAR" />
+		<result column="res_id" property="resId" jdbcType="VARCHAR" />
+		<result column="res_name" property="resName" jdbcType="VARCHAR" />
+		<result column="res_parent_id" property="resParentId" jdbcType="VARCHAR" />
+		<result column="res_url" property="resUrl" jdbcType="VARCHAR" />
+		<result column="res_code" property="resCode" jdbcType="VARCHAR" />
+		<result column="res_type" property="resType" jdbcType="VARCHAR" />
+		<result column="res_order" property="resOrder" jdbcType="VARCHAR" />
+		<result column="res_desc" property="resDesc" jdbcType="VARCHAR" />
+		<result column="rr_role_id" property="rrRoleId" jdbcType="VARCHAR" />
+		<result column="rr_res_id" property="rrResId" jdbcType="VARCHAR" />
+	</resultMap>
+<select id="getAuthMenu" parameterType="String" resultType="java.util.Map">   		
+	 SELECT distinct(res_temp.res_id),res_temp.* FROM 
+		( SELECT res.*
+		  FROM sys_res_info res
+		 start with res.res_id in
+		            (select sur.ur_res_id
+		               from sys_user_res_info sur ,sys_user_info u
+		              where sur.ur_user_id  = u.user_id and u.user_no = #{_parameter,jdbcType=VARCHAR}
+		             union
+		             select srr.rr_res_id
+		               FROM sys_role_res_info srr ,sys_user_info u ,sys_user_role_info ur
+		              where srr.rr_role_id  = ur.ur_role_id and ur.ur_user_id =  u.user_id 
+		              and u.user_no = #{_parameter,jdbcType=VARCHAR})
+		connect by nocycle prior res.res_parent_id = res.res_id
+		 order by res.res_order ) res_temp 
+ 	where res_temp.res_type   <![CDATA[ <> ]]> '2'
+	</select> 
+	<!-- 根据上级组织查询所有组织机构， -->
+	<select id="getResByUser" resultMap="BaseResultMap" parameterType="String">
+		SELECT sri.*
+		  FROM sys_res_info sri, sys_role_res_info srri
+		 where sri.res_id = srri.rr_res_id
+		   and srri.rr_role_id in 
+		   (SELECT sur.ur_role_id
+            	FROM sys_user_role_info sur
+               	 <if test="_parameter !=null and _parameter !=''">
+ 					where ur_user_id=#{_parameter,jdbcType=VARCHAR}
+				</if>
+            )
+		union 
+		SELECT sri.*
+		  FROM sys_res_info sri, sys_user_res_info suri
+		 where sri.res_id = suri.ur_res_id
+		<if test="_parameter !=null and _parameter !=''">
+	   		and ur_user_id=#{_parameter,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="getUserRes" parameterType="String" resultMap="BaseResultMap">
+		SELECT sri.*
+		  FROM sys_res_info sri, sys_user_res_info suri
+		 where sri.res_id = suri.ur_res_id
+		<if test="_parameter !=null and _parameter !=''">
+	   		and ur_user_id=#{_parameter,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="getRoleRes" parameterType="String" resultMap="BaseResultMap">
+		SELECT sri.*
+		  FROM sys_res_info sri, sys_role_res_info srri
+		 where sri.res_id = srri.rr_res_id
+		   and srri.rr_role_id in 
+		   (SELECT sur.ur_role_id
+            	FROM sys_user_role_info sur
+               	 <if test="_parameter !=null and _parameter !=''">
+ 					where ur_user_id=#{_parameter,jdbcType=VARCHAR}
+				</if>
+            )
+	</select>
+	<select id="getChecked" parameterType="String"  resultMap="BaseResultMap">
+		select t.res_id, t.res_name, t.res_parent_id,t.res_url , '' checked
+		  from sys_res_info t
+		 where t.res_id not in
+		       (SELECT sri.res_id
+		          FROM sys_res_info sri, sys_user_res_info suri
+		         where sri.res_id = suri.ur_res_id
+	   				and ur_user_id=#{_parameter,jdbcType=VARCHAR})
+	   	union
+		SELECT sri.res_id, sri.res_name, sri.res_parent_id, sri.res_url,'true' checked
+		  FROM sys_res_info sri, sys_user_res_info suri
+		 where sri.res_id = suri.ur_res_id
+	   		and ur_user_id=#{_parameter,jdbcType=VARCHAR}
+	</select>
+	<delete id="delResByUser" parameterType="String">
+		delete from sys_user_res_info where ur_user_id = #{urUserId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="addRes" parameterType="com.creidtsys.apps.auth.entity.SysUserRes">
+		insert into sys_user_res_info(ur_user_id,ur_res_id) values(#{urUserId,jdbcType=VARCHAR},#{urResId,jdbcType=VARCHAR})
+	</insert>
+	<select id="getResByNo" parameterType="String" resultMap="BaseResultMap">
+		SELECT sri.res_url
+		  FROM sys_res_info sri, sys_role_res_info srri
+		 where sri.res_id = srri.rr_res_id
+		   and srri.rr_role_id in
+		       (SELECT sur.ur_role_id
+		          FROM sys_user_role_info sur
+		         where ur_user_id =
+		               (select user_id from sys_user_info u where u.user_no = #{_parameter,jdbcType=VARCHAR} ))
+		   and sri.res_type ='2' 
+		union
+		SELECT sri.res_url
+		  FROM sys_res_info sri, sys_user_res_info suri
+		 where sri.res_id = suri.ur_res_id
+		   and ur_user_id =
+		       (select user_id from sys_user_info u where u.user_no = #{_parameter,jdbcType=VARCHAR})
+		   and sri.res_type ='2' 
+	</select>
+</mapper>

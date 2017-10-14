@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* CSS Document */
+
+.twin{width:260px; height:400px; margin-top:10px; margin-left:10px;}
+.twinTop{background:#8fa4b4; width:260px; height:22px; text-align:right; padding-right:6px;}
+.twinTop img{border:none;}
+.twinMain{border:#b5daf7 solid 1px; background:#ddf0ff; padding:3px; width:258px;}
+.twinBg{border:#b5daf7 solid 1px; background:#fff; width:256px; height:300px; padding:1px;}
+
+
+/*菜单class*/
+#Tab1{width:100%; padding:0px; margin:0 auto;}
+.Menubox1{width:254; height:28px; line-height:28px; background:#00a6dd;}
+.Menubox1 ul{list-style:none; margin:0px; padding:0px;}
+.Menubox1 li{float:left; display:block; cursor:pointer; text-align:center; padding:0px 10px; background:#00a6dd;}
+.Menubox1 li a{color:#fff; text-decoration:none; font-size:12px;}
+.Menubox1 li.hover{height:28px; line-height:28px; text-decoration:none; background:#1283b4; padding:0px 10px;}
+.Menubox1 li.hover a{color:#ffffff;}
+.Menubox1 li.active{height:28px; line-height:28px; text-decoration:none; background:#1283b4; padding:0px 10px;}
+.Menubox1 li.active a{color:#fff;}
+.Menubox1 li a:hover{color:#ffffff; text-decoration:none;}
+.Menubox1More a:link, .Menubox1More a:visited{color:#fff; float:right; margin-right:5px; text-decoration:none; font-size:10px;}
+.Menubox1More a:hover{color:#fff;}
+
+.Contentbox1{clear:both; text-align:center; padding:5px; border:none;}
+.Contentbox1 ul{list-style:none;}
+.Contentbox1 ul li{line-height:24px;}
+.Contentbox1 a{color:#333333; text-align:left; text-decoration:none;}
+.Contentbox1 a:hover{color:#0e668b; text-align:left; text-decoration:none;}

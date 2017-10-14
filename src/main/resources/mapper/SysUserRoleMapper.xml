@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.creidtsys.apps.auth.dao.SysUserRoleDao">
+	<resultMap id="BaseResultMap" type="com.creidtsys.apps.auth.entity.SysUserRole">
+		<id column="ur_user_id" property="urUserId" jdbcType="VARCHAR" />
+		<id column="ur_role_id" property="urRoleId" jdbcType="VARCHAR" />
+		<result column="role_id" property="roleId" jdbcType="VARCHAR" />
+		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+		<result column="role_is_valid" property="roleIsValid" jdbcType="VARCHAR" />
+		<result column="role_parent_id" property="roleParentId" jdbcType="VARCHAR" />
+		<result column="remake" property="remake" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ur_user_id,ur_role_id,role_id,role_name,role_is_valid,role_parent_id,remake
+	</sql>
+
+	<!-- 查询所有用户 -->
+	<select id="getRoleByUser" resultMap="BaseResultMap" parameterType="com.creidtsys.apps.auth.entity.SysUserRole">
+		SELECT r.ur_user_id,
+	       r.ur_role_id,
+	       ur.role_id,
+	       ur.role_name,
+	       ur.role_is_valid,
+	       ur.role_parent_id,
+	       ur.remake
+	  FROM sys_user_role_info r, sys_role_info ur
+	 	where r.ur_role_id = ur.role_id
+	 	and r.ur_user_id = #{urUserId,jdbcType=VARCHAR}
+
+	</select>
+	<insert id="addRe" parameterType="com.creidtsys.apps.auth.entity.SysUserRole">
+		insert into sys_user_role_info(
+			ur_user_id,
+			ur_role_id)
+		values(
+			#{urUserId,jdbcType=VARCHAR},
+			#{urRoleId,jdbcType=VARCHAR}
+			)
+	</insert>
+	<delete id="delReByUser" parameterType="String">
+		delete from sys_user_role_info where ur_user_id = #{urUserId,jdbcType=VARCHAR}
+	</delete>
+	<update id="editUser" parameterType="com.creidtsys.apps.auth.entity.SysUser">
+		update sys_user_info set  
+			user_pwd = #{userPwd,jdbcType=VARCHAR},
+			user_name = #{userName,jdbcType=VARCHAR},
+			card_id = #{cardId,jdbcType=VARCHAR},
+			user_addr = #{userAddr,jdbcType=VARCHAR},	
+			user_contact = #{userContact,jdbcType=VARCHAR},
+			enter_date = to_date(#{enterDate,jdbcType=VARCHAR},'yyyy-mm-dd'),
+			leave_date = to_date(#{leaveDate,jdbcType=VARCHAR},'yyyy-mm-dd'),	
+			user_profess = #{userProfess,jdbcType=VARCHAR},	
+			user_status	= #{userStatus,jdbcType=VARCHAR},
+			user_email = #{userEmail,jdbcType=VARCHAR},
+			last_login = #{lastLogin,jdbcType=VARCHAR},	
+			school_year = #{schoolYear,jdbcType=VARCHAR},
+			remark = #{remark,jdbcType=VARCHAR},	
+			user_no = #{userNo,jdbcType=VARCHAR},
+			user_sex = #{userSex,jdbcType=VARCHAR}
+		where 
+			user_dept_id = #{userDeptId,jdbcType=VARCHAR}
+	</update>
+</mapper>

@@ -1,0 +1,30 @@
+.panel-header{
+	padding:5px;
+	line-height:15px;
+	color:#15428b;
+	font-weight:bold;
+	font-size:12px;
+	background:url('../images/panel_title.png') repeat-x;
+	position:relative;
+	border:1px solid #99BBE8;
+}
+			
+.easyui-accordion ul{list-style-type:none;margin:0px; padding:10px;color: #ffffff;}
+.easyui-accordion ul li{ padding:0px;}
+.easyui-accordion ul li a{line-height:24px;font-size:13px;font-family:Tahoma,Verdana,Î¢ÈíÑÅºÚ,ÐÂËÎÌå;color: #1f5169;text-decoration:none;}
+.easyui-accordion ul li div{margin:2px 0px;padding-left:20px;padding-top:2px;}
+.easyui-accordion ul li div.hover{ background:#33adff;cursor:pointer;}
+.easyui-accordion ul li div.hover a{color:#fff;}
+.easyui-accordion ul li div.selected{ background:#33adff;cursor:default;}
+.easyui-accordion ul li div.selected a{color:#fff; font-weight:bold;}
+
+
+.icon-nav{
+	background:url('../images/ico_nav.png') no-repeat center center;
+}
+.icon-menu{
+	background:url('../images/dghy/menufile3.png') no-repeat center center;
+}
+.icon-smenu{
+	background:url('../images/dghy/meunfile1.png') no-repeat center center;
+}

@@ -1,0 +1,72 @@
+.icon-add2{
+    background:url('icons/add.gif') no-repeat center center;
+}
+.icon-clean2{
+    background:url('icons/clean.png') no-repeat center center;
+}
+.icon-remove2{
+    background:url('icons/remove.gif') no-repeat center center;
+}
+.icon-checked{
+    background:url('icons/checked.gif') no-repeat center center;
+}
+
+.icon-unchecked{
+    background:url('icons/unchecked.gif') no-repeat center center;
+}
+
+.icon-hmenu-asc{
+    background:url('icons/hmenu-asc.gif') no-repeat center center;
+}
+
+.icon-hmenu-desc{
+    background:url('icons/hmenu-desc.gif') no-repeat center center;
+}
+
+.icon-columns{
+    background:url('icons/columns.gif') no-repeat center center;
+}
+
+.icon-export-excel{
+    background:url('icons/export_excel.png') no-repeat center center;
+}
+
+.icon-table-excel{
+    background:url('icons/table-excel.png') no-repeat center center;
+}
+
+.icon-table-export{
+    background:url('icons/table_export.png') no-repeat center center;
+}
+
+.icon-reload2{
+    background:url('icons/reload_2.png') no-repeat center center;
+}
+.icon-reload3{
+    background:url('icons/reload_3.png') no-repeat center center;
+}
+.icon-reload4{
+    background:url('icons/reload_4.png') no-repeat center center;
+}
+
+.icon-form{
+    background:url('icons/application_form.png') no-repeat center center;
+}
+.icon-moveup{
+    background:url('icons/move_up.png') no-repeat center center;
+}
+.icon-movedown{
+    background:url('icons/move_down.png') no-repeat center center;
+}
+.icon-collapse{
+    background:url('icons/toggle_collapse.png') no-repeat center center;
+}
+.icon-expand{
+    background:url('icons/toggle_expand.png') no-repeat center center;
+}
+.icon-lock{
+    background:url('icons/lock.png') no-repeat center center;
+}
+.icon-unlock{
+    background:url('icons/lock-unlock.png') no-repeat center center;
+}

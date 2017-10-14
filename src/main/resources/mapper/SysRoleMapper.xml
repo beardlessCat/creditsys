@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.creidtsys.apps.auth.dao.SysRoleDao">
+	<resultMap id="BaseResultMap" type="com.creidtsys.apps.auth.entity.SysRole">
+		<id column="role_id" property="roleId" jdbcType="VARCHAR" />
+		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+		<result column="role_is_valid" property="roleIsValid" jdbcType="VARCHAR" />
+		<result column="role_parent_id" property="roleParentId" jdbcType="VARCHAR" />
+		<result column="remake" property="remake" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		 role_id,role_name ,role_is_valid,role_parent_id ,remake 
+	</sql>
+
+	<!-- 根据上级组织查询所有组织机构， -->
+	<select id="getAllRole" resultMap="BaseResultMap" parameterType="String">
+		select
+		<include refid="Base_Column_List" />
+		from sys_role_info where 1=1 
+		 <if test="_parameter !=null and _parameter !=''">
+	      and role_parent_id=#{_parameter,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<insert id="addRole" parameterType="com.creidtsys.apps.auth.entity.SysRole">
+		insert into sys_role_info(role_id,role_name ,role_is_valid,role_parent_id ,remake )
+			values(#{roleId,jdbcType=VARCHAR},#{roleName,jdbcType=VARCHAR},#{roleIsValid,jdbcType=VARCHAR},#{roleParentId,jdbcType=VARCHAR},#{remake,jdbcType=VARCHAR})
+	</insert>
+	<delete id="delRoles" parameterType="String">
+		delete  from sys_role_info where role_id = #{roleId,jdbcType=VARCHAR}
+	</delete>
+	<update id="editRole" parameterType="com.creidtsys.apps.auth.entity.SysRole">
+		update sys_role_info set role_name =#{roleName,jdbcType=VARCHAR},role_is_valid=#{roleIsValid,jdbcType=VARCHAR},role_parent_id=#{roleParentId,jdbcType=VARCHAR} ,
+			remake=#{remake,jdbcType=VARCHAR} 
+		where role_id = #{roleId,jdbcType=VARCHAR} 
+	</update>
+	<select id="getTreeDate" parameterType="String" resultMap="BaseResultMap">
+		     SELECT  
+        <include refid="Base_Column_List" />  
+        FROM  
+        sys_role_info  
+        WHERE  1=1 
+        <if test="roleId != null">  
+            AND role_id like #{roleId,jdbcType=VARCHAR}  
+        </if>  
+        <if test="roleParentId != null">  
+            AND role_parent_id like #{roleParentId,jdbcType=VARCHAR}  
+        </if>  
+	</select>
+	<select id="getById" parameterType="String" resultMap="BaseResultMap">
+		select * from sys_role_info where role_id =  #{roleId,jdbcType=VARCHAR}
+	</select>
+</mapper>

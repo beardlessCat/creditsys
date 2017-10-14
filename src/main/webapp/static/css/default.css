@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+/*全局样式*/
+*{margin:0;padding:0;}
+
+/*基本信息*/
+body,html{width:100%; height:100%;}
+body {font-size:12px; font-family:"tahoma","Arial","\5FAE\8F6F\96C5\9ED1"; margin:0 auto; color:#7b7b7b; text-align:center; word-break:break-all; overflow:hidden;}
+
+li {list-style:none;}
+h1,h2,h3,h4,h5,h6 {font-weight: normal; font-size: 12px; margin:0;}
+div,from,span,p,img.ul,li,ol{margin:0; border:0;}
+img {border: 0px;}
+ul,ol,li {list-style:none; text-align:left}
+input,select,img {vertical-align:middle; font-size:12px; line-height:16px;}
+ol,ul{list-style:none;}
+
+.clear{clear:both}
+a:link, a:visited{color:#3f658c; text-decoration:none;}
+a:hover{color:#3f658c; text-decoration:underline;}
+
+

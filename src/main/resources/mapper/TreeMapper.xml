@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.creidtsys.apps.auth.dao.TreeDao">
+	<resultMap id="BaseResultMap" type="com.creidtsys.apps.auth.entity.Tree">
+        <id column="id" property="deptId" jdbcType="VARCHAR" />  
+        <result column="pid" property="deptPid" jdbcType="VARCHAR" />  
+        <result column="name" property="deptName" jdbcType="VARCHAR" />  
+		
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, pid,name, type
+	</sql>
+
+	 <!-- 查询符合条件的记录 -->  
+    <select id="list" parameterType="map" resultMap="BaseResultMap">  
+        SELECT  
+        <include refid="Base_Column_List" />  
+        FROM  
+        dept  
+        WHERE  1=1 
+        <if test="id != null">  
+            AND id like #{id,jdbcType=VARCHAR}  
+        </if>  
+        <if test="pid != null">  
+            AND pid like #{pid,jdbcType=VARCHAR}  
+        </if>  
+    </select>  
+	
+</mapper>

@@ -1,0 +1,434 @@
+div.top{
+	width: 100%;
+	background-image:url(../images/topBg.png) ;
+	font-family:"微软雅黑";
+	height:30px ;
+	margin:0 auto ;
+	overflow:hidden ;
+}
+.hid{
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+	margin:8px ;
+}
+div.topCont{
+	width:1187px;
+	height:30px;
+	margin:0 auto ;
+}
+div.logo{
+	width: 1187px;
+	height:128px ;
+	margin:0 auto ;
+}
+div.star{
+	height:32px ;
+	width:32px ;
+	padding-top:4px ;
+}
+div.some{
+	line-height: 30px;
+	margin-left:826px ;
+	margin-top:-34px ;
+}
+body{
+	background-color:#fff; 
+	padding: 0px;
+	border: 0px;
+	outline: 0px;
+	overflow-x: hidden;
+	width:100%;
+	margin: 0 auto;	
+	}
+div.login{
+	margin-left:248px;
+	height:30px;
+	width:150px ;
+	margin-top:-33px;
+	}
+a{	
+	color: #666666;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ff6600;
+	text-decoration: none;
+}
+
+.wel{
+	float:left;
+	line-height: 30px;
+	margin-top:-37px;
+	margin-left:30px ;
+}
+
+.sp {
+	width: 678px;
+	float: left;
+	overflow: hidden;
+
+}
+div.cata{
+	width: 150px;
+	height:40px ;
+}
+div.next{
+	position:relative;
+	left:150px;
+	top:-34px ;
+	width: 30px;
+	height:30px ;
+	
+}
+.in {
+	 position:relative;
+	left:612px;
+	 width: 535px;
+	height:103px;
+	 float: left;
+	 top:-128px ;
+	margin-right: 10px;
+	overflow: hidden;
+}
+.input{
+	line-height:27px;
+	width:498px;
+	height:27px;
+	padding:3px 12px;
+	font-size:14px;
+	line-height:3;
+	background-color:#fff;
+	background-image:none;
+	border:3px solid #266e60;
+	border-radius:4px;
+	margin: 39px 0 0 0; 
+	color:#666666;
+	}
+.search{
+	position:absolute;
+	width:75px;
+	height:34px;
+	top:40px;
+	left:453px;
+	z-index:99;
+	}
+.ulSt{
+	position:absolute;
+	left:1000px;
+	top:5px;
+}
+.countSearch{
+	width:710px;
+	overflow:hidden;
+	position:relative;
+	left:629px;
+	top:-151px;
+	}
+/* 
+	导航栏样式
+*/
+div.dhl{
+	background:#266e60 ; 
+	width:100%;
+	height:40px;
+	margin-top:-5px;
+}
+/**
+导航栏白色字体
+**/
+
+.whiteSpan{
+	
+	font-size:17px;
+	color:#fff;
+}
+div.span{
+	position:relative;
+	left:201px;
+	top:-69px;
+	margin-top:9px;
+	width:794px;
+}
+div.rightArea{
+	width: 1187px;
+	height: 379px;
+	margin: 0 auto;
+	margin-top:14px ;
+}
+div.area{
+	background-color:#f2f2f2;
+	width: 100%;
+	height: 1032px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+div.contv{
+	width: 1187px;
+	height: 1032px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+div.allFun{
+	position:relative ;
+	width:284px ;
+	height:367px ;
+	left:-545px;
+	overflow: hidden;
+	border-style:solid none solid none ;
+	border-color:#266e60;
+	
+}
+/*
+主页大图片
+*/
+div.img{
+	position:relative;
+	left:302px;
+	bottom:322px;
+	width:904px ;
+	height:379px ;
+	overflow: hidden;
+	top:-374px ;
+}
+/* 主页查询div*/
+div.serfunc{
+	margin-top:0px ;
+	position:relative;
+	background:url(../images/funcBg.png) ;
+	border:solid 2px ;
+	border-color:#f2f2f2;
+	width:280px ;
+	height:74px ;
+}
+/* 业务div*/
+div.busfunc{
+	position:relative;
+	background:url(../images/funcBg.png) ;
+	border:solid 2px ;
+	border-color:#f2f2f2;
+	width:280px ;
+	height:72px ;
+}
+/* 充值div*/
+div.charfunc{
+	position:relative;
+	background:url(../images/funcBg.png) ;
+	border:solid 2px ;
+	border-color:#f2f2f2;
+	width:280px ;
+	height:71px ;
+}
+/* 资讯div*/
+div.newsfunc{
+	position:relative;
+	background:url(../images/funcBg.png) ;
+	border:solid 2px ;
+	border-color:#f2f2f2;
+	width:280px ;
+	height:71px ;
+}
+/* 报修div*/
+div.quesfunc{
+	position:relative;
+	background:url(../images/funcBg.png) ;
+	border-style:solid solid none solid  ;
+	border-color:#f2f2f2;
+	border-width:2px ;
+	width:280px ;
+	height:72px ;
+}
+div.twoF{
+	position:relative ;
+	margin-top:23px ;
+	width:1211px ;
+	height:253px ;
+	overflow: hidden;
+}
+div.funT{
+	position:relative ;
+	width:869px ;
+	height:253px ;
+	overflow: hidden;
+}
+div.funO{
+	position:relative ;
+	width:309px ;
+	height:252px ;
+	top:-253px ;
+	left:878px ;
+	overflow: hidden;
+}
+div.title{
+	position:relative ;
+	width:868px ;
+	height:43px ;
+	background-color:#fff;
+	overflow: hidden;
+}
+div.left{
+	position:relative ;
+	width:288px ;
+	height:216px ;
+	top:1px ;
+	background-color:#fff;
+	overflow: hidden;
+}
+div.mid{
+	position:relative ;
+	width:289px ;
+	height:209px ;
+	top:-215px ;
+	left:289px ;
+	background-color:#fff;
+	overflow: hidden;
+}
+div.right{
+	position:relative ;
+	width:289px ;
+	height:2096px ;
+	top:-424px ;
+	left:579px ;
+	background-color:#fff;
+	overflow: hidden;
+}
+div.more{
+	position:relative ;
+	left:108px;
+	top:-45px ;
+	width:148px ;
+	height:24px ;
+}
+div.info{
+	position:relative ;
+	left:142px;
+	top:-94px ;
+	width:131px ;
+	height:104px ;
+}
+div.notice{
+	position:relative ;
+	left:9px;
+	top:10px ;
+	width:248px ;
+	height:159px ;
+}
+div.notice2{
+	position:relative ;
+	left:50px;
+	top:-7px ;
+	width:205px ;
+	height:140px ;
+}
+div.pro{
+	position:relative ;
+	width:309px ;
+	height:70px ;
+}
+div.ewm{
+	position:relative ;
+	left:-12px;
+	top:-3px ;
+	width:144px ;
+	height:130px ;
+}
+div.down{
+	position:relative ;
+	left:133px;
+	top:-42px ;
+	width:89px ;
+	height:36px ;
+}
+div.line {
+	width:100%;
+	height: 4px;
+	background:#10906f;
+	margin:20px 0;
+}
+div.bott{
+	background-color:#f2f2f2;
+	width: 100%;
+	height: 222px;
+	float: left;
+	top:1451px ;
+	margin-right: 20px;
+	overflow: hidden;
+}
+div.others{
+	background-color:#fff;
+	margin-top:5px ;
+	position:relative ;
+	width: 1187px;
+	height: 199px;
+	float: left;
+	margin-right: 20px;
+	overflow: hidden;
+}
+div.scgg{
+	position:relative ;
+	left:0px;
+	top:-5px ;
+	width:288px ;
+	height:200px 
+}
+div.jfgz{
+	position:relative ;
+	left:291px;
+	top:-200px ;
+	width:288px ;
+	height:200px 
+}
+div.cjwt{
+	position:relative ;
+	left:582px;
+	top:-400px ;
+	width:288px ;
+	height:200px 
+}
+div.zxrx{
+	position:relative ;
+	left:899px;
+	top:-600px ;
+	width:288px ;
+	height:200px 
+}
+div.rem {
+	width:1187 ;
+	margin:0 auto ;
+	line-height: 12px;
+	margin-top: 10px;
+	color: #555555;
+	text-align: center;
+	font-size:14px;
+}
+div.im{
+	width :1187px ;
+	height:44px;
+	margin:0 auto;
+}
+.gjdw{
+	float:left;
+	width:145px;
+	height:100%;
+	background:url(../images/gjdw.png) no-repeat;
+	margin-left: 322px;
+	margin-top:13px;
+}
+.gw {
+	float:left;
+	width:150px;
+	height:100%;
+	background:url(../images/gw.png) no-repeat;
+	margin-left: 50px;
+	margin-top:13px;
+}
+.tel {
+	float:left;
+	width:145px;
+	height:100%;
+	background:url(../images/tel.png) no-repeat;
+	margin-left: 50px;
+	margin-top:13px;
+}

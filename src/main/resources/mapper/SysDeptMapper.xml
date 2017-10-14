@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.creidtsys.apps.auth.dao.SysDeptDao">
+	<resultMap id="BaseResultMap" type="com.creidtsys.apps.auth.entity.SysDept">
+		<id column="dept_id" property="deptId" jdbcType="VARCHAR" />
+		<result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+		<result column="dept_desc" property="deptDesc" jdbcType="VARCHAR" />
+		<result column="dept_parent_id" property="deptParentId" jdbcType="VARCHAR" />
+		<result column="dept_level" property="deptLevel" jdbcType="INTEGER" />
+		<result column="dept_order" property="deptOrder" jdbcType="INTEGER" />
+		<result column="dept_is_valid" property="deptIsValid" jdbcType="VARCHAR" />
+		<result column="dept_leader" property="deptLeader" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		 dept_id,dept_name ,dept_desc,dept_parent_id ,dept_level ,dept_order ,dept_is_valid, dept_leader    
+	</sql>
+
+	<!-- 根据上级组织查询所有组织机构， -->
+	<select id="getSysDept" resultMap="BaseResultMap" parameterType="String">
+		select
+		<include refid="Base_Column_List" />
+		from sys_dept_info   where 1=1 
+		 <if test="_parameter !=null and _parameter !=''">
+	      and dept_parent_id=#{_parameter,jdbcType=VARCHAR}
+		</if>
+		order by dept_order
+	</select>
+	<select id="getTreeDate" parameterType="String" resultMap="BaseResultMap">
+		     SELECT  
+        <include refid="Base_Column_List" />  
+        FROM  
+        sys_dept_info  
+        WHERE  1=1 
+        <if test="deptId != null">  
+            AND dept_id like #{deptId,jdbcType=VARCHAR}  
+        </if>  
+        <if test="deptParentId != null">  
+            AND dept_parent_id like #{deptParentId,jdbcType=VARCHAR}  
+        </if>  
+	
+	</select>
+	<insert id="addDept" parameterType="com.creidtsys.apps.auth.entity.SysDept">
+		insert into sys_dept_info(dept_id,dept_name ,dept_desc,dept_parent_id ,dept_level ,dept_order ,dept_is_valid, dept_leader )
+					values(#{deptId,jdbcType=VARCHAR},#{deptName,jdbcType=VARCHAR} ,#{deptDesc,jdbcType=VARCHAR},#{deptParentId,jdbcType=VARCHAR} ,#{deptLevel,jdbcType=INTEGER} ,#{deptOrder,jdbcType=INTEGER} ,#{deptIsValid,jdbcType=VARCHAR}, #{deptLeader,jdbcType=VARCHAR} )
+	</insert>
+	<delete id="delDept" parameterType="String">
+		delete  from sys_dept_info where dept_id = #{deptId,jdbcType=VARCHAR}
+	</delete>
+	<update id="editDept" parameterType="com.creidtsys.apps.auth.entity.SysDept">
+		update sys_dept_info set dept_name =#{deptName,jdbcType=VARCHAR},dept_desc=#{deptDesc,jdbcType=VARCHAR},dept_parent_id=#{deptParentId,jdbcType=VARCHAR} ,
+		dept_level=#{deptLevel,jdbcType=INTEGER} ,dept_order =#{deptOrder,jdbcType=INTEGER},dept_is_valid=#{deptIsValid,jdbcType=VARCHAR}, dept_leader=#{deptLeader,jdbcType=VARCHAR}
+		where dept_id = #{deptId,jdbcType=VARCHAR}
+	</update>
+	<select id="getById" parameterType="String" resultMap="BaseResultMap">
+		select * from sys_dept_info where dept_id = #{deptId,jdbcType=INTEGER}
+	</select>
+</mapper>

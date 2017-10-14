@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:org/springframework/beans/factory/xml/spring-beans-3.0.xsd
+				http://www.springframework.org/schema/context classpath:org/springframework/context/config/spring-context-3.0.xsd
+				http://www.springframework.org/schema/aop classpath:org/springframework/aop/config/spring-aop-3.0.xsd
+				http://www.springframework.org/schema/tx classpath:org/springframework/transaction/config/spring-tx-3.0.xsd
+				http://www.springframework.org/schema/mvc
+   				 http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+	<mvc:annotation-driven />
+	<!-- 扫描controller（controller层注入） -->
+	<!-- <context:component-scan base-package="com.creidtsys.apps.*.controller" 
+		/> -->
+	<context:component-scan base-package="com.creidtsys.**" />
+
+
+
+	<!-- 3.配置jsp 显示ViewResolver -->
+	<!-- 配置多个视图管理器，重写checkResource方法 -->
+	<bean id="htmlviewResolver"  class="org.springframework.web.servlet.view.InternalResourceViewResolver">   
+        <property name="viewClass" value="com.creidtsys.utils.HtmlResourceView"/>  
+        <property name="order" value="0" />  
+        <property name="prefix" value="/WEB-INF/"/>  
+        <property name="suffix" value=".html" />    
+        <property name="contentType" value="text/html;charset=UTF-8"></property>    
+    </bean>  
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="order" value="1" />  
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 静态资源访问 -->
+	<mvc:resources mapping="/static/**" location="/static/" />
+
+	<!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 定义无Controller的path<->view直接映射 -->
+	<mvc:view-controller path="/" view-name="/" />
+</beans>

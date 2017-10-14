@@ -1,0 +1,45 @@
+@charset "utf-8";
+/* CSS Document */
+
+.contentPar{width:100%; margin-top:10px; overflow:hidden;}
+.conLeft{width:248px; height:600px; border:#94bef8 solid 1px; float:left; background:#cee9ff;}
+.conGuide{width:248px; height:32px; line-height:32px; background:#6a869b; color:#fff; font-size:14px; text-align:left;}
+.conGuide a{display:block; background:url(../images/dghy/menuhome.png) no-repeat; margin:8px 10px; width:15px; height:15px; float:left;}
+
+
+.conRight{border:#94bef8 solid 1px; margin-left:258px;}
+.conTab{background:#e6f3ff; border-bottom:#94bef8 solid 1px; height:32px;}
+.conTab ul{}
+.conTab ul li{float:left; height:32px; line-height:32px; padding:0px 10px; background:#1283b4; margin-right:1px; color:#fff;}
+.conTab ul li:hover{background:#1493c9;}
+.conTab ul li.active{background:#0099ff;}
+.conTab ul li a:link,.conTab ul li a:visited{color:#fff; text-decoration:none;}
+.conTab ul li a:hover{color:#fff; text-decoration:none;}
+
+.conForm{height:60px; line-height:60px; margin-left:10px; text-align:left;}
+.conInput{width:154px; height:24px; line-height:24px; border:#94bef8 1px solid; background:#ddf0ff; margin:0px 5px;}
+
+.btn_54{width:54px; height:28px; background:url(../images/dghy/searchbg.png) no-repeat; border:none; color:#fff; cursor:pointer;}
+.btn_54_hover{background:url(../images/dghy/searchbg_hover.png) no-repeat; color:#fff;}
+
+.btn_qk01{width:54px; height:28px; background:url(../images/dghy/deletebg.png) no-repeat; border:none; color:#fff; cursor:pointer;}
+.btn_qk01_hover{background:url(../images/dghy/deletebg_hover.png) no-repeat; color:#fff;}
+
+.conModify{margin:0px 10px; width:98%; background:#e6ebec; height:32px; line-height:32px; text-align:left;}
+.conModify img{border:none; margin-left:10px;}
+
+.contable{margin:0px 10px 10px; width:98%; border:#bee0fa 1px solid; border-collapse:collapse; border-spacing:0; padding:0px; text-align:center; font-size:12px; color:#333;}
+.contable th{height:28px; line-height:28px; background:#b5deff; border-bottom:#bee0fa 1px solid; border-right:#bee0fa 1px dotted;}
+.contable td{height:28px; line-height:28px; border:#bee0fa 1px dotted; padding:0px;}
+.contable tr:nth-child(odd){background:#F1F4F5;}
+.contable tr:hover{background:#e2edff;}
+
+/* 左侧下拉菜单 */
+
+#faq {font-size:12px; width:248px;}
+#faq li {margin:0px; padding:0px;}
+#faq dl {margin:0px; padding:0; display:inline;}
+#faq dt {cursor:pointer; height:32px; line-height:32px; padding-left:20px; border-top:1px #71b5d2 solid; background:#1283b4; color:#fff;}
+#faq dd {display:none; height:32px; line-height:32px; padding-left:40px; border-top:1px #66c7cc solid; background:#00a2aa; color:#fff;}
+.faqLink{background:url(../images/dghy/meunfile1.png) no-repeat; display:block; width:15px; height:15px; float:left; margin:8px 10px;}
+.subLink{background:url(../images/dghy/menufile3.png) no-repeat; display:block; width:15px; height:15px; float:left; margin:8px 10px;}

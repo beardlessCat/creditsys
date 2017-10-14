@@ -1,0 +1,62 @@
+@charset "utf-8";
+/* CSS Document */
+
+.mainTop{width:100%; height:48px; line-height:48px; background:-webkit-linear-gradient(#fafcff,#cce7fb); background:-moz-linear-gradient(#fafcff,#cce7fb); background:-o-linear-gradient(#fafcff,#cce7fb); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafcff', endColorstr='#cce7fb', GradientType=0);background: linear-gradient(#fafcff, #cce7fb); overflow:hidden;}
+.mainTop_menu{height:48px; line-height:48px; float:left;}
+
+.logo{float:left; display:block; margin-left:5px;}
+.logo2{height:44px; line-height:44px; float:left; display:block; font-family:'\5FAE\8F6F\96C5\9ED1'; font-size:22px; color:#003366; margin-left:6px;}
+@media screen and (min-width:1024px){.logo2{font-size:22px;}}
+@media screen and (min-width:1200px){.logo2{font-size:22px;}}
+
+.time{height:48px; line-height:48px; color:#5b5b5b; font-family:'\5FAE\8F6F\96C5\9ED1'; font-size:12px; float:left;}
+@media screen and (min-width:1024px){.time{margin-left:30px;}}
+@media screen and (min-width:1200px){.time{margin-left:50px;}}
+
+.topNav{height:48px; line-height:48px; float:right; margin-right:10px; background:url(../images/top_line.png) repeat-x;}
+
+.topNav ul{}
+.topNav ul li{height:48px; line-height:48px; color:#333; font-family:'\5FAE\8F6F\96C5\9ED1'; float:left; display:block; background:-webkit-linear-gradient(#fafcff,#cce7fb); background:-moz-linear-gradient(#fafcff,#cce7fb); background:-o-linear-gradient(#fafcff,#cce7fb); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafcff', endColorstr='#cce7fb', GradientType=0);background: linear-gradient(#fafcff, #cce7fb); margin-right:3px;}
+@media screen and (min-width:1024px){.topNav ul li{font-size:12px; padding:0px 6px;}}
+@media screen and (min-width:1200px){.topNav ul li{font-size:14px; padding:0px 10px;}}
+
+.topNav div ul li:hover{background:-webkit-linear-gradient(#c6e5fa,#8dc9f5); background:-moz-linear-gradient(#c6e5fa,#8dc9f5); background:-o-linear-gradient(#c6e5fa,#8dc9f5); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c6e5fa', endColorstr='#8dc9f5', GradientType=0);background: linear-gradient(#c6e5fa, #8dc9f5);}
+.topNav div ul li a:link, .topNav div ul li a:visited{color:#333; text-decoration:none;}
+.topNav div ul li a:hover{color:#075175; text-decoration:none;}
+.topNav div ul li.active{background:-webkit-linear-gradient(#c6e5fa,#8dc9f5); background:-moz-linear-gradient(#c6e5fa,#8dc9f5); background:-o-linear-gradient(#c6e5fa,#8dc9f5); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c6e5fa', endColorstr='#8dc9f5', GradientType=0);background: linear-gradient(#c6e5fa, #8dc9f5);}
+
+.mainNav{width:100%; height:35px; line-height:35px; background:-webkit-linear-gradient(#109fcb,#085b8f); background:-moz-linear-gradient(#109fcb,#085b8f); background:-o-linear-gradient(#109fcb,#085b8f); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#109fcb', endColorstr='#085b8f', GradientType=0);background: linear-gradient(#109fcb, #085b8f); overflow:hidden;}
+.mainNav div{margin-left:20px; float:left;}
+.mainNav div ul{}
+.mainNav div ul li{height:35px; line-height:35px; color:#fff; font-family:'\5FAE\8F6F\96C5\9ED1'; font-size:14px; float:left; display:block; margin-left:15px; padding:0px 25px;}
+.mainNav div ul li:hover{background:-webkit-linear-gradient(#29c8ed,#0e91bf); background:-moz-linear-gradient(#29c8ed,#0e91bf); background:-o-linear-gradient(#29c8ed,#0e91bf); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#29c8ed', endColorstr='#0e91bf', GradientType=0);background: linear-gradient(#29c8ed, #0e91bf);}
+.mainNav div ul li a:link, .mainNav div ul li a:visited{color:#fff; text-decoration:none;}
+.mainNav div ul li a:hover{color:#fff; text-decoration:none;}
+.mainNav div ul li.active{background:-webkit-linear-gradient(#29c8ed,#0e91bf); background:-moz-linear-gradient(#29c8ed,#0e91bf); background:-o-linear-gradient(#29c8ed,#0e91bf); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#29c8ed', endColorstr='#0e91bf', GradientType=0);background: linear-gradient(#29c8ed, #0e91bf);}
+
+
+.mainCon{width:98%; margin:10px auto; overflow:hidden;}
+.mainQuxian{border:#94bef8 solid 1px; height:200px; padding:0px 1px;}
+.mainQuxian_menu{width:100%; height:33px; line-height:33px; background:url(../images/mainConbg.jpg) repeat-x; float:left; color:#075175; font-family:'\5FAE\8F6F\96C5\9ED1'; font-size:14px; text-align:left;}
+.mainQuxian_menu span{margin-left:10px;}
+.mainQuxian_xuan{float:right;}
+.mainQuxian_xuan ul{margin-top:3px;}
+.mainQuxian_xuan ul li{width:74px; height:24px; line-height:24px; color:#fff; font-family:'\5FAE\8F6F\96C5\9ED1'; font-size:14px; display:block; float:left; background:url(../images/btnbg2.png) no-repeat; margin-right:10px; text-align:center;}
+.mainQuxian_xuan ul li:hover{color:#fff; background:url(../images/btnbg2_hover.png) no-repeat;}
+.mainQuxian_xuan ul li a:link, .mainQuxian_xuan ul li a:visited{color:#fff; text-decoration:none;}
+.mainQuxian_xuan ul li a:hover{color:#fff; text-decoration:none;}
+.mainQuxian_xuan ul li.active{color:#fff; background:url(../images/btnbg2_hover.png) no-repeat;}
+
+.mainZhu{margin-top:10px; display:inline; overflow:auto; width:100%;}
+.mainZhu_sub1{width:32%; border:#94bef8 solid 1px; height:120px; margin-top:10px; padding:0px 1px; float:left; }
+.mainZhu_sub2{border:#94bef8 solid 1px; height:120px; margin-top:10px; margin-left:33%; margin-right:33%; padding:0px 1px;}
+.mainZhu_sub3{width:32%; border:#94bef8 solid 1px; height:120px; margin-top:10px; padding:0px 1px; float:right;}
+.mainZhu_menu{width:100%; height:33px; line-height:33px; background:url(../images/mainConbg.jpg) repeat-x; float:left; color:#075175; font-family:'\5FAE\8F6F\96C5\9ED1'; font-size:14px; text-align:left;}
+.mainZhu_menu span{margin-left:10px;}
+.mainZhu_small{color:#075175; font-family:'\5FAE\8F6F\96C5\9ED1'; font-size:12px;}
+
+.margin10{margin:0px 10px;}
+
+
+.mainBot{width:100%; margin:5px auto 0px; overflow:hidden; border-top:#95b8e7 1px solid; position:absolute; bottom:0px;}
+.mainBotqu{height:30px; line-height:30px; color:#555; background-color:#e3eeff; padding-left:15px; text-align:left;}

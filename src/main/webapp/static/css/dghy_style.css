@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* CSS Document */
+
+.main{border:#b5daf7 solid 1px; margin-top:10px; overflow:hidden;}
+.mainRight{float:right; width:390px; border-left:#b5daf7 solid 1px;}
+.mainLeft{float:left; width:calc(100% - 391px);}
+
+
+.midMenu{width:100%; background:#cee9ff; height:39px; line-height:39px;}
+.midForm{text-align:left; margin-left:5px; float:left;}
+.midSelcet{width:175px; height:29px; border:#9fcef4 solid 1px; color:#0d5b7d; padding:2px; margin-bottom:5px; background:#f8fcff;}
+
+.topmenu{float:right; margin-right:1px; margin-top:2px;position: absolute;top:0px;right: 0px;}
+.topmenu ul {padding:0; margin:0; list-style-type: none;}
+.topmenu ul li{float:left; position:relative; width:110px; height:32px; line-height:32px; border:#52c5ef solid 1px;border-top:none; text-align:center; margin-right:1px;}
+.topmenu ul li a:link,.menu ul li a:visited{text-decoration:none;}
+.topmenu ul li span{margin-right:6px;}
+.topmenu ul li ul{display:none;}
+.topmenu ul li:hover ul{display:block; position:absolute; z-index:1; top:33px; left:-1px;}
+.topmenu ul li:hover ul li{background:#e1f1ff; border-top:none;}
+.topmenu ul li:hover ul li a{display:block; width:110px; height30px;}
+.topmenu ul li:hover ul li a:hover{background:#cfe7fa;}
+
+
+.mapCon{width:100%;}
+.leftMenu{float:left; background:#edf7ff; border-right:#85daf7 solid 1px; border-top:#fff solid 1px; width:45px;position: absolute;top: 50px;}
+.leftMenu ul{list-style-type: none;}
+.leftMenu ul li{position:relative; width:45px; height:35px; line-height:35px; text-align:center; border-bottom:#b5daf7 solid 1px;}
+.leftMenu ul li img{border:none;}
+.leftMenu ul li ul{display:none; width:193px; margin-left:48px; top:0px; border-top:#d7dde3 solid 1px; border-right:#d7dde3 solid 1px;}
+.leftMenu ul li ul li{width:193px; height:32px; line-height:32px; background:#e1f1ff; color:#0a445c; text-align:left;}
+.leftMenu ul li ul li a:link,.leftMenu ul li ul li a:visited{display:block; text-decoration:none;}
+.leftMenu li:hover ul{display:block; position:absolute; z-index:2;}
+.leftMenu li:hover ul li{height:32px;}
+.leftMenu li:hover ul li a{display:block; width:178px; padding-left:15px;}
+.leftMenu li:hover ul li a:hover{background:#cfe7fa;}
+.leftMenu ul li ul li ul{display:none; width:193px; margin:0px; top:32px;}
+
+
+.leftTitle{background:#1283b4; color:#fff; width:178px; padding-left:15px;}
+
+
+
+
+.guideRight{width:388px; background:#edf7ff; border-bottom:#b5daf7 solid 1px; height:38px; line-height:38px; font-size:14px; color:#0d5b7d; text-align:left; padding-left:10px;}
+.guideRight a{background:url(../images/dghy/qiehuan.png) no-repeat; float:right; margin-right:10px; margin-top:10px; display:block; width:18px; height:18px;}
+.guideRight a:hover{background:url(../images/dghy/qiehuan_hover.png) no-repeat;}
