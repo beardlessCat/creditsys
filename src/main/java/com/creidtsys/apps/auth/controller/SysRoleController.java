@@ -6,13 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import net.sf.json.JSONObject;
-
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -21,11 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.creidtsys.apps.auth.entity.SysRole;
-import com.creidtsys.apps.auth.entity.SysUser;
 import com.creidtsys.apps.auth.service.SysRoleService;
 import com.creidtsys.apps.auth.service.SysUserService;
-import com.creidtsys.utils.Constant;
-import com.creidtsys.utils.ShiroUtils;
 import com.creidtsys.utils.JsonMessage;
 import com.creidtsys.utils.TreeModel;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -96,7 +88,7 @@ public class SysRoleController {
 	}
 	@RequestMapping(value="/allRole" ,method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public  JSONObject  allRole (String data) throws JsonParseException, JsonMappingException, IOException{
+	public  Map<String, Object>  allRole (String data) throws JsonParseException, JsonMappingException, IOException{
 		
 		SysRole sysRole= mapper.readValue(data, new TypeReference<SysRole>() { });  
 		int page = Integer.parseInt(sysRole.getPageNumber()) ;  
@@ -108,7 +100,7 @@ public class SysRoleController {
 		PageHelper.startPage(page,rows);  
 		List<SysRole> listPage = sysRoleService.getAllRole(roleParentId) ;  
 		map.put("rows", listPage);//rows¼ü ´æ·ÅÃ¿Ò³¼ÇÂ¼ list             
-        return  JSONObject.fromObject(map) ;
+        return  map ;
 	}
 	/**
 	 * 
