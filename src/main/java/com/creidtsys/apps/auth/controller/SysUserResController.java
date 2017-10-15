@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -14,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.creidtsys.apps.auth.entity.SysDept;
-import com.creidtsys.apps.auth.entity.SysRes;
 import com.creidtsys.apps.auth.entity.SysUserRes;
 import com.creidtsys.apps.auth.service.SysUserResService;
 import com.creidtsys.utils.JsonMessage;
@@ -49,11 +45,11 @@ public class SysUserResController {
 	 */
 	@RequestMapping(value="/getResByUser",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-	public JSONObject getResByUser(String userId){
+	public Map<String,Object> getResByUser(String userId){
 		List<SysUserRes> list = sysUserResService.getResByUser(userId);
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("rows", list);
-		return JSONObject.fromObject(map);
+		return map;
 	}
 	/**
 	 * 
@@ -65,11 +61,11 @@ public class SysUserResController {
 	 */
 	@RequestMapping(value="/getUserRes",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-	public JSONObject getUserRes(String userId){
+	public Map<String,Object> getUserRes(String userId){
 		List<SysUserRes> list = sysUserResService.getUserRes(userId);
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("rows", list);
-		return JSONObject.fromObject(map);
+		return map;
 	}
 	/**
 	 * 
@@ -81,11 +77,11 @@ public class SysUserResController {
 	 */
 	@RequestMapping(value="/getRoleRes",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-	public JSONObject getRoleRes(String userId){
+	public Map<String,Object> getRoleRes(String userId){
 		List<SysUserRes> list = sysUserResService.getRoleRes(userId);
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("rows", list);
-		return JSONObject.fromObject(map);
+		return map;
 	}
 	/**
 	 * 

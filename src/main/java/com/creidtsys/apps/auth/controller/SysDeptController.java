@@ -9,9 +9,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSON;
-import net.sf.json.JSONObject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -19,14 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-
-
-
-
-
-
-
 import org.springframework.web.servlet.ModelAndView;
 
 import com.creidtsys.apps.auth.entity.SysDept;
@@ -121,7 +110,7 @@ public class SysDeptController {
 	 */
 	@RequestMapping(value="/allDept" ,method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public  JSONObject  allDept (String data) throws JsonParseException, JsonMappingException, IOException{
+	public  Map<String,Object>  allDept (String data) throws JsonParseException, JsonMappingException, IOException{
 		    SysDept sysDept= mapper.readValue(data, new TypeReference<SysDept>() { });  
 	        int page = Integer.parseInt(sysDept.getPageNumber()) ;  
 	        int rows =Integer.parseInt(sysDept.getPageSize()) ;   
@@ -132,7 +121,7 @@ public class SysDeptController {
 	        PageHelper.startPage(page,rows);  
 	        List<SysDept> listPage = sysDeptService.getAllDept(deptParentId) ;  
 	        map.put("rows", listPage);//rows¼ü ´æ·ÅÃ¿Ò³¼ÇÂ¼ list             
-	       return  JSONObject.fromObject(map) ;
+	       return  map ;
 	}
 	/**
 	 * 

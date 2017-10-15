@@ -9,12 +9,9 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -156,7 +153,7 @@ public class SysUserController {
 	
 	@RequestMapping(value="/allUser" ,method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public  JSONObject  allUser (String data) throws JsonParseException, JsonMappingException, IOException{
+	public  Map<String,Object>  allUser (String data) throws JsonParseException, JsonMappingException, IOException{
 		    SysUser sysUser= mapper.readValue(data, new TypeReference<SysUser>() { });  
 	        int page = Integer.parseInt(sysUser.getPageNumber()) ;  
 	        int rows =Integer.parseInt(sysUser.getPageSize()) ;   
@@ -166,7 +163,7 @@ public class SysUserController {
 	        PageHelper.startPage(page,rows);  
 	        List<SysUser> listPage = userService.getAllUser(sysUser) ;  
 	        map.put("rows", listPage);//rows¼ü ´æ·ÅÃ¿Ò³¼ÇÂ¼ list             
-	       return  JSONObject.fromObject(map) ;
+	       return  map ;
 	}
 	/**
 	 * 

@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import net.sf.json.JSONObject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.creidtsys.apps.auth.entity.SysRes;
-import com.creidtsys.apps.auth.entity.SysRole;
 import com.creidtsys.apps.auth.service.SysResService;
 import com.creidtsys.utils.JsonMessage;
 import com.creidtsys.utils.TreeModel;
@@ -96,11 +93,11 @@ public class SysResController {
 	 */
 	@RequestMapping(value="/getTreeData",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-	public JSONObject getTreeData(){
+	public Map<String,Object> getTreeData(){
 		List<SysRes> list = sysResService.getAllRes();
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("rows", list);
-		return JSONObject.fromObject(map);
+		return map;
 	}
 	
 	@RequestMapping(value="/initTree",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
