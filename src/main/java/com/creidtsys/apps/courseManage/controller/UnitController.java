@@ -8,21 +8,18 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONArray;
-
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.sys.auth.utils.JsonMessage;
-import cn.sys.courseManage.entity.CourseRelation;
-import cn.sys.courseManage.entity.Unit;
-import cn.sys.courseManage.service.CourseRelationService;
-import cn.sys.courseManage.service.UnitService;
-import cn.sys.utils.UtilTools;
-
+import com.creidtsys.apps.courseManage.entity.CourseRelation;
+import com.creidtsys.apps.courseManage.entity.Unit;
+import com.creidtsys.apps.courseManage.service.CourseRelationService;
+import com.creidtsys.apps.courseManage.service.UnitService;
+import com.creidtsys.utils.JsonMessage;
+import com.creidtsys.utils.UtilTools;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;

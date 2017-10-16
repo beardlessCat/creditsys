@@ -8,21 +8,16 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONArray;
-
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.sys.auth.utils.JsonMessage;
-import cn.sys.courseManage.entity.CourseType;
-import cn.sys.courseManage.entity.Unit;
-import cn.sys.courseManage.service.CourseTypeService;
-import cn.sys.manage.entity.CompanyType;
-import cn.sys.utils.UtilTools;
-
+import com.creidtsys.apps.courseManage.entity.CourseType;
+import com.creidtsys.apps.courseManage.service.CourseTypeService;
+import com.creidtsys.utils.JsonMessage;
+import com.creidtsys.utils.UtilTools;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -79,7 +74,7 @@ public class CourseTypeController {
 	}
 	@RequestMapping(value="/initType",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JSONArray initType() throws Exception{
+	public List<Map<String,String>> initType() throws Exception{
 		List<CourseType> list = courseTypeService.selectAll();
 		List<Map<String,String>> listMap = new ArrayList<Map<String,String>>();
 		for(int i=0;i<list.size();i++){
@@ -88,6 +83,6 @@ public class CourseTypeController {
 				newMap.put("text", list.get(i).getCtypeName());
 				listMap.add(newMap) ;
 			}
-		return JSONArray.fromObject(listMap) ;
+		return listMap;
 	}
 }

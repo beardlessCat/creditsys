@@ -8,27 +8,22 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONArray;
-
 import org.springframework.http.MediaType;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.sys.auth.utils.JsonMessage;
-import cn.sys.courseManage.entity.Course;
-import cn.sys.courseManage.entity.CourseDepend;
-import cn.sys.courseManage.entity.CourseRelation;
-import cn.sys.courseManage.service.CourseDependService;
-import cn.sys.courseManage.service.CourseRelationService;
-import cn.sys.courseManage.service.CourseService;
-import cn.sys.manage.entity.ResultInfo;
-import cn.sys.manage.service.ResultInfoService;
-import cn.sys.utils.UtilTools;
-
+import com.creidtsys.apps.courseManage.entity.Course;
+import com.creidtsys.apps.courseManage.entity.CourseDepend;
+import com.creidtsys.apps.courseManage.entity.CourseRelation;
+import com.creidtsys.apps.courseManage.service.CourseDependService;
+import com.creidtsys.apps.courseManage.service.CourseRelationService;
+import com.creidtsys.apps.courseManage.service.CourseService;
+import com.creidtsys.apps.manage.entity.ResultInfo;
+import com.creidtsys.apps.manage.service.ResultInfoService;
+import com.creidtsys.utils.JsonMessage;
+import com.creidtsys.utils.UtilTools;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -180,7 +175,7 @@ public class CourseController {
 	
 	@RequestMapping(value="/initCourse",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JSONArray initCourse(String majorId) throws Exception{
+	public List<Map<String,String>> initCourse(String majorId) throws Exception{
 		List<Course> list =  courseService.selectAll(majorId); 
 		List<Map<String,String>> listMap = new ArrayList<Map<String,String>>();
 		for(int i=0;i<list.size();i++){
@@ -189,15 +184,15 @@ public class CourseController {
 				newMap.put("text", list.get(i).getCourseName());
 				listMap.add(newMap) ;
 			}
-		return JSONArray.fromObject(listMap) ;
+		return listMap ;
 	}
 	@RequestMapping(value="/getChoose",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	private JsonMessage getChoose(){
 		ResultInfo resultInfo = new ResultInfo();
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+	//	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
 		//获取用户id以判断是否已经对课程选择，判断条件用户与对应的课程的成绩中是否有数据
-		String userId = userDetails.getPassword() ;
+		String userId = "" ;//userDetails.getPassword() ;
 		resultInfo.setRiUserId(userId);
 		List<ResultInfo> list = resultInfoService.getChoose(resultInfo) ;
 		return new JsonMessage().success(list) ;

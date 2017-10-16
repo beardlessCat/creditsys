@@ -11,15 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.sys.auth.utils.JsonMessage;
-import cn.sys.courseManage.entity.Course;
-import cn.sys.courseManage.entity.CourseRelation;
-import cn.sys.courseManage.entity.Point;
-import cn.sys.courseManage.entity.Unit;
-import cn.sys.courseManage.service.CourseRelationService;
-import cn.sys.courseManage.service.PointService;
-import cn.sys.utils.UtilTools;
-
+import com.creidtsys.apps.courseManage.entity.CourseRelation;
+import com.creidtsys.apps.courseManage.service.CourseRelationService;
+import com.creidtsys.apps.courseManage.service.PointService;
+import com.creidtsys.apps.manage.entity.Point;
+import com.creidtsys.utils.JsonMessage;
+import com.creidtsys.utils.UtilTools;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;

@@ -4,18 +4,16 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.xml.resolver.apps.resolver;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.sys.auth.utils.JsonMessage;
-import cn.sys.courseManage.entity.CourseDepend;
-import cn.sys.courseManage.service.CourseDependService;
-import cn.sys.utils.UtilTools;
-
+import com.creidtsys.apps.courseManage.entity.CourseDepend;
+import com.creidtsys.apps.courseManage.service.CourseDependService;
+import com.creidtsys.utils.JsonMessage;
+import com.creidtsys.utils.UtilTools;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

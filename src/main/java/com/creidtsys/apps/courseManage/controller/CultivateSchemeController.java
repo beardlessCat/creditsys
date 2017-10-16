@@ -8,25 +8,22 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.regexp.recompile;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.courseManage.entity.CultivateScheme;
+import com.creidtsys.apps.courseManage.entity.Major;
+import com.creidtsys.apps.courseManage.service.CultivateSchemeService;
+import com.creidtsys.apps.courseManage.service.MajorService;
+import com.creidtsys.utils.JsonMessage;
+import com.creidtsys.utils.UtilTools;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import cn.sys.auth.utils.JsonMessage;
-import cn.sys.courseManage.entity.CultivateScheme;
-import cn.sys.courseManage.entity.Major;
-import cn.sys.courseManage.service.CultivateSchemeService;
-import cn.sys.courseManage.service.MajorService;
-import cn.sys.utils.UtilTools;
-import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping("/cultivateScheme")
@@ -93,7 +90,7 @@ public class CultivateSchemeController {
 	
 	@RequestMapping(value="/initMajor" ,method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JSONArray initMajor(String majorId)
+	public List<Map<String,String>> initMajor(String majorId)
 	{
 		List<Major> majors=majorService.selectAll(majorId);
 		
@@ -104,6 +101,6 @@ public class CultivateSchemeController {
 				newMap.put("text", majors.get(i).getMajorName());
 				listMap.add(newMap) ;
 			}
-		return JSONArray.fromObject(listMap) ;
+		return listMap ;
 	}
 }

@@ -1,9 +1,7 @@
 package com.creidtsys.apps.courseManage.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,41 +13,33 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONArray;
-
 import org.springframework.http.MediaType;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonParseException;
+import com.creidtsys.apps.auth.entity.User;
+import com.creidtsys.apps.auth.service.UserService;
+import com.creidtsys.apps.courseManage.entity.Course;
+import com.creidtsys.apps.courseManage.entity.CourseDepend;
+import com.creidtsys.apps.courseManage.entity.CourseRelation;
+import com.creidtsys.apps.courseManage.entity.HTMLInfo;
+import com.creidtsys.apps.courseManage.entity.PlanRelation;
+import com.creidtsys.apps.courseManage.entity.ReCondition;
+import com.creidtsys.apps.courseManage.service.CourseDependService;
+import com.creidtsys.apps.courseManage.service.CourseRelationService;
+import com.creidtsys.apps.courseManage.service.CourseService;
+import com.creidtsys.apps.courseManage.service.MajorService;
+import com.creidtsys.apps.courseManage.service.PlanRelationService;
+import com.creidtsys.apps.manage.entity.Relation;
+import com.creidtsys.apps.manage.entity.ResultInfo;
+import com.creidtsys.apps.manage.service.RelationService;
+import com.creidtsys.apps.manage.service.ResultInfoService;
+import com.creidtsys.utils.JsonMessage;
+import com.creidtsys.utils.UtilTools;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import cn.sys.auth.entity.User;
-import cn.sys.auth.service.UserService;
-import cn.sys.auth.utils.JsonMessage;
-import cn.sys.courseManage.entity.Course;
-import cn.sys.courseManage.entity.CourseDepend;
-import cn.sys.courseManage.entity.CourseRelation;
-import cn.sys.courseManage.entity.HTMLInfo;
-import cn.sys.courseManage.entity.PlanRelation;
-import cn.sys.courseManage.entity.ReCondition;
-import cn.sys.courseManage.service.CourseDependService;
-import cn.sys.courseManage.service.CourseRelationService;
-import cn.sys.courseManage.service.CourseService;
-import cn.sys.courseManage.service.MajorService;
-import cn.sys.courseManage.service.PlanRelationService;
-import cn.sys.manage.entity.Company;
-import cn.sys.manage.entity.Relation;
-import cn.sys.manage.entity.ResultInfo;
-import cn.sys.manage.service.RelationService;
-import cn.sys.manage.service.ResultInfoService;
-import cn.sys.utils.UtilTools;
 
 @Controller
 @RequestMapping("/recommendCourse") 

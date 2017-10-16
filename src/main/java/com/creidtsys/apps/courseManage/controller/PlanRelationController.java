@@ -8,23 +8,18 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONArray;
-
 import org.springframework.http.MediaType;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.sys.auth.utils.JsonMessage;
-import cn.sys.courseManage.entity.Major;
-import cn.sys.courseManage.entity.PlanRelation;
-import cn.sys.courseManage.service.MajorService;
-import cn.sys.courseManage.service.PlanRelationService;
-import cn.sys.utils.UtilTools;
-
+import com.creidtsys.apps.courseManage.entity.Major;
+import com.creidtsys.apps.courseManage.entity.PlanRelation;
+import com.creidtsys.apps.courseManage.service.MajorService;
+import com.creidtsys.apps.courseManage.service.PlanRelationService;
+import com.creidtsys.utils.JsonMessage;
+import com.creidtsys.utils.UtilTools;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -84,7 +79,7 @@ public class PlanRelationController {
 	@RequestMapping(value="/oneData" )
     @ResponseBody
 	public Map<String,Object> oneData(String majorId){
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+	¡¢¡¢	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
 		String userId = userDetails.getPassword();
 	//	String majorIds = majorService.getidByUserId(userId);
 		List<PlanRelation> list= planRelationService.oneData(majorId);

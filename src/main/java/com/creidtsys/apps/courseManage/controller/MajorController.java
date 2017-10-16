@@ -8,25 +8,20 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONArray;
-
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.courseManage.entity.Major;
+import com.creidtsys.apps.courseManage.service.MajorService;
+import com.creidtsys.utils.JsonMessage;
+import com.creidtsys.utils.UtilTools;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import cn.sys.auth.utils.JsonMessage;
-import cn.sys.courseManage.entity.Course;
-import cn.sys.courseManage.entity.CourseDepend;
-import cn.sys.courseManage.entity.Major;
-import cn.sys.courseManage.service.MajorService;
-import cn.sys.utils.UtilTools;
 
 
 @Controller
@@ -90,7 +85,7 @@ public class MajorController {
 	}
 	@RequestMapping(value="/initMajor",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JSONArray initCourse(String majorId) throws Exception{
+	public List<Map<String,String>> initCourse(String majorId) throws Exception{
 		List<Major> list = majorService.selectAll(majorId); 
 		List<Map<String,String>> listMap = new ArrayList<Map<String,String>>();
 		for(int i=0;i<list.size();i++){
@@ -99,6 +94,6 @@ public class MajorController {
 				newMap.put("text", list.get(i).getMajorName());
 				listMap.add(newMap) ;
 			}
-		return JSONArray.fromObject(listMap) ;
+		return listMap ;
 	} 
 }
