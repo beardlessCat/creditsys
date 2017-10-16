@@ -1,0 +1,135 @@
+	@RequestMapping(value="/getAllPointChoosed",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	private JSONArray allCourseUnChoosed(String relationId){
+		//获取当前用户
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+		//获取用户id以判断是否已经对课程选择，判断条件用户与对应的课程的成绩中是否有数据
+		String userId = userDetails.getPassword() ;
+		List<Relation> list = relationService.getAllPoint(relationId);
+		List<String> sIdList = new ArrayList<String>();
+		Relation relation = relationService.getPosition(relationId);
+		String positionName = relation.getRelationRes();
+		for(int i=0;i<list.size();i++ ){
+			String pointId = list.get(i).getOtherId();
+			List<CourseRelation> reList =  courseRelationService.getCourse(pointId); 
+			for(int j=0;j<reList.size();j++){
+				String sId = reList.get(j).getSrOtherId();
+				if(!sIdList.contains(sId)){
+					sIdList.add(sId);
+				}
+			}
+		}
+		//已经选的课程
+				ResultInfo resultInfo = new ResultInfo();
+				resultInfo.setRiUserId(userId);
+				List<ResultInfo> inList = resultInfoService.getChoose(resultInfo);;
+				List<String> choosedList = new ArrayList<String>() ;
+				if(inList.size()>0){
+					for(ResultInfo r:inList){
+						if(!choosedList.contains(r.getCourseId())){
+							choosedList.add(r.getCourseId());
+						}
+					}
+				}
+		List<String> newIdParamList = new ArrayList<String>(sIdList) ;
+		
+		//获取没个课程的id
+		List<String> finalList= getList(newIdParamList,newIdParamList);
+		List<String> pdRootList = new ArrayList<String>() ;
+		List<String> pIdList = new ArrayList<String>();
+		List<String> leafList = new ArrayList<String>();
+		for(String s :finalList){
+			List<CourseDepend> p = courseDependService.getBySid(s);
+			for(CourseDepend c:p){
+				String str = c.getCoursePid();
+				if(str=="0"){
+					leafList.add(str);
+				}else{
+					if(!pIdList.contains(str)){
+						pIdList.add(str);
+				}
+				}
+		}
+	}
+		for(String rootId:finalList){
+			if(!pIdList.contains(rootId)){
+				pdRootList.add(rootId) ;
+			}
+		}
+		//获取每个的pid
+		List<Map<String,String>> listMaps = initData(finalList);		
+		List<Map<String,String>> testList = new ArrayList<Map<String,String>>();
+		Map<String,String> root = new HashMap<String, String>();
+		root.put("key", positionName);
+		root.put("color", "#EF9EFA") ;
+		testList.add(root);
+		for(Map<String,String> m:listMaps){
+			if(!choosedList.contains(m.get("sId"))&&!choosedList.contains(m.get("pSid"))){
+			Map<String,String> lmap = new HashMap<String, String>() ;
+			//判断是否有依赖，没有的话指向根节点
+			List<CourseDepend> tl =  courseDependService.getByPsid(m.get("sId"));
+			//判断是否已选
+			String color = "#CDDAF0";
+			if(tl.size()>0){
+				for(int l=0;l<tl.size();l++){
+					if(pdRootList.contains(tl.get(l).getCoursePid())){
+							lmap.put("parent", m.get("name"));
+							lmap.put("key", m.get("pname"));
+							lmap.put("dir", "left");
+							lmap.put("color", color);
+							if(!testList.contains(lmap)){
+								if(!m.get("pname").equals("0")){
+									testList.add(lmap);
+								}
+							}
+							Map<String,String> mMap = new HashMap<String, String>() ;
+							if(choosedList.contains(m.get("sId"))){
+								color="#CDDAF0";
+							}
+							mMap.put("parent", positionName);
+							mMap.put("key", m.get("name"));
+							mMap.put("dir", "left");
+							mMap.put("color", color);
+							if(!testList.contains(mMap)){
+								testList.add(mMap);
+							}
+					}else{
+						
+						//不需指向职位节点
+						lmap.put("parent", m.get("name"));
+						lmap.put("key", m.get("pname"));
+						lmap.put("dir", "left");
+						lmap.put("color", color);
+						if(!testList.contains(lmap)){
+							if(!m.get("pname").equals("0")){
+								testList.add(lmap);
+							}
+						}
+					}
+				}
+			}else{
+				//不需指向职位节点
+				//指向根节点
+				lmap.put("parent", m.get("name"));
+				lmap.put("key", m.get("pname"));
+				lmap.put("dir", "left");
+				lmap.put("color", color);
+				if(!m.get("pname").equals("0")){
+					if(!testList.contains(lmap)){
+						testList.add(lmap);
+					}
+				}
+				Map<String,String> mMap = new HashMap<String, String>() ;
+				mMap.put("parent", positionName);
+				mMap.put("key", m.get("name"));
+				mMap.put("dir", "left");
+				mMap.put("color", color);
+				if(!testList.contains(mMap)){
+					testList.add(mMap);
+				}
+			}
+		}
+		}
+		System.out.println("size---->>>"+leafList.size());
+		return JSONArray.fromObject(testList) ;
+	}

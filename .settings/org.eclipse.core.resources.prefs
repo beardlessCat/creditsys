@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/creidtsys/apps/courseManage/entity/Major.java=UTF-8
 encoding//src/main/webapp/WEB-INF/page/auth/dept/addDept.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/page/auth/dept/list.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/wsyyt/index.html=UTF-8
