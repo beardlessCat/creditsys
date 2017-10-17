@@ -1,5 +1,6 @@
 package com.creidtsys.apps.manage.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,14 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.manage.entity.Company;
 import com.creidtsys.apps.manage.entity.Paper;
 import com.creidtsys.apps.manage.entity.PaperRelation;
 import com.creidtsys.apps.manage.service.PaperRelationService;
 import com.creidtsys.apps.manage.service.PaperService;
 import com.creidtsys.utils.JsonMessage;
 import com.creidtsys.utils.UtilTools;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
 
 @Controller
 @RequestMapping(value="/paper")
@@ -29,10 +34,10 @@ public class PaperController {
 	private PaperService paperService ;
 	@Resource
 	private PaperRelationService paperRelationService ; 
-	private final String  LIST ="manage/paper/list" ;
-	private final String TONEWJSP = "manage/paper/add" ;
-	private final String TOEDITJSP ="manage/paper/edit" ;
-	private final String TOEDITINFO ="manage/paper/listRelation";
+	private final String  LIST ="jsp/manage/paper/list" ;
+	private final String TONEWJSP = "jsp/manage/paper/add" ;
+	private final String TOEDITJSP ="jsp/manage/paper/edit" ;
+	private final String TOEDITINFO ="jsp/manage/paper/listRelation";
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping(value="/toEditInfo")
 	public String toEditInfo(){
@@ -52,9 +57,18 @@ public class PaperController {
     }
     @RequestMapping(value="/getAll",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    private JsonMessage allPaper(){
+    private Map<String,Object>  allPaper(String data) throws JsonParseException, JsonMappingException, IOException{
+    	Paper paper= mapper.readValue(data, new TypeReference<Paper>() { 
+		 });
+		int page = Integer.parseInt(paper.getPageNumber()) ;  
+       int rows =Integer.parseInt(paper.getPageSize()) ;   
     	List<Paper> list = paperService.getAll() ;
-    	return new JsonMessage().success(list) ;
+    	Map<String,Object> map =new HashMap<String, Object>() ;
+		map.put("total", list.size()) ;
+		PageHelper.startPage(page,rows);
+		List<Paper> listPage = paperService.getAll() ;;  
+		map.put("rows", listPage) ;
+    	return map ;
     }
     @RequestMapping(value="/delete",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

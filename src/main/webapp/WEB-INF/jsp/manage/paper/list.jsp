@@ -7,8 +7,36 @@
 <head>
 <script type="text/javascript">
 $(function(){
-	initdatagrid();
+	var pager = $("#dgzds").datagrid("getPager");
+	if (pager) {
+		$(pager).pagination({
+			onBeforeRefresh : function() {
+			},
+			onRefresh : function(pageNumber, pageSize) {
+			},
+			onChangePageSize : function(pageNumber, pageSize) {
+			},
+			onSelectPage : function(pageNumber, pageSize) {
+				initGrid('', pageNumber, pageSize);
+			}
+		});
+	}
+	initGrid('','1','10') ;
 	initCourse();
+	function initGrid(coursePaperId, pageNumber, pageSize) {
+		if(pageNumber==null||pageNumber==""){
+			pageNumber = "1" ;
+		}
+		if(pageSize==null||pageSize==""){
+			pageSize = "10" ;
+		}
+		var jsonData = JSON.stringify({
+			'coursePaperId':coursePaperId ,
+			'pageNumber' : pageNumber,
+			'pageSize' : pageSize
+		});
+		initDataGrid('dgzds', 'paper/getAll', 'POST', 'json', jsonData);
+	}
 	$('#delbtn').bind('click', function(){
 		var row = $("#dgzds").treegrid("getSelected");
 		if(row==null){
@@ -27,7 +55,7 @@ $(function(){
 						//成功返回之后调用的函数             
 						success : function(data) {
 							if(data.meta.success){
-								initdatagrid();
+								initGrid('','1','10') ;
 		                    }else{
 		                        $.messager.alert('error', data.meta.message, 'error');
 		                    }
@@ -244,7 +272,7 @@ function edit(rowIndex){
 }
 $("#queryName").combobox({
 	onChange: function (n,o) {
-		initdatagrid(n);
+		initGrid(n,'1','10') ;
 	}
 });
 function initCourse(){
@@ -267,7 +295,7 @@ function initCourse(){
 				<a id="editbtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'">修改</a>
 				<a id="editinfo" class="easyui-linkbutton" data-options="iconCls:'icon-add'">编辑试卷内容</a>
 			</div>
-			<table id="dgzds" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid">
+			<table id="dgzds" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid" pagination="true">
 			<thead>
 				<tr>  
 					<th data-options="field:'paperId',halign:'center',align:'center',width:10,hidden:true">试卷id</th>

@@ -1,6 +1,9 @@
 package com.creidtsys.apps.manage.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -11,20 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.manage.entity.CompanyType;
 import com.creidtsys.apps.manage.entity.Technology;
 import com.creidtsys.apps.manage.service.TechnologyService;
 import com.creidtsys.utils.JsonMessage;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
 
 @Controller
 @RequestMapping("/technology")
 public class TechnologyController {
 	@Resource
 	private TechnologyService technologyService ; 
-	private final String  LIST ="manage/technology/list" ;
-	private final String TONEWJSP = "manage/technology/add" ;
-	private final String TOEDITJSP ="manage/technology/edit" ;
+	private final String  LIST ="jsp/manage/technology/list" ;
+	private final String TONEWJSP = "jsp/manage/technology/add" ;
+	private final String TOEDITJSP ="jsp/manage/technology/edit" ;
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping("/list")
 	public String list(){
@@ -40,9 +47,18 @@ public class TechnologyController {
 	}
 	@RequestMapping(value="/allTechnology",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public JsonMessage allPosition(String technologyName){
-    	List<Technology> list = technologyService.selectAll(technologyName);
-    	return new JsonMessage().success(list) ;
+    public  Map<String,Object> allPosition(String data) throws JsonParseException, JsonMappingException, IOException{
+	     Technology technology= mapper.readValue(data, new TypeReference<Technology>() { 
+		 });
+	     int page = Integer.parseInt(technology.getPageNumber()) ;  
+         int rows =Integer.parseInt(technology.getPageSize()) ;   
+    	 List<Technology> list = technologyService.selectAll(technology.getTechnologyName());
+    	 Map<String,Object> map =new HashMap<String, Object>() ;
+         map.put("total", list.size()) ;
+         PageHelper.startPage(page,rows);
+         List<Technology> listPage = technologyService.selectAll(technology.getTechnologyName()); 
+         map.put("rows", listPage) ;
+         return map;
     }
 	 @RequestMapping(value="/add",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	    @ResponseBody

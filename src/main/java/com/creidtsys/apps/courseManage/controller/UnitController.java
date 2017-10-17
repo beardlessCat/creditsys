@@ -32,9 +32,9 @@ public class UnitController {
 	private UnitService unitService ;
 	@Resource
 	private CourseRelationService  courseRelationService;
-	private final String  LIST ="courseManager/unit/list" ;
-	private final String TONEWJSP = "courseManager/unit/add" ;
-	private final String TOEDITJSP ="courseManager/unit/edit" ;
+	private final String  LIST ="jsp/courseManager/unit/list" ;
+	private final String TONEWJSP = "jsp/courseManager/unit/add" ;
+	private final String TOEDITJSP ="jsp/courseManager/unit/edit" ;
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping(value="/list")
 	public String list(){

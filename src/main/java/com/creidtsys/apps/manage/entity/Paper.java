@@ -1,7 +1,9 @@
 package com.creidtsys.apps.manage.entity;
 
+import com.creidtsys.apps.courseManage.entity.Course;
+
 //public class Paper extends User{
-public class Paper{
+public class Paper extends Course{
 	private String paperName;
 	private String paperId ;
 	private String coursePaperId;

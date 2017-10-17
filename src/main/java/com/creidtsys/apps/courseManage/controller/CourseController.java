@@ -40,11 +40,11 @@ public class CourseController {
 	private CourseRelationService courseRelationService ;
 	@Resource
 	private ResultInfoService resultInfoService ;
-	private final String  LIST ="courseManager/course/list" ;
-	private final String TONEWJSP = "courseManager/course/add" ;
-	private final String TOEDITJSP ="courseManager/course/edit" ;
-	private final String TONESCOURSE ="courseManager/course/nesCourse";
-	private final String PROGRESS ="courseManager/course/learnProgess";
+	private final String  LIST ="jsp/courseManager/course/list" ;
+	private final String TONEWJSP = "jsp/courseManager/course/add" ;
+	private final String TOEDITJSP ="jsp/courseManager/course/edit" ;
+	private final String TONESCOURSE ="jsp/courseManager/course/nesCourse";
+	private final String PROGRESS ="jsp/courseManager/course/learnProgess";
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping("/learnProgess")
 	public String progress(){

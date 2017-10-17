@@ -8,37 +8,17 @@ import org.springframework.stereotype.Service;
 
 import com.creidtsys.apps.manage.entity.CompanyType;
 
-@Service
-public class CompanyTypeService {
-	@Autowired
-	private SqlSessionFactory sessionFactory ;
+public interface CompanyTypeService {
+	
+	public List<CompanyType> getAll() ;
 
-	public List<CompanyType> getAll() {
-		// TODO Auto-generated method stub
-		List<CompanyType> list = sessionFactory.openSession().selectList("cn.sys.manage.entity.CompanyTypeMapper.selectList");
-		return list;
-	}
+	public void addType(CompanyType companyType) ;
 
-	public void addType(CompanyType companyType) {
-		// TODO Auto-generated method stub
-		sessionFactory.openSession().insert("cn.sys.manage.entity.CompanyTypeMapper.addType",companyType) ;
-	}
+	public void editType(CompanyType companyType) ;
 
-	public void editType(CompanyType companyType) {
-		// TODO Auto-generated method stub
-		sessionFactory.openSession().insert("cn.sys.manage.entity.CompanyTypeMapper.editType",companyType) ;
-	}
-
-	public void deleteType(String typeId) {
-		// TODO Auto-generated method stub
-		sessionFactory.openSession().delete("cn.sys.manage.entity.CompanyTypeMapper.deleteType",typeId);
-	}
-
-	public List<CompanyType> allByCon(String typeName) {
-		List<CompanyType> list = sessionFactory.openSession().selectList("cn.sys.manage.entity.CompanyTypeMapper.allByCon", typeName);
-		// TODO Auto-generated method stub
-		return list;
-	}
+	public void deleteType(String typeId)  ;
+	
+	public List<CompanyType> allByCon(CompanyType companyType) ;
 	
 	
 }

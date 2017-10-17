@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sys.courseManage.entity.CourseTypeMapper">
+	<resultMap type="com.creidtsys.apps.courseManage.entity.CourseType" id="courseType">
+		<id column="CType_id" property="ctypeId"/>
+		<result column="CType_name" property="ctypeName"/>
+		<result column="CType_desc" property="ctypeDesc"/>
+	</resultMap>
+	<select id="selectList" resultMap="courseType" >
+		select * from course_type 
+	</select>
+	<insert id="addType" parameterType="com.creidtsys.apps.courseManage.entity.CourseType">
+	insert into course_type(CType_id,CType_name,CType_desc)
+				values(#{ctypeId,jdbcType=VARCHAR},#{ctypeName,jdbcType=VARCHAR},#{ctypeDesc,jdbcType=VARCHAR})
+	</insert>
+	<delete id="deleteType" parameterType="String">
+		delete from course_type where CType_id =#{ctypeId}
+	</delete>
+	<update id="editType" parameterType="com.creidtsys.apps.courseManage.entity.CourseType">
+		update course_type set CType_name=#{ctypeName} ,CType_desc=#{ctypeDesc}where  CType_id=#{ctypeId}
+	</update>
+</mapper>

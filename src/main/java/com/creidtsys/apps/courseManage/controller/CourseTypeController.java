@@ -28,9 +28,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class CourseTypeController {
 	@Resource
 	private CourseTypeService courseTypeService ;
-	private final String  LIST ="courseManager/courseType/list" ;
-	private final String TONEWJSP = "courseManager/courseType/add" ;
-	private final String TOEDITJSP ="courseManager/courseType/edit" ;
+	private final String  LIST ="jsp/courseManager/courseType/list" ;
+	private final String TONEWJSP = "jsp/courseManager/courseType/add" ;
+	private final String TOEDITJSP ="jsp/courseManager/courseType/edit" ;
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping(value="/list")
 	public String list(){

@@ -87,7 +87,7 @@ public class ReadExcelService {
    * @return
    */
   private List<ResultInfo> readExcelValue(Workbook wb){ 
-       Sheet sheet=wb.getSheetAt(0);
+   /*    Sheet sheet=wb.getSheetAt(0);
        this.totalRows=sheet.getPhysicalNumberOfRows();
        if(totalRows>=1 && sheet.getRow(0) != null){//判断行数大于一，并且第一行必须有标题（这里有bug若文件第一行没值就完了）
             this.totalCells=sheet.getRow(0).getPhysicalNumberOfCells();
@@ -119,7 +119,8 @@ public class ReadExcelService {
     		   nameList.add(loName);
     		   resultInfoList.add(resultInfo);
     	   }
-       }
+       }*/
+	   List<ResultInfo> resultInfoList=new ArrayList<ResultInfo>();//声明一个对象集合
        return resultInfoList;
   }
   
@@ -160,10 +161,10 @@ public void addResultDetial(File file, ResultInfo resultInfo) throws Exception {
        is.close();
 }
 
-
+//-----------------------------
 private void readExcelValues(Workbook wb,ResultInfo resultInfo) {
 	String resultId =resultInfo.getResultId() ;
-	String name = resultInfo.getUserLoginName();
+	/*String name = resultInfo.getUserLoginName();
 	double totalResult =0;
     List<ResultDetial> list = new ArrayList<ResultDetial>();
     Sheet sheet=wb.getSheetAt(0);
@@ -202,7 +203,7 @@ private void readExcelValues(Workbook wb,ResultInfo resultInfo) {
     }
     resultInfo.setRiResult((Double.toString(totalResult)));
     resultInfoService.editRe(resultInfo);
-
+*/
     
 }
 public static String subZeroAndDot(String s){  

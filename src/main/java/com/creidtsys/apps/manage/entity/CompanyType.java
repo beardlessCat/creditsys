@@ -1,7 +1,9 @@
 package com.creidtsys.apps.manage.entity;
 
 import java.io.Serializable;
-public class CompanyType implements Serializable{
+
+import com.creidtsys.utils.Pager;
+public class CompanyType extends Pager implements Serializable{
 	private String typeId ;
 	private String typeName ;
 	private String typeRemake ;

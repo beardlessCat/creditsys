@@ -25,9 +25,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class MajorDirectController {
 	@Resource
 	private MajorDirectService majorDirectService ;
-	private final String  LIST ="courseManager/majorDirect/list" ;
-	private final String TONEWJSP = "courseManager/majorDirect/add" ;
-	private final String TOEDITJSP ="courseManager/majorDirect/edit" ;
+	private final String  LIST ="jsp/courseManager/majorDirect/list" ;
+	private final String TONEWJSP = "jsp/courseManager/majorDirect/add" ;
+	private final String TOEDITJSP ="jsp/courseManager/majorDirect/edit" ;
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping(value="/list")
 	public String list(){

@@ -43,6 +43,7 @@
 				/login = anon
 				/index = anon
 				/page/** = anon
+				/company/** = anon
 				<!-- 要拦截的url -->
 				<!-- 用户权限拦截 -->
 				/sysUser/list= perms["user:serch"]

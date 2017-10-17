@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.auth.entity.SysUser;
 import com.creidtsys.apps.manage.entity.Company;
 import com.creidtsys.apps.manage.service.CompanyService;
 import com.creidtsys.utils.JsonMessage;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
 
 @Controller
 @RequestMapping("/company")
@@ -71,10 +73,14 @@ public class CompanyController  {
 	public Map<String,Object> selectByCon(String data) throws Exception{
 		Company company= mapper.readValue(data, new TypeReference<Company>() { 
 		 });
+		int page = Integer.parseInt(company.getPageNumber()) ;  
+        int rows =Integer.parseInt(company.getPageSize()) ;   
 		List<Company> list = companyService.selectByCon(company);
 		Map<String,Object> map =new HashMap<String, Object>() ;
 		map.put("total", list.size()) ;
-		map.put("rows", list) ;
+		PageHelper.startPage(page,rows);
+		List<Company> listPage = companyService.selectByCon(company);  
+		map.put("rows", listPage) ;
 		return map ;
 	}
 	@RequestMapping(value="/add",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
@@ -83,7 +89,7 @@ public class CompanyController  {
 		 Company company= mapper.readValue(data, new TypeReference<Company>() { 
 		 });
 		 company.setCompanyId(UUID.randomUUID().toString().replaceAll("-", "").toUpperCase());
-		 companyService.add(company);
+		 companyService.addCompany(company);
 		return new JsonMessage().success() ;
 	}
 	@RequestMapping(value="/delete",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)

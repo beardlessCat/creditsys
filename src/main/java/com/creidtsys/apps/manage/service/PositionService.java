@@ -8,29 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.creidtsys.apps.manage.entity.Position;
 
-@Service
-public class PositionService {
-	@Autowired
-	private SqlSessionFactory sessionFactory ;
 
-	public List<Position> selectAll(String positionName) {
-		// TODO Auto-generated method stub
-		List<Position> list = sessionFactory.openSession().selectList("cn.sys.manage.entity.PositionMapper.selectList",positionName);
-		return list;
-	}
+public interface PositionService {
+	
+	public List<Position> selectAll(String positionName)  ;
+	public void add(Position position) ;
+	public void edit(Position position) ;
 
-	public void add(Position position) {
-		// TODO Auto-generated method stub
-		sessionFactory.openSession().insert("cn.sys.manage.entity.PositionMapper.addPosition",position);
-	}
-
-	public void edit(Position position) {
-		// TODO Auto-generated method stub
-		sessionFactory.openSession().update("cn.sys.manage.entity.PositionMapper.editPosition",position) ;
-	}
-
-	public void deletePosition(String positionId) {
-		// TODO Auto-generated method stub
-		sessionFactory.openSession().delete("cn.sys.manage.entity.PositionMapper.deletePosition",positionId);
-	}
+	public void deletePosition(String positionId)  ;
 }

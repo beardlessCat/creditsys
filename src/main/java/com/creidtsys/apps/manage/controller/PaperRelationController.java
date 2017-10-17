@@ -25,10 +25,10 @@ public class PaperRelationController {
 	
 	@Resource
 	private PaperRelationService paperRelationService ;
-	private final String TOADD = "/manage/paperRelation/add" ;
-	private final String TOLISTPAPERDETIAL="manage/paperRelation/listPaperDetial";
-	private final String TOEDIT="manage/paperRelation/edit" ;
-	private final String TOCHOOSEPOINT="manage/paperRelation/listPoint";
+	private final String TOADD = "jsp//manage/paperRelation/add" ;
+	private final String TOLISTPAPERDETIAL="jsp/manage/paperRelation/listPaperDetial";
+	private final String TOEDIT="jsp/manage/paperRelation/edit" ;
+	private final String TOCHOOSEPOINT="jsp/manage/paperRelation/listPoint";
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping(value="/toEditJsp")
 	public String toEdit(){

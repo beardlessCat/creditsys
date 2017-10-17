@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sys.manage.entity.UnitMapper">
+	<resultMap type="com.creidtsys.apps.courseManage.entity.Unit" id="unit">
+		<id column="unit_id" property="unitId"/>
+		<result column="un_course_Id" property="unCourseId"/>
+		<result column="unit_name" property="unitName"/>  
+		<result column="unit_content" property="unitContent"/>
+		<result column="unit_remake" property="unitRemake"/>
+		<result column="course_name" property="courseName"/>
+	</resultMap>
+	<select id="selectList" parameterType="String" resultMap="unit">
+		select c.*,u.* from unit u left join course c on u.un_course_id = c.course_id where 1=1<if test="_parameter !=null and _parameter !=''"> and unit_name LIKE concat(concat('%',#{unitName}),'%')</if>
+	</select>
+	<delete id="delete" parameterType="String" >
+		delete from  unit where unit_id = #{unitId}
+	</delete>
+	<insert id="add" parameterType="com.creidtsys.apps.courseManage.entity.Unit">
+		insert into unit(unit_id,unit_name,unit_content,unit_remake)values(#{unitId},#{unitName},#{unitContent},#{unitRemake})
+	</insert>
+	<update id="update" parameterType="com.creidtsys.apps.courseManage.entity.Unit">
+		update unit set unit_content=#{unitContent},unit_name=#{unitName},unit_remake=#{unitRemake} where unit_id=#{unitId}
+	</update>
+</mapper>

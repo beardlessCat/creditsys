@@ -30,11 +30,11 @@ public class MajorController {
 	@Resource
 	private MajorService majorService;
 	
-	private final String LIST ="courseManager/major/list" ;
-	private final String TONEWJSP = "courseManager/major/add" ;
-	private final String TOEDITJSP ="courseManager/major/edit" ;
-	private final String TONESmajor ="courseManager/major/nesmajor";
-	private final String TOCUsC = "courseManager/major/listCuSc";
+	private final String LIST ="jsp/courseManager/major/list" ;
+	private final String TONEWJSP = "jsp/courseManager/major/add" ;
+	private final String TOEDITJSP ="jsp/courseManager/major/edit" ;
+	private final String TONESmajor ="jsp/courseManager/major/nesmajor";
+	private final String TOCUsC = "jsp/courseManager/major/listCuSc";
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping("/toCusc")
 	public String toCusc(){

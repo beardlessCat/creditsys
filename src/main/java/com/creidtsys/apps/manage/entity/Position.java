@@ -1,6 +1,8 @@
 package com.creidtsys.apps.manage.entity;
 
-public class Position {
+import com.creidtsys.utils.Pager;
+
+public class Position extends Pager {
 	private String positionId ;
 	private String positionName ;
 	private String positionSalary ;

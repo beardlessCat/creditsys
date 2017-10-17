@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creidtsys.apps.manage.dao.CompanyTypeDao">
+	<resultMap type="com.creidtsys.apps.manage.entity.CompanyType" id="companyType">
+		<id column="type_id" property="typeId"/>
+		<result column="type_name" property="typeName"/>
+		<result column="type_remake" property="typeRemake"/>
+	</resultMap>
+	<select id="selectList" resultMap="companyType" >
+		select type_id,type_name,type_remake from company_type
+	</select>
+	<insert id="addType" parameterType="com.creidtsys.apps.manage.entity.CompanyType">
+	insert into company_type(type_id,type_name,type_remake)
+				values(#{typeId,jdbcType=VARCHAR},#{typeName,jdbcType=VARCHAR},#{typeRemake,jdbcType=VARCHAR})
+	</insert>
+	<delete id="deleteType" parameterType="String">
+		delete from company_type where type_id =#{typeId}
+	</delete>
+	<update id="editType" parameterType="com.creidtsys.apps.manage.entity.CompanyType">
+		update company_type set type_name=#{typeName},type_remake=#{typeRemake} where type_id=#{typeId}
+	</update>
+	<select id="allByCon" parameterType="com.creidtsys.apps.manage.entity.CompanyType" resultMap="companyType">
+		select type_id,type_name,type_remake from company_type where 1=1 <if test="typeName !=null and typeName !=''"> and type_name LIKE concat(concat('%',#{typeName}),'%')</if>
+	</select>
+</mapper>

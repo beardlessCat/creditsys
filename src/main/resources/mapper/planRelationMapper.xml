@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sys.manage.entity.PaperRelationMapper">
+	<resultMap type="com.creidtsys.apps.courseManage.entity.PlanRelation" id="planRelation">
+		<id column="pr_id" property="prId"/>
+		<result column="pr_pid" property="prPid"/>
+		<result column="pr_name" property="prName"/>
+		<result column="pr_type" property="prType"/>
+		<result column="pr_code" property="prCode"/>
+		<result column="pr_dept" property="prDept"/>
+		<result column="other_id" property="otherId"/>
+		<result column="actual_credit" property="actualCredit"/>
+		<result column="charge_crerdit" property="chargeCrerdit"/>
+		<result column="check_style" property="checkStyle"/>
+		<result column="total_period" property="totalPeriod"/>
+		<result column="talk_period" property="talkPeriod"/>
+		<result column="comp_period" property="compPeriod"/>
+		<result column="test_period" property="testPeriod"/>
+		<result column="start_term" property="startTerm"/>
+		<result column="if_charge" property="ifCharge"/>
+		<result column="major_id" property="majorId"/>
+		<result column="pr_degree" property="prDegree"/>
+	</resultMap>
+	<select id="selectList" resultMap="planRelation" >
+		select * from plan_relation 
+	</select>
+	<insert id="add" parameterType="com.creidtsys.apps.courseManage.entity.PlanRelation">
+	insert into plan_relation(pr_id,pr_pid,pr_name,pr_type,pr_code,pr_dept,other_id,pr_degree,major_id)
+				values(#{prId,jdbcType=VARCHAR},#{prPid,jdbcType=VARCHAR},#{prName,jdbcType=VARCHAR},#{prType,jdbcType=VARCHAR},#{prCode,jdbcType=VARCHAR},#{prDept,jdbcType=VARCHAR},#{otherId,jdbcType=VARCHAR},#{prDegree,jdbcType=VARCHAR},#{majorId,jdbcType=VARCHAR})
+	</insert>
+	<delete id="delete" parameterType="String">
+		delete from plan_relation where pr_id  in(
+			select pr_id from plan_relation
+			CONNECT BY PRIOR pr_id = pr_pid start WITH pr_id = #{prId} 
+		)
+	</delete>
+	<update id="edit" parameterType="com.creidtsys.apps.courseManage.entity.PlanRelation">
+		update plan_relation set 
+				pr_dept=#{prDept,jdbcType=VARCHAR},
+				charge_crerdit=#{chargeCrerdit,jdbcType=VARCHAR},
+				start_term=#{startTerm,jdbcType=VARCHAR},
+				if_charge=#{ifCharge,jdbcType=VARCHAR} 
+		where  pr_id=#{prId}
+	</update>
+	<select id="checkExists" parameterType="com.creidtsys.apps.courseManage.entity.PlanRelation" resultMap="planRelation">
+		select * from plan_relation where pr_pid = #{prPid} and other_id =#{otherId}
+	</select>
+	<select id="getAllDirect" resultMap="planRelation" parameterType="String">
+		select * from plan_relation where pr_type ='3' and major_id = #{majorId}
+	</select>
+	<select id="getAllCourse" parameterType="com.creidtsys.apps.courseManage.entity.PlanRelation" resultMap="planRelation">
+	
+		select t.* from plan_relation t where t.pr_degree='3' and t.pr_type='4' and major_id= #{majorId}
+		union 
+		select * from (select t.* from plan_relation t start with t.pr_id=#{prId} connect by prior t.pr_id = t.pr_pid   ) where pr_type='4' and major_id= #{majorId}
+		
+	</select>
+	<select id="oneData" parameterType="String" resultMap="planRelation">
+		select * from plan_relation  
+		<if test="_parameter !=null and _parameter !=''">
+	      where major_id =#{_parameter}
+		</if>
+	</select>
+	<select id="check" parameterType="String" resultMap="planRelation">
+		select * from plan_relation where major_id =#{majorId} 
+	</select>
+	<insert id="addCourse" parameterType="com.creidtsys.apps.courseManage.entity.PlanRelation">
+	insert into plan_relation(pr_id,pr_pid,pr_name,pr_type,pr_code,other_id,pr_degree,major_id,actual_credit,check_style,talk_period,comp_period,test_period,if_charge   )
+				values(#{prId,jdbcType=VARCHAR},
+				#{prPid,jdbcType=VARCHAR},
+				#{prName,jdbcType=VARCHAR},
+				#{prType,jdbcType=VARCHAR},
+				#{prCode,jdbcType=VARCHAR},
+				#{otherId,jdbcType=VARCHAR},
+				#{prDegree,jdbcType=VARCHAR},
+				#{majorId,jdbcType=VARCHAR},
+				#{actualCredit,jdbcType=VARCHAR},
+				#{checkStyle,jdbcType=VARCHAR},
+				#{talkPeriod,jdbcType=VARCHAR},
+				#{compPeriod,jdbcType=VARCHAR},
+				#{testPeriod,jdbcType=VARCHAR},
+				#{ifCharge,jdbcType=VARCHAR})
+	
+	</insert>
+</mapper>

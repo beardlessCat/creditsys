@@ -30,13 +30,13 @@ public class RelationController {
 	private RelationService relationService ; 
 	@Resource
 	private TestTreeGridService gridService ;
-	private final String LISTTREE="manage/relation/listTree" ;
-	private final String ADDCOMPANY="manage/relation/addCompany" ;
-	private final String ADDPOSITION="manage/relation/listPosition" ;
-	private final String ADDPOINT="manage/relation/listPoint" ;
-	private final String ADDTECHNOLOGY="manage/relation/listTechnology" ;
-	private final String TOCHOOSECOMPANY="manage/relation/listCompany";
-	private final String TOEDITJSP="manage/relation/edit";
+	private final String LISTTREE="jsp/manage/relation/listTree" ;
+	private final String ADDCOMPANY="jsp/manage/relation/addCompany" ;
+	private final String ADDPOSITION="jsp/manage/relation/listPosition" ;
+	private final String ADDPOINT="jsp/manage/relation/listPoint" ;
+	private final String ADDTECHNOLOGY="jsp/manage/relation/listTechnology" ;
+	private final String TOCHOOSECOMPANY="jsp/manage/relation/listCompany";
+	private final String TOEDITJSP="jsp/manage/relation/edit";
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping(value="/toEditJsp")
 	private String toEdit(){

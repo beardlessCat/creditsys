@@ -1,6 +1,8 @@
 package com.creidtsys.apps.manage.entity;
 
-public class Technology {
+import com.creidtsys.utils.Pager;
+
+public class Technology extends Pager{
 	private String technologyId ;
 	private String technologyName ;
 	private String technologyInfo ;

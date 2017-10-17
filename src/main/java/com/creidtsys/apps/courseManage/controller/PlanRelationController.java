@@ -76,11 +76,12 @@ public class PlanRelationController {
 		planRelationService.add(planRelation);
 		return new JsonMessage().success();
 	}
+	// ----------------
 	@RequestMapping(value="/oneData" )
     @ResponseBody
 	public Map<String,Object> oneData(String majorId){
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
-		String userId = userDetails.getPassword();
+	//	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+		String userId = "" ;//userDetails.getPassword();
 	//	String majorIds = majorService.getidByUserId(userId);
 		List<PlanRelation> list= planRelationService.oneData(majorId);
 		Map<String,Object> map = new HashMap<String, Object>();
@@ -125,9 +126,9 @@ public class PlanRelationController {
 	}
 	@RequestMapping(value="/initDirect",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JSONArray initDirect() throws Exception{
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
-		String userId = userDetails.getPassword();
+	public List<Map<String,String>> initDirect() throws Exception{
+	//	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+		String userId = "" ;//userDetails.getPassword();
 		String majorId = majorService.getidByUserId(userId);
 		List<PlanRelation> list = planRelationService.getAllDirect(majorId); 
 		List<Map<String,String>> listMap = new ArrayList<Map<String,String>>();
@@ -137,6 +138,6 @@ public class PlanRelationController {
 				newMap.put("text", list.get(i).getPrName());
 				listMap.add(newMap) ;
 			}
-		return JSONArray.fromObject(listMap) ;
+		return listMap ;
 	}
 }

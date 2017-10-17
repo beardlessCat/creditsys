@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="<%=basePath%>static/easyui-1.4.2/themes/icon.css"/>
 <script type="text/javascript" src="<%=basePath%>static/easyui-1.4.2/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="<%=basePath%>static/js/jquery.easyui.extension.min.js"></script>
-
 <script type="text/javascript" src="<%=basePath%>static/js/jsUtils.js"></script>
 
 

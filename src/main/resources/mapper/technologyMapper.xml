@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creidtsys.apps.manage.dao.TechnologyDao">
+	<resultMap type="com.creidtsys.apps.manage.entity.Technology" id="technology">
+		<id column="technology_id" property="technologyId"/>
+		<result column="technology_name" property="technologyName"/>
+		<result column="technology_info" property="technologyInfo"/>
+		<result column="technology_remake" property="technologyRemake"/>
+	</resultMap>
+	<select id="selectList" resultMap="technology" parameterType="String">
+		select t.technology_id,t.technology_name,t.technology_info,t.technology_remake from technology t
+		where 1=1
+		<if test="_parameter !=null and _parameter !=''"> and technology_name LIKE concat(concat('%',#{technologyName}),'%')</if>
+	</select>
+	<insert id="addTechnology" parameterType="com.creidtsys.apps.manage.entity.Technology">
+	insert into technology(technology_id,technology_name,technology_info,technology_remake)
+				values(#{technologyId,jdbcType=VARCHAR},#{technologyName,jdbcType=VARCHAR},#{technologyInfo,jdbcType=VARCHAR},#{technologyRemake,jdbcType=VARCHAR})
+	</insert>
+	<delete id="delete" parameterType="String">
+		delete from technology where technology_id =#{technologyId}
+	</delete>
+	<update id="edittechnology" parameterType="com.creidtsys.apps.manage.entity.Technology">
+		update technology set technology_name=#{technologyName},technology_info=#{technologyInfo},technology_remake=#{technologyRemake}where technology_id=#{technologyId}
+	</update>
+</mapper>

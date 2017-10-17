@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sys.manage.entity.RelationMapper">
+	<resultMap type="com.creidtsys.apps.manage.entity.Relation" id="relation">
+		<id column="relation_id" property="relationId"/>
+		<result column="relation_pid" property="relationPid"/>
+		<result column="relation_res" property="relationRes"/>  
+		<result column="relation_type" property="relationType"/>
+		<result column="relation_remake" property="relationRemake"/>
+		<result column="relation_remain" property="relationRemain"/>
+		<result column="other_id" property="otherId"/>
+	</resultMap>
+	<select id="selectList" resultMap="relation" parameterType="String">
+		select * from relation
+	</select>
+	<insert id="add" parameterType="com.creidtsys.apps.manage.entity.Relation">
+		insert into relation(relation_id,relation_pid,relation_res,relation_type,relation_remake,relation_remain,other_id)values(#{relationId},#{relationPid},#{relationRes},#{relationType},#{relationRemake},#{relationRemain},#{otherId}) 
+	</insert>
+	<delete id="deleteRelation" parameterType="String">
+		delete from relation where relation_id in(  
+			SELECT relation_id  
+			FROM  
+			relation  
+				CONNECT BY PRIOR relation_id = relation_pid start WITH relation_id = #{relationId} )
+	</delete>
+	<update id="edit" parameterType="com.creidtsys.apps.manage.entity.Relation">
+		update relation set relation_remake=#{relationRemake},relation_remain=#{relationRemain} where relation_id= #{relationId}
+	</update>
+	<select id="getById" parameterType="String" resultMap="relation">
+		select * from relation where relation_id= #{relationId}
+	</select>
+	<select id="getTreeList" resultMap="relation" parameterType="String">
+		select * from relation 
+		<choose>
+		 <when test="_parameter !=null and _parameter !=''">
+		 		CONNECT BY PRIOR relation_id = relation_pid start WITH  relation_type != '4' and other_id = #{_parameter}
+		 </when>
+		 <otherwise> where relation_type != '4'</otherwise>
+		</choose>
+	</select>
+	<select id="getAllPoint" parameterType="String" resultMap="relation">
+		     select distinct(other_id) from( select * from relation CONNECT BY PRIOR relation_id = relation_pid start WITH   relation_id = #{relationId}) where  relation_type = '4'
+	</select>
+	<select id="getPosition" parameterType="String" resultMap="relation">
+		select * from relation where  relation_id = #{relationId}
+	</select>
+	<select id="getTree" resultMap="relation">
+		select  relation_pid,relation_res,relation_id,relation_type from relation where relation_type ='1' or relation_type ='2'
+	</select>
+</mapper>

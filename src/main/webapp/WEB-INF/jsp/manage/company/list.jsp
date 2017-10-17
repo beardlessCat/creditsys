@@ -21,7 +21,7 @@ $(function(){
 				initGrid('', pageNumber, pageSize);
 			}
 		});
-	}
+	} ;
 	initGrid('','1','10') ;
 	initCobbobox();
 	$('#querybtn').bind('click', function(){

@@ -243,19 +243,20 @@ public class RecommendCourseController {
 	@ResponseBody
 	public JsonMessage getHtmlInfo(String relationId){
 		//获取当前用户
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+		//UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
 		//获取用户id以判断是否已经对课程选择，判断条件用户与对应的课程的成绩中是否有数据
-		String userId = userDetails.getPassword() ;
+		String userId = "" ;//userDetails.getPassword() ;
 		ResultInfo resultInfo = new ResultInfo();
 		resultInfo.setRiUserId(userId);
 		List<ResultInfo> inList = resultInfoService.getChoose(resultInfo);;
 		List<String> choosedList = new ArrayList<String>() ;
 		if(inList.size()>0){
-			for(ResultInfo r:inList){
+			// -----------
+			/*for(ResultInfo r:inList){
 				if(!choosedList.contains(r.getCourseId())){
 					choosedList.add(r.getCourseId());
 				}
-			}
+			}*/
 		}
 		choosedCourseList = new ArrayList<String>(choosedList);
 		unChoosedStr="";
@@ -315,18 +316,19 @@ public class RecommendCourseController {
 	@ResponseBody
 	private List<Map<String,String>>  allCourseUnChoosed(){
 		//获取当前用户
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+	//	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
 		//获取用户id以判断是否已经对课程选择，判断条件用户与对应的课程的成绩中是否有数据
-		String userId = userDetails.getPassword() ;
+		String userId ="" ;// userDetails.getPassword() ;
 		ResultInfo resultInfo = new ResultInfo();
 		resultInfo.setRiUserId(userId);
 		List<ResultInfo> inList = resultInfoService.getChoose(resultInfo);;
 		List<String> choosedList = new ArrayList<String>() ;
+		//----
 		if(inList.size()>0){
 			for(ResultInfo r:inList){
-				if(!choosedList.contains(r.getCourseId())){
+				/*if(!choosedList.contains(r.getCourseId())){
 					choosedList.add(r.getCourseId());
-				}
+				}*/
 			}
 		}
 		choosedCourseList = new ArrayList<String>(choosedList);
@@ -414,8 +416,8 @@ public class RecommendCourseController {
 		
 		
 		//通过用户获取专业id
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
-		String userId = userDetails.getPassword();
+	//	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+		String userId ="";// userDetails.getPassword();
 		String majorId = majorService.getidByUserId(userId);
 		PlanRelation cond = new PlanRelation();
 		cond.setMajorId(majorId);
@@ -477,9 +479,10 @@ public class RecommendCourseController {
 		List<String> allChoosedList = new ArrayList<String>();
 		if(inList.size()>0){
 			for(ResultInfo r:inList){
-				if(!choosedList.contains(r.getCourseId())){
+				//----
+				/*if(!choosedList.contains(r.getCourseId())){
 					choosedList.add(r.getCourseId());
-				}
+				}*/
 			}
 			Queue<String> queues = new LinkedList<String>();
 			for(String i :choosedList){
@@ -498,8 +501,8 @@ public class RecommendCourseController {
 			}
 		}
 		//Collections.reverse(allVourseList);
-		User user = userService.getById(userId);
-		String date = user.getUserIp();
+	//	User user = userService.getById(userId);
+		String date ="" ;// user.getUserIp();
 		String currentTerm = getInfo(date);
 		int index =0 ;
 		for(Map<String,String> cm:listTerm){

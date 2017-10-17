@@ -7,11 +7,25 @@
 <head>
 <script type="text/javascript">
 $(function(){
-	initdatagrid();
+	var pager = $("#dgzd").datagrid("getPager");
+	if (pager) {
+		$(pager).pagination({
+			onBeforeRefresh : function() {
+			},
+			onRefresh : function(pageNumber, pageSize) {
+			},
+			onChangePageSize : function(pageNumber, pageSize) {
+			},
+			onSelectPage : function(pageNumber, pageSize) {
+				initGrid('', pageNumber, pageSize);
+			}
+		});
+	}
+	initGrid('','1','10') ;
 	$('#clearBtn').bind('click', function(){
 		$("#queryName").textbox("setValue",'');
 		initdatagrid();
-	})
+	}) ;
 	$('#querybtn').bind('click', function(){
 		var typeName = $("#queryName").textbox("getValue");
 		initdatagrid(typeName);
@@ -97,7 +111,7 @@ $(function(){
 						//成功返回之后调用的函数             
 						success : function(data) {
 							if(data.meta.success){
-								initdatagrid();
+								initGrid('','1','10') ;
 		                    }else{
 		                        $.messager.alert('error', data.meta.message, 'error');
 		                    }
@@ -113,20 +127,22 @@ $(function(){
 	})
 		
 });
-//初始化数据格
-function initdatagrid(typeName){
-	$.ajax({
-		url:'companyType/allByCon',
-		type:'POST',
-		dataType:'json',
-		data:{
-			typeName:typeName
-		},
-		success:function(data){
-			$("#dgzd").datagrid("loadData",data.data);
-		}
+function initGrid(typeName, pageNumber, pageSize) {
+	if(pageNumber==null||pageNumber==""){
+		pageNumber = "1" ;
+	}
+	if(pageSize==null||pageSize==""){
+		pageSize = "10" ;
+	}
+	var jsonData = JSON.stringify({
+		'typeName':typeName ,
+		'pageNumber' : pageNumber,
+		'pageSize' : pageSize
 	});
+	initDataGrid('dgzd', 'companyType/allByCon', 'POST', 'json', jsonData);
 }
+//初始化数据格
+
 function  foeDel(value, rec, rowIndex){
 	value ='<a href="javascript:void(0);" onclick="edit('+'\''+rowIndex+'\''+')">编辑</a>' +"|"+
 		   '<a href="javascript:void(0);" onclick="del('+'\''+rowIndex+'\''+')">删除</a>'  ;
@@ -202,7 +218,7 @@ function edit(rowIndex){
                     dialog.close();
                 }
             }],
-            onLoad: function(dialog, cotent){//参数扩展，dialog表示弹出页面，cotent表示弹出页面的body
+            onLoad: function(dcialog, cotent){//参数扩展，dialog表示弹出页面，cotent表示弹出页面的body
                 if(cotent && cotent.doInit){//判断弹出页面是否加载完，是否有这个方法
                     cotent.doInit(dialog);//调用dialog页面的方法
                 }
@@ -221,7 +237,7 @@ function edit(rowIndex){
 				<a id="delbtn" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
 				<a id="editbtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'">修改</a>
 			</div>
-			<table id="dgzd" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid">
+			<table id="dgzd" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid"  pagination="true">
 			<thead>
 				<tr>  
 					<th data-options="field:'typeId',halign:'center',align:'center',width:120,hidden:true">id</th>

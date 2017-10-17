@@ -1,6 +1,8 @@
 package com.creidtsys.apps.courseManage.entity;
 
-public class CourseType {
+import com.creidtsys.utils.Pager;
+
+public class CourseType extends Pager{
 	private String ctypeId;
 	private String ctypeName ;
 	private String ctypeDesc ;

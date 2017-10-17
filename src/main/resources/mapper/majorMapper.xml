@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sys.manage.entity.MajorMapper">
+	<resultMap type="com.creidtsys.apps.courseManage.entity.Major" id="majorMap">
+		<id column="major_id" property="majorId"/>
+		<result column="major_code" property="majorCode" />
+		<result column="major_name" property="majorName"/>
+		<result column="major_English_name" property="majorEnglishName"/>
+		<result column="major_length" property="majorLength"/>
+		<result column="major_degree" property="majorDegree"/>
+		<result column="major_academy" property="majorAcademy"/>
+		<result column="major_purpose" property="majorPurpose"/>
+		<result column="major_condition" property="majorCondition"/>
+		<result column="major_overview" property="majorOverview"/>
+		<result column="user_id" property="userId"/>
+    </resultMap>
+    
+    <select id="selectAll" parameterType="String" resultMap="majorMap">
+    	select * from major where 1=1
+    	<if test="_parameter !=null and _parameter !=''"> and major_name LIKE concat(concat('%',#{majorName}),'%')</if>
+    </select>
+    <delete id="deleteMajor" parameterType="String">
+    	delete from  major where major_id = #{majorId}
+    </delete>
+    <insert id="addMajor" parameterType="com.creidtsys.apps.courseManage.entity.Major">
+    	insert into major (major_id,major_code,major_name,major_English_name,major_length,major_degree,major_academy,major_purpose,major_condition,major_overview)
+		values
+		(#{majorId},#{majorCode},#{majorName},#{majorEnglishName},#{majorLength},#{majorDegree},#{majorAcademy},#{majorPurpose},#{majorCondition},#{majorOverview})
+    </insert>
+    <update id="editMajor" parameterType="com.creidtsys.apps.courseManage.entity.Major">
+    	update major set major_code=#{majorCode},major_name=#{majorName},major_English_name=#{majorEnglishName},major_length=#{majorLength},major_degree=#{majorDegree}
+    	,major_academy=#{majorAcademy},major_purpose=#{majorPurpose},major_condition=#{majorCondition},major_overview=#{majorOverview} where major_id=#{majorId}
+    </update>
+    <select id="getById" parameterType="String" resultMap="majorMap">
+    	select * from major where major_id = #{majorId}
+    </select>
+    <select id="getByName" parameterType="String" resultMap="majorMap">
+    	select * from major where major_name = #{majorName}
+    </select>
+    <select id="getidByUserId" parameterType="String" resultMap="majorMap">
+    	select m.* from major m  inner join uc_user_dept u on  m.major_academy = u.dept_id
+		where u.user_id = #{userId}
+    </select>
+    
+</mapper>

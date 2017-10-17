@@ -25,9 +25,9 @@ public class PaperDetialController {
 	private PaperDetialService paperDetialService  ;
 	@Resource
 	private PaperRelationService paperRelationService ;
-	private final String  LIST ="manage/paperDetial/list" ;
-	private final String TONEWJSP = "manage/paperDetial/add" ;
-	private final String TOEDITJSP ="manage/paperDetial/edit" ;
+	private final String  LIST ="jsp/manage/paperDetial/list" ;
+	private final String TONEWJSP = "jsp/manage/paperDetial/add" ;
+	private final String TOEDITJSP ="jsp/manage/paperDetial/edit" ;
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping("/list")
 	public String list(){

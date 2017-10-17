@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sys.manage.entity.CourseMapper">
+	<resultMap type="com.creidtsys.apps.courseManage.entity.Course" id="course">
+		<id column="course_id" property="courseId"/>
+		<result column="course_code" property="courseCode"/>
+		<result column="course_name" property="courseName"/>  
+		<result column="course_period" property="coursePeriod"/>
+		<result column="course_require" property="courseRequire"/>
+		<result column="course_score" property="courseScore"/>
+		<result column="course_form" property="courseForm"/>
+		<result column="course_refer" property="courseRefer"/>
+		<result column="course_feed" property="courseFeed"/> 
+		<result column="course_credit" property="courseCredit"/>
+		<result column="course_checked" property="courseChecked"/>
+		<result column="pd_lesson" property="pdLesson"/>
+		<result column="pl_lesson" property="plLesson"/>  
+		<result column="course_property" property="courseProperty"/>
+		<result column="pd_test" property="pdTest"/>
+		<result column="CType_id" property="ctypeId"/>
+		<result column="CType_name" property="ctypeName"/>
+		<result column="CType_desc" property="ctypeDesc"/>
+	</resultMap>
+	<select id="selectList" parameterType="String" resultMap="course">
+		select t.*, t.rowid,p.* from COURSE t inner join course_type p on p.ctype_id = t.course_property  
+	</select>
+	<delete id="delete" parameterType="String" >
+		delete from  course where course_id = #{courseId}
+	</delete>
+	<insert id="addCourse" parameterType="com.creidtsys.apps.courseManage.entity.Course" >
+		insert into course (course_id,course_code,course_name,course_period,course_require,course_score,course_form,course_refer,course_feed,course_credit,course_checked,pd_lesson,pl_lesson,course_property,pd_test)
+		values
+		(#{courseId},#{courseCode},#{courseName},#{coursePeriod},#{courseRequire},#{courseScore},#{courseForm},#{courseRefer},#{courseFeed},#{courseCredit},#{courseChecked},#{pdLesson},#{plLesson},#{courseProperty},#{pdTest}
+		)
+	</insert>
+	<update id="editCourse" parameterType="com.creidtsys.apps.courseManage.entity.Course">
+		update course set course_code=#{courseCode}, course_name=#{courseName}, course_period=#{coursePeriod}, course_require=#{courseRequire}, course_score=#{courseScore}, course_form=#{courseForm}, course_refer=#{courseRefer}, course_feed=#{courseFeed}, course_credit=#{courseCredit}, course_checked=#{courseChecked}, pd_lesson=#{pdLesson}, pl_lesson=#{plLesson}, course_property=#{courseProperty}, pd_test=#{pdTest}
+			where course_id =#{courseId}
+	</update>
+	<select id="getById" parameterType="String" resultMap="course">
+		select * from course where course_id = #{courseId}
+	</select>
+</mapper>

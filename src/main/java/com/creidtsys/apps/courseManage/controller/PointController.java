@@ -29,9 +29,9 @@ public class PointController {
 	private PointService pointService ;
 	@Resource
 	private CourseRelationService  courseRelationService;
-	private final String  LIST ="courseManager/point/list" ;
-	private final String TONEWJSP = "courseManager/point/add" ;
-	private final String TOEDITJSP ="courseManager/point/edit" ;
+	private final String  LIST ="jsp/courseManager/point/list" ;
+	private final String TONEWJSP = "jsp/courseManager/point/add" ;
+	private final String TOEDITJSP ="jsp/courseManager/point/edit" ;
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping(value="/list")
 	public String list(){
