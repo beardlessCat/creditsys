@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sys.manage.entity.CompanyMapper">
+	<resultMap type="com.creidtsys.apps.manage.entity.Company" id="company">
+		<id column="company_id" property="companyId"/>
+		<result column="company_name" property="companyName"/>
+		<result column="company_info" property="companyInfo"/>  
+		<result column="company_address" property="companyAddress"/>
+		<result column="company_tel" property="companyTel"/>
+		<result column="company_url" property="companyUrl"/>
+		<result column="company_aptitude" property="companyAptitude"/>
+		<result column="company_size" property="companySize"/>
+		<result column="company_business" property="companyBusiness"/> 
+		<result column="company_type_id" property="companyTypeId"/>
+		<result column="type_name" property="typeName"/>
+	</resultMap>
+	<select id="selectList" resultMap="company" parameterType="String">
+		select t.company_id,t.company_name,t.company_info,t.company_address,t.company_tel,t.company_url,t.company_aptitude,t.company_size,t.company_business,t.company_type_id,c.type_name from company t left join company_type c on t.company_type_id = c.type_id
+		where 1=1
+		<if test="_parameter !=null and _parameter !=''">
+			and company_name =#{_parameter}
+		</if>
+	</select>
+	<insert id="addCompany" parameterType="com.creidtsys.apps.manage.entity.Company">
+	insert into company(company_id,company_name,company_info,company_address,company_tel,company_url,company_aptitude,company_size,company_business,company_type_id)
+				values(#{companyId,jdbcType=VARCHAR},#{companyName,jdbcType=VARCHAR},#{companyInfo,jdbcType=VARCHAR},#{companyAddress,jdbcType=VARCHAR},#{companyTel,jdbcType=VARCHAR},#{companyUrl,jdbcType=VARCHAR},#{companyAptitude,jdbcType=VARCHAR},#{companySize,jdbcType=VARCHAR},#{companyBusiness,jdbcType=VARCHAR},#{companyTypeId,jdbcType=VARCHAR})
+	</insert>
+	<delete id="deleteCompany" parameterType="String">
+		delete from company where company_id =#{compaanyId}
+	</delete>
+	<update id="editCompany" parameterType="com.creidtsys.apps.manage.entity.Company">
+		update company set company_info=#{companyInfo},company_id=#{companyId},company_name=#{companyName},company_tel=#{companyTel},company_address=#{companyAddress},company_aptitude=#{companyAptitude},company_size=#{companySize},company_business=#{companyBusiness},company_type_id=#{companyTypeId} where company_id=#{companyId}
+	</update>
+	<select id="selectByCon" parameterType="com.creidtsys.apps.manage.entity.Company" resultMap="company">
+		select t.company_id,t.company_name,t.company_info,t.company_address,t.company_tel,t.company_url,t.company_aptitude,t.company_size,t.company_business,t.company_type_id,c.type_name from company t left join company_type c on t.company_type_id = c.type_id
+		where 1=1
+		<if test="companyName !=null and companyName !=''">
+			and company_name LIKE concat(concat('%',#{companyName}),'%')
+		</if>
+		<if test="companyTypeId !=null and companyTypeId !=''">
+			and company_type_id =#{companyTypeId}
+		</if>
+	</select>
+</mapper>

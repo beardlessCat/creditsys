@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/commonJs.jsp"%> 
+
 <!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -7,7 +8,21 @@
 <head>
 <script type="text/javascript">
 $(function(){
-	initdatagrid("","");
+	var pager = $("#dgzd").datagrid("getPager");
+	if (pager) {
+		$(pager).pagination({
+			onBeforeRefresh : function() {
+			},
+			onRefresh : function(pageNumber, pageSize) {
+			},
+			onChangePageSize : function(pageNumber, pageSize) {
+			},
+			onSelectPage : function(pageNumber, pageSize) {
+				initGrid('', pageNumber, pageSize);
+			}
+		});
+	}
+	initGrid('','1','10') ;
 	initCobbobox();
 	$('#querybtn').bind('click', function(){
 		var companyName = $("#queryName").textbox("getValue");
@@ -17,11 +32,11 @@ $(function(){
 	$('#clearBtn').bind('click', function(){
 		$("#queryName").textbox("setValue",'');
 		$("#queryType").combobox("setValue",'');
-		initdatagrid();
+		initGrid('','1','10') ;
 	})
 	$("#queryType").combobox({
 		onChange: function (n,o) {
-			initdatagrid("",n);
+			initGrid(n, '1', '10');
 		}
 	});
 	//点击添加按钮
@@ -71,7 +86,7 @@ $(function(){
 						//成功返回之后调用的函数             
 						success : function(data) {
 							if(data.meta.success){
-								initdatagrid();
+								initGrid('','1','10');
 		                    }else{
 		                        $.messager.alert('error', data.meta.message, 'error');
 		                    }
@@ -120,23 +135,21 @@ $(function(){
 	        });
 	})
 });
-//初始化数据格
-function initdatagrid(companyName,companyTypeId){
-	$.ajax({
-		url:'company/selectByCon',
-		type:'POST',
-		dataType:'json',
-		data:{
-			"data":JSON.stringify({
-					companyName:companyName,
-					companyTypeId:companyTypeId
-			})
-		},
-		success:function(data){
-			$("#dgzd").datagrid("loadData",data);
-		}
+function initGrid(companyType, pageNumber, pageSize) {
+	if(pageNumber==null||pageNumber==""){
+		pageNumber = "1" ;
+	}
+	if(pageSize==null||pageSize==""){
+		pageSize = "10" ;
+	}
+	var jsonData = JSON.stringify({
+		'companyTypeId':companyType ,
+		'pageNumber' : pageNumber,
+		'pageSize' : pageSize
 	});
+	initDataGrid('dgzd', 'company/selectByCon', 'POST', 'json', jsonData);
 }
+
 function  foeDel(value, rec, rowIndex){
 	value ='<a href="javascript:void(0);" onclick="edit('+'\''+rowIndex+'\''+')">编辑</a>' +"|"+
 		   '<a href="javascript:void(0);" onclick="del('+'\''+rowIndex+'\''+')">删除</a>'  +"|"+
@@ -222,13 +235,6 @@ function edit(rowIndex){
         });
 }
 
-function undoSelTreeNode() {
-	var treeNode = $('#deptTree').tree('getSelected');
-	if (treeNode) {
-		$('#deptTree').tree('unselect', treeNode);
-		initdatagrid();
-		}
-}
 function initCobbobox(){
 		$('#queryType').combobox({    
 		    url:'companyType/initType',    
@@ -249,7 +255,7 @@ function initCobbobox(){
 				<a id="delbtn" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
 				<a id="editbtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'">修改</a>
 			</div>
-			<table id="dgzd" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid">
+			<table id="dgzd" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid" pagination="true">
 			<thead>
 				<tr>  
 					<th data-options="field:'companyId',halign:'center',align:'center',width:120,hidden:true">id</th>

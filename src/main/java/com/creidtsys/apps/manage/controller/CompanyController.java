@@ -25,12 +25,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class CompanyController  {
 	@Resource
 	private CompanyService companyService ;
-	private final String  LIST ="manage/company/list" ;
-	private final String TEST = "manage/company/ueditor" ;
-	private final String TONEWJSP = "manage/company/add" ;
-	private final String TOEDITJSP ="manage/company/edit" ;
-	private final String LISTTREE ="manage/company/listTree" ;
-	private final String TOSHOWJSP ="manage/company/show";
+	private final String  LIST ="jsp/manage/company/list" ;
+	private final String TEST = "jsp/manage/company/ueditor" ;
+	private final String TONEWJSP = "jsp/manage/company/add" ;
+	private final String TOEDITJSP ="jsp/manage/company/edit" ;
+	private final String LISTTREE ="jsp/manage/company/listTree" ;
+	private final String TOSHOWJSP ="jsp/manage/company/show";
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping(value="/listTree")
 	public String listTree(){
@@ -56,9 +56,10 @@ public class CompanyController  {
 	public String toAdd(){
 		return TONEWJSP ;
 	}
-	@RequestMapping(value="/allCompany",method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/allCompany",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
 	public Map<String,Object> queryAllDep(String companyName){
+		
 		List<Company> list = companyService.findAll(companyName);
 		Map<String,Object> map =new HashMap<String, Object>() ;
 		map.put("total", list.size()) ;
