@@ -93,7 +93,7 @@ public class UnitController {
 	}
 	@RequestMapping(value="/initUnit",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JSONArray initCourse(String courseId) throws Exception{
+	public List<Map<String,String>>  initCourse(String courseId) throws Exception{
 		List<Unit> list =  unitService.getAll(courseId); 
 		List<Map<String,String>> listMap = new ArrayList<Map<String,String>>();
 		for(int i=0;i<list.size();i++){
@@ -102,6 +102,6 @@ public class UnitController {
 				newMap.put("text", list.get(i).getUnitName());
 				listMap.add(newMap) ;
 			}
-		return JSONArray.fromObject(listMap) ;
+		return listMap ;
 	}
 }

@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.creidtsys.apps.courseManage.entity.CourseRelation;
+import com.creidtsys.apps.courseManage.entity.Point;
 import com.creidtsys.apps.courseManage.service.CourseRelationService;
 import com.creidtsys.apps.courseManage.service.PointService;
-import com.creidtsys.apps.manage.entity.Point;
 import com.creidtsys.utils.JsonMessage;
 import com.creidtsys.utils.UtilTools;
 import com.fasterxml.jackson.core.JsonParseException;

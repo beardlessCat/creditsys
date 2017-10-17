@@ -26,7 +26,7 @@ public class OwnInfoController {
 	private UserRoleService userRoleService ;
 	@RequestMapping(value="/allUser",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JSONArray allUser(){
+	public List<Map<String,Object>>   allUser(){
 		List<Map<String,Object>> listMap = new ArrayList<Map<String,Object>>();
 		List<Role> list = roleService.findAll();
 		List<String> listName = new ArrayList<String>();
@@ -48,6 +48,6 @@ public class OwnInfoController {
 		}
 		//arrm.put("nameArr", listName);
 		//arrMap.add(arrm);
-		return JSONArray.fromObject(arrMap) ;
+		return arrMap;
 	}
 }

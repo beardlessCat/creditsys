@@ -79,7 +79,7 @@ public class PlanRelationController {
 	@RequestMapping(value="/oneData" )
     @ResponseBody
 	public Map<String,Object> oneData(String majorId){
-	¡¢¡¢	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
 		String userId = userDetails.getPassword();
 	//	String majorIds = majorService.getidByUserId(userId);
 		List<PlanRelation> list= planRelationService.oneData(majorId);

@@ -88,7 +88,7 @@ public class RecommendCourseController {
 	}
 	@RequestMapping(value="/getAllPoint",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	private JSONArray allCourse(String relationId){
+	private List<Map<String,String>>  allCourse(String relationId){
 		
 		List<Relation> list = relationService.getAllPoint(relationId);
 		List<String> sIdList = new ArrayList<String>();
@@ -203,7 +203,7 @@ public class RecommendCourseController {
 			}
 		}
 	//	}
-		return JSONArray.fromObject(testList) ;
+		return testList ;
 	}
 	//递归查询所有相关课程
 	public List<String> getList(List<String> list,Queue<String> queue){
@@ -313,7 +313,7 @@ public class RecommendCourseController {
 	}
 	@RequestMapping(value="/initChoosed",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	private JSONArray allCourseUnChoosed(){
+	private List<Map<String,String>>  allCourseUnChoosed(){
 		//获取当前用户
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
 		//获取用户id以判断是否已经对课程选择，判断条件用户与对应的课程的成绩中是否有数据
@@ -389,7 +389,7 @@ public class RecommendCourseController {
 				}
 			}
 		}
-		return JSONArray.fromObject(list);
+		return list;
 	}
 	@RequestMapping(value="/reByPlan" )
     @ResponseBody
