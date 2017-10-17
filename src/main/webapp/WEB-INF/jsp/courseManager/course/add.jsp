@@ -135,7 +135,7 @@
   				//成功返回之后调用的函数             
   				success : function(data) {
   						$.messager.alert('提示','保存成功!','warning');
-  						initdatagrid();
+  						initGrid('','1','10') ;
   						if(node.length>1){
   							chooseMust(data.data);
   						}

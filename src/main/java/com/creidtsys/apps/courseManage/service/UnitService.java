@@ -9,29 +9,14 @@ import org.springframework.stereotype.Service;
 import com.creidtsys.apps.courseManage.entity.Unit;
 
 
-@Service
-public class UnitService {
-	@Autowired
-	private SqlSessionFactory sqlSessionFactory ;
 
-	public List<Unit> getAll(String unitName) {
-		// TODO Auto-generated method stub
-		List<Unit> list= sqlSessionFactory.openSession().selectList("cn.sys.manage.entity.UnitMapper.selectList",unitName);
-		return list;
-	}
+public interface UnitService {
 
-	public void deleteCourse(String unitId) {
-		// TODO Auto-generated method stub
-		sqlSessionFactory.openSession().delete("cn.sys.manage.entity.UnitMapper.delete", unitId);
-	}
 
-	public void addUnit(Unit unit) {
-		// TODO Auto-generated method stub
-		sqlSessionFactory.openSession().insert("cn.sys.manage.entity.UnitMapper.add",unit);
-	}
+	public List<Unit> getAll(String unitName) ;
 
-	public void editUnit(Unit unit) {
-		// TODO Auto-generated method stub
-		sqlSessionFactory.openSession().update("cn.sys.manage.entity.UnitMapper.update",unit) ;
-	}
+	public void deleteCourse(String unitId)  ;
+	public void addUnit(Unit unit) ;
+
+	public void editUnit(Unit unit) ;
 }

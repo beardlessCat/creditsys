@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.courseManage.entity.Course;
 import com.creidtsys.apps.courseManage.entity.Major;
 import com.creidtsys.apps.courseManage.service.MajorService;
 import com.creidtsys.utils.JsonMessage;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
 
 
 @Controller
@@ -55,9 +57,18 @@ public class MajorController {
 	
 	@RequestMapping(value="/allMajor",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	private JsonMessage allCourse(String majorName){
-		List<Major> list = majorService.selectAll(majorName);
-		return new JsonMessage().success(list) ;
+	private Map<String,Object> allCourse(String data) throws JsonParseException, JsonMappingException, IOException{
+		Major major= mapper.readValue(data, new TypeReference<Major>() { 
+		 });
+	    int page = Integer.parseInt(major.getPageNumber()) ;  
+        int rows =Integer.parseInt(major.getPageSize()) ;   
+		List<Major> list = majorService.selectAll(major.getMajorName());
+		Map<String,Object> map =new HashMap<String, Object>() ;
+		map.put("total", list.size()) ;
+		PageHelper.startPage(page,rows);
+		List<Major> listPage = majorService.selectAll(major.getMajorName());
+		map.put("rows", listPage) ;
+		return map ;
 	}
 	
 	@RequestMapping(value="/delete",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)

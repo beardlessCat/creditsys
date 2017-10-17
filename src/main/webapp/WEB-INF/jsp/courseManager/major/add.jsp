@@ -114,7 +114,7 @@
 				//成功返回之后调用的函数             
 				success : function(data) {
 						$.messager.alert('提示','保存成功!','warning');
-						initdatagrid();
+						initGrid('','1','10') ;
 		           		dialog.close();
 				},
 				//调用出错执行的函数

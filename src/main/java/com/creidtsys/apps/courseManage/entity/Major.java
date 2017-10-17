@@ -1,8 +1,10 @@
 package com.creidtsys.apps.courseManage.entity;
 
+import com.creidtsys.utils.Pager;
+
 //public class Major extends UserDep{
 
-public class Major {
+public class Major extends  Pager {
 	
 	private String majorId;
 	private String majorCode;

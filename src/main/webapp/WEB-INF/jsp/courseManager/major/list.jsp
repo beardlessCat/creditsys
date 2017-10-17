@@ -7,10 +7,24 @@
 <head>
 <script type="text/javascript">
 $(function(){
-	initdatagrid("");
+	var pager = $("#dgzd").datagrid("getPager");
+	if (pager) {
+		$(pager).pagination({
+			onBeforeRefresh : function() {
+			},
+			onRefresh : function(pageNumber, pageSize) {
+			},
+			onChangePageSize : function(pageNumber, pageSize) {
+			},
+			onSelectPage : function(pageNumber, pageSize) {
+				initGrid('', pageNumber, pageSize);
+			}
+		});
+	} ;
+	initGrid('','1','10') ;
 	$('#querybtn').bind('click', function(){
 		var majorName = $("#queryName").textbox("getValue");
-		initdatagrid(majorName);
+		initGrid(majorName,'1','10') ;
 	})
 	$('#clearBtn').bind('click', function(){
 		$("#queryName").textbox("setValue",'');
@@ -63,7 +77,7 @@ $(function(){
 						//成功返回之后调用的函数             
 						success : function(data) {
 							if(data.meta.success){
-								initdatagrid();
+								initGrid('','1','10') ;
 		                    }else{
 		                        $.messager.alert('error', data.meta.message, 'error');
 		                    }
@@ -146,17 +160,21 @@ $(function(){
 	})
 });
 //初始化数据格
-function initdatagrid(name){
-	$.ajax({
-		url:'major/allMajor',
-		type:'POST',
-		dataType:'json',
-		data:{majorName:name},
-		success:function(data){
-			$("#dgzd").datagrid("loadData",data.data);
-		}
+function initGrid(majorName, pageNumber, pageSize) {
+	if(pageNumber==null||pageNumber==""){
+		pageNumber = "1" ;
+	}
+	if(pageSize==null||pageSize==""){
+		pageSize = "10" ;
+	}
+	var jsonData = JSON.stringify({
+		'majorName':majorName,
+		'pageNumber' : pageNumber,
+		'pageSize' : pageSize
 	});
+	initDataGrid('dgzd', 'major/allMajor', 'POST', 'json', jsonData);
 }
+
 function  foeDel(value, rec, rowIndex){
 	value ='<a href="javascript:void(0);" onclick="edit('+'\''+rowIndex+'\''+')">编辑</a>' +"|"+
 		   '<a href="javascript:void(0);" onclick="del('+'\''+rowIndex+'\''+')">删除</a>'  +"|"+
@@ -176,7 +194,7 @@ function  foeDel(value, rec, rowIndex){
 				<a id="editbtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'">修改</a>
 				<a id="toCulti" class="easyui-linkbutton" data-options="iconCls:'icon-add'">培养方案</a>
 			</div>
-			<table id="dgzd" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid">
+			<table id="dgzd" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid" pagination="true">
 			<thead>
 				<tr>  
 					<th data-options="field:'majorId',halign:'center',align:'center',width:120,hidden:true">majorId</th>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.courseManage.entity.Course;
 import com.creidtsys.apps.courseManage.entity.CourseRelation;
 import com.creidtsys.apps.courseManage.entity.Unit;
 import com.creidtsys.apps.courseManage.service.CourseRelationService;
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
 
 @Controller
 @RequestMapping("/unit")
@@ -51,9 +53,18 @@ public class UnitController {
 	}
 	@RequestMapping(value="/allUnit",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	private JsonMessage allUnit(String unitName){
-		List<Unit> list= unitService.getAll(unitName);
-		return new JsonMessage().success(list);
+	private Map<String,Object> allUnit(String data) throws JsonParseException, JsonMappingException, IOException{
+		Unit unit= mapper.readValue(data, new TypeReference<Unit>() { 
+		 });
+	    int page = Integer.parseInt(unit.getPageNumber()) ;  
+        int rows =Integer.parseInt(unit.getPageSize()) ;   
+		List<Unit> list= unitService.getAll(unit.getUnitName());
+		Map<String,Object> map =new HashMap<String, Object>() ;
+		map.put("total", list.size()) ;
+		PageHelper.startPage(page,rows);
+		List<Unit> listPage = unitService.getAll(unit.getUnitName());  
+		map.put("rows", listPage) ;
+		return map ;
 	}
 	@RequestMapping(value="/delete",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

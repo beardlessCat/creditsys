@@ -1,7 +1,9 @@
 package com.creidtsys.apps.courseManage.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.courseManage.entity.Course;
 import com.creidtsys.apps.courseManage.entity.CourseRelation;
 import com.creidtsys.apps.courseManage.entity.Point;
 import com.creidtsys.apps.courseManage.service.CourseRelationService;
@@ -21,6 +24,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
 
 @Controller
 @RequestMapping("/point")
@@ -48,9 +52,18 @@ public class PointController {
 	}
 	@RequestMapping(value="/allPoint",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	private JsonMessage allPoint(String unitId){
-		List<Point> list = pointService.getAll(unitId);
-		return new JsonMessage().success(list);
+	private Map<String,Object> allPoint(String data) throws JsonParseException, JsonMappingException, IOException{
+		Point point= mapper.readValue(data, new TypeReference<Point>() { 
+		 });
+	    int page = Integer.parseInt(point.getPageNumber()) ;  
+        int rows =Integer.parseInt(point.getPageSize()) ;   
+		List<Point> list = pointService.getAll(point.getPointId());
+		Map<String,Object> map =new HashMap<String, Object>() ;
+		map.put("total", list.size()) ;
+		PageHelper.startPage(page,rows);
+		List<Point> listPage = pointService.getAll(point.getPointId());  
+		map.put("rows", listPage) ;
+		return map ;
 	}
 	@RequestMapping(value="/delete",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.sys.manage.entity.CourseMapper">
+<mapper namespace="com.creidtsys.apps.courseManage.dao.CourseDao">
 	<resultMap type="com.creidtsys.apps.courseManage.entity.Course" id="course">
 		<id column="course_id" property="courseId"/>
 		<result column="course_code" property="courseCode"/>

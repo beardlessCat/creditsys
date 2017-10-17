@@ -20,6 +20,7 @@ import com.creidtsys.apps.courseManage.entity.CourseRelation;
 import com.creidtsys.apps.courseManage.service.CourseDependService;
 import com.creidtsys.apps.courseManage.service.CourseRelationService;
 import com.creidtsys.apps.courseManage.service.CourseService;
+import com.creidtsys.apps.manage.entity.Company;
 import com.creidtsys.apps.manage.entity.ResultInfo;
 import com.creidtsys.apps.manage.service.ResultInfoService;
 import com.creidtsys.utils.JsonMessage;
@@ -28,6 +29,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
 
 @Controller
 @RequestMapping("/course")
@@ -70,9 +72,18 @@ public class CourseController {
 	
 	@RequestMapping(value="/allCourse",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	private JsonMessage allCourse(String majorId){
-		List<Course> list = courseService.selectAll(majorId);
-		return new JsonMessage().success(list) ;
+	private Map<String,Object> allCourse(String data) throws JsonParseException, JsonMappingException, IOException{
+		Course course= mapper.readValue(data, new TypeReference<Course>() { 
+		 });
+	    int page = Integer.parseInt(course.getPageNumber()) ;  
+        int rows =Integer.parseInt(course.getPageSize()) ;   
+		List<Course> list = courseService.selectAll(course.getPids());
+		Map<String,Object> map =new HashMap<String, Object>() ;
+		map.put("total", list.size()) ;
+		PageHelper.startPage(page,rows);
+		List<Course> listPage = courseService.selectAll(course.getPids());  
+		map.put("rows", listPage) ;
+		return map ;
 	}
 	@RequestMapping(value="/delete",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
