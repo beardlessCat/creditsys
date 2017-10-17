@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sys.manage.entity.CourseRelationMapper">
+	<resultMap type="com.creidtsys.apps.courseManage.entity.CourseRelation" id="courseRelation">
+		<id column="sr_id" property="srId"/>
+		<result column="sr_Pid" property="srPid"/>
+		<result column="sr_name" property="srName"/>  
+		<result column="sr_type" property="srType"/>
+		<result column="sr_date" property="srDate"/>
+		<result column="sr_is_ness" property="srIsNess"/>
+		<result column="sr_property" property="srProperty"/>
+		<result column="sr_other_id" property="srOtherId"/>
+		<result column="sr_remake" property="srRemake"/> 
+	</resultMap>
+	<insert id="addRela" parameterType="com.creidtsys.apps.courseManage.entity.CourseRelation">
+		insert into course_relation(sr_id,sr_Pid,sr_name,sr_type,sr_date,sr_is_ness,sr_property,sr_other_id,sr_remake)
+		values(#{srId,jdbcType=VARCHAR},#{srPid,jdbcType=VARCHAR},#{srName,jdbcType=VARCHAR},#{srType,jdbcType=VARCHAR},#{srDate,jdbcType=VARCHAR},#{srIsNess,jdbcType=VARCHAR},#{srProperty,jdbcType=VARCHAR},#{srOtherId,jdbcType=VARCHAR},#{srRemake,jdbcType=VARCHAR})
+	</insert>
+	<delete id="deleteByOtherId" parameterType="String">
+		delete from course_relation where sr_other_id = #{srItherId}
+	</delete>
+	<select id="getTreeGrid" parameterType="String" resultMap="courseRelation">
+		select * from course_relation where 1=1 <if test="_parameter !=null and _parameter !=''"></if>
+	</select>
+	<delete id="del" parameterType="String">
+		delete from course_relation where sr_id in(  
+			SELECT sr_id  
+			FROM  
+			course_relation  
+				CONNECT BY PRIOR sr_id = sr_pid start WITH sr_id = #{srId} )
+	</delete>
+	<select id="getCourse" parameterType="String" resultMap="courseRelation">
+		select * from (select * from course_relation  CONNECT BY PRIOR sr_pid = sr_id start WITH sr_other_id = #{srOtherId} 
+		) where sr_type='1'
+	</select>
+	<select id="getBySrPid" parameterType="String" resultMap="courseRelation">
+		select * from course_relation where sr_Pid = #{srPid}
+	</select>
+	<select id="findByOtherId" parameterType="String" resultMap="courseRelation">
+		select * from course_relation where sr_other_id = #{srOtherId}
+	</select>
+	<update id="editByOtherId" parameterType="com.creidtsys.apps.courseManage.entity.CourseRelation">
+		update  course_relation 
+		<set>
+         <if test="srDate!=null">
+                 sr_date=#{srDate},
+         </if>
+         <if test="srName!=null">
+                sr_name=#{srName},
+         </if>
+         <if test="srIsNess!=null">
+                 sr_is_ness=#{srIsNess},
+         </if>
+          <if test="srProperty!=null">
+                sr_property=#{srProperty} ,
+         </if>
+          <if test="srRemake!=null">
+                sr_remake=#{srRemake} ,
+         </if>
+     </set>
+		where sr_other_id =#{srOtherId}
+	</update>
+</mapper>

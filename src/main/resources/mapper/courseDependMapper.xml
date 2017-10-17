@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sys.manage.entity.CourseDependMapper">
+	<resultMap type="com.creidtsys.apps.courseManage.entity.CourseDepend" id="courseDepend">
+		<id column="depend_id" property="dependId"/>
+		<result column="course_pid" property="coursePid"/>
+		<result column="course_sid" property="courseSid"/>  
+		<result column="major_id" property="majorId"/>
+		<result column="course_name" property="courseName"/>
+		<result column="course_pname" property="coursePname"/>
+		<result column="is_nes" property="isNes"/>
+	</resultMap>
+	<select id="getBySid" parameterType="String" resultMap="courseDepend">
+		select * from course_depend 
+		<if test="_parameter !=null and _parameter !=''">
+	      where course_sid=#{_parameter}
+		</if>
+	
+	</select>
+	<delete id="deleteByCourseSid" parameterType="String" >
+		delete from course_depend where course_sid =#{courseSid}
+	</delete>
+	<insert id="addCourseDepend" parameterType="com.creidtsys.apps.courseManage.entity.CourseDepend" >
+		insert into course_depend(depend_id,course_pid,course_sid,major_id,course_name,course_pname,is_nes)values(#{dependId},#{coursePid},#{courseSid},#{majorId},#{courseName},#{coursePname},#{isNes})
+	</insert>
+	<update id="editCourseDepend" parameterType="com.creidtsys.apps.courseManage.entity.CourseDepend">
+		update course_depend set course_pid=#{coursePid},course_sid=#{courseSid},major_id=#{majorId} where course_depend=#{courseDepend}
+	</update>
+	<update id="editChecked" parameterType="String" >
+		update course_depend set is_nes ='unChecked' where depend_id =#{dependId}
+	</update>
+	<select id="getByPsid" parameterType="String" resultMap="courseDepend">
+		select * from course_depend 
+		<if test="_parameter !=null and _parameter !=''">
+	      where course_pid=#{_parameter}
+		</if>
+	</select>
+</mapper>

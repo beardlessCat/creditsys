@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creidtsys.apps.manage.entity.ResultDetialMapper">
+	<resultMap type="com.creidtsys.apps.manage.entity.ResultDetial" id="resultDetial">
+		<id column="rd_id" property="rdId"/>
+		<result column="rd_info_id" property="rdInfoId"/>
+		<result column="rd_result" property="rdResult"/>
+		<result column="rd_rate" property="rdRate"/>
+		<result column="rd_ranking" property="rdRanking"/>
+		<result column="pr_id" property="prId"/>
+		<result column="pr_pid" property="prPid"/>
+		<result column="type" property="type"/>
+		<result column="pr_name" property="prName"/>
+		<result column="other_id" property="otherId"/>
+		<result column="user_login_name" property="userLoginName"/>
+		<result column="rd_index" property="rdIndex"/>	
+		<result column="detial_core" property="detialCore"/>
+	</resultMap>
+	<insert id="add" parameterType="com.creidtsys.apps.manage.entity.ResultDetial">
+		insert into result_detial(rd_id,rd_info_id,rd_result,rd_rate,rd_ranking,pr_id,pr_pid,type,pr_name,other_id,user_login_name,rd_index,detial_core)
+				values(#{rdId,jdbcType=VARCHAR},#{rdInfoId,jdbcType=VARCHAR},#{rdResult,jdbcType=VARCHAR},#{rdRate,jdbcType=VARCHAR},#{rdRanking,jdbcType=VARCHAR},
+				#{prId,jdbcType=VARCHAR},#{prPid,jdbcType=VARCHAR},#{type,jdbcType=VARCHAR},#{prName,jdbcType=VARCHAR},#{otherId,jdbcType=VARCHAR},#{userLoginName,jdbcType=VARCHAR},#{rdIndex,jdbcType=VARCHAR}
+				,#{detialCore,jdbcType=VARCHAR})
+	</insert>
+	<select id="ifContain" parameterType="String" resultMap="resultDetial">
+		select * from result_detial where rd_info_id = #{rdInfoId} order by rd_index
+	</select>
+	<update id="edit" parameterType="com.creidtsys.apps.manage.entity.ResultDetial">
+		update result_detial
+		<set>
+	         <if test="rdResult!=null">
+	                rd_result=#{rdResult},
+	         </if>
+	         <if test="rdRate!=null">
+	                rd_rate=#{rdRate},
+	         </if>
+	         <if test="rdRanking!=null">
+	                 rd_ranking=#{rdRanking},
+	         </if>
+    	</set>
+    	 where 1=1
+    	 <if test="rdId!=null">
+    		 and rd_id = #{rdId}
+    	 </if>
+    	 <if test="rdInfoId!=null">
+    	 and rd_info_id=#{rdInfoId}
+    	 </if>
+    	 <if test="userLoginName!=null">
+    	and  user_login_name=#{userLoginName}
+    	 </if>
+    	  <if test="rdIndex!=null">
+    	 and rd_index=#{rdIndex} 
+    	 </if>
+	</update>
+	<update id="editRe" parameterType="com.creidtsys.apps.manage.entity.ResultDetial" >
+		update result_detial set rd_result=#{rdResult}  where rd_info_id=#{rdInfoId} and rd_index=#{rdIndex} and user_login_name=#{userLoginName}
+	</update>
+	<select id="getByCond" parameterType="com.creidtsys.apps.manage.entity.ResultDetial" resultMap="resultDetial">
+	 select * from  result_detial where  rd_info_id=#{rdInfoId} and rd_index=#{rdIndex} and user_login_name=#{userLoginName}
+	</select>
+	<delete id="delete" parameterType="com.creidtsys.apps.manage.entity.ResultDetial">
+	
+		delete from result_detial where rd_info_id =#{rdInfoId,jdbcType=VARCHAR} and user_login_name=#{userLoginName,jdbcType=VARCHAR}
+	</delete>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creidtsys.apps.manage.entity.PaperDetialMapper">
+	<resultMap type="com.creidtsys.apps.manage.entity.PaperDetial" id="paperDetial">
+		<id column="detial_id" property="detialId"/>
+		<result column="detial_name" property="detialName"/>
+		<result column="detial_paperId" property="detialPaperId"/>
+		<result column="detial_type" property="detialType"/>
+		<result column="detial_desc" property="detialDesc"/>
+		<result column="detial_result" property="detialResult"/>
+		<result column="detial_rate" property="detialRate"/>
+		<result column="detial_degree" property="detialDegree"/>
+		<result column="paper_id" property="paperId"/>
+		<result column="paper_name" property="paperName"/>
+	</resultMap>
+	<select id="selectList" resultMap="paperDetial" parameterType="String">
+		select p.*, d.* from paper_detial p left join paper d on p.detial_paperid= d.paper_id
+		where 1=1
+		<if test="_parameter !=null and _parameter !=''">
+			and detial_paperid=#{_parameter}
+		</if> 
+	</select>
+	<insert id="addDetial" parameterType="com.creidtsys.apps.manage.entity.PaperDetial">
+	insert into paper_detial(detial_id,detial_name,detial_paperId,detial_type,detial_desc,detial_result,detial_degree)
+				values
+				(#{detialId,jdbcType=VARCHAR},
+				#{detialName,jdbcType=VARCHAR},
+				#{detialPaperId,jdbcType=VARCHAR},
+				#{detialType,jdbcType=VARCHAR},
+				#{detialDesc,jdbcType=VARCHAR},
+				#{detialResult,jdbcType=VARCHAR},
+				#{detialDegree,jdbcType=VARCHAR})
+	</insert>
+	<delete id="deleteDetial" parameterType="String">
+		delete from paper_detial where detial_id =#{detialId}
+	</delete>
+	<update id="editDetial" parameterType="com.creidtsys.apps.manage.entity.PaperDetial">
+		update paper_detial set detial_name=#{detialName},detial_paperId=#{detialPaperId},detial_type=#{detialType},detial_desc=#{detialDesc},detial_result=#{detialResult},detial_degree=#{detialDegree} where detial_id=#{detialId}
+	</update>
+</mapper>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sys.manage.entity.CultivateSchemeMapper">
+	<resultMap type="com.creidtsys.apps.courseManage.entity.CultivateScheme" id="cultivateSchemeMapper">
+		<id column="cultivate_id" property="cultivateId"/>
+		<result column="major_id" property="majorId"/>
+		<result column="cultivate_business" property="cultivateBusiness"/>
+		<result column="cultivate_skills" property="cultivateSkills"/>  
+		<result column="cultivate_process" property="cultivateProcess"/>
+		<result column="cultivate_percent" property="cultivatePercent"/>
+		<result column="cultivate_standard" property="cultivateStandard"/>
+		<result column="cultivate_least_study_time" property="cultivateLeastStudyTime"/>
+		<result column="cultivate_most_study_time" property="cultivateMostStudyTime"/>
+		<result column="cultivate_innovate_score" property="cultivateInnovateScore"/> 
+		<result column="cultivate_all_course_period" property="cultivateAllCoursePeriod"/>
+		<result column="cultivate_all_course_score" property="cultivateAllCourseScore"/>
+		<result column="cultivate_major_opt_score" property="cultivateMajorOptScore"/>
+		<result column="cultivate_public_opt_score" property="cultivatePublicOptScore"/>  
+		<result column="cultivate_req_course_period" property="cultivateReqCoursePeriod"/>
+		<result column="cultivate_req_course_score" property="cultivateReqCourseScore"/>
+		<result column="cultivate_opt_period" property="cultivateOptPeriod"/>
+		<result column="cultivate_opt_score" property="cultivateOptScore"/>
+		<result column="cultivate_theory_period" property="cultivateTheoryPeriod"/>
+		<result column="cultivate_theory_score" property="cultivateTheoryScore"/>
+		<result column="cultivate_practice_period" property="cultivatePracticePeriod"/>
+		<result column="cultivate_practice_score" property="cultivatePracticeScore"/>
+		<result column="cultivate_center_score" property="cultivateCenterScore"/>
+		<result column="major_id" property="majorId"/>
+		<result column="major_code" property="majorCode" />
+		<result column="major_name" property="majorName"/>
+	</resultMap>
+	<select id="selectAll" parameterType="String" resultMap="cultivateSchemeMapper">
+		select v.*,c.* from cultivateScheme v left join major c on v.major_id = c.major_id 
+		<if test="_parameter!=null and _parameter!=''">
+    		where v.major_id=#{_parameter}
+    	</if>
+	</select>
+	<delete id="deleteCultivate" parameterType="String" >
+		delete from  cultivateScheme where cultivate_id = #{cultivateId}
+	</delete>
+	<insert id="addCultivate" parameterType="com.creidtsys.apps.courseManage.entity.CultivateScheme" >
+		insert into cultivateScheme (
+		cultivate_id,
+		major_id,
+		cultivate_business,
+		cultivate_skills,
+		cultivate_process,
+		cultivate_percent,
+		cultivate_standard,
+		cultivate_least_study_time,
+		cultivate_most_study_time,
+		cultivate_innovate_score,
+		cultivate_all_course_period,
+		cultivate_all_course_score,
+		cultivate_major_opt_score,
+		cultivate_public_opt_score,
+		cultivate_req_course_period,
+		cultivate_req_course_score,
+		cultivate_opt_period,
+		cultivate_opt_score,
+		cultivate_theory_period,
+		cultivate_theory_score,
+		cultivate_practice_period,
+		cultivate_practice_score,
+		cultivate_center_score)
+		values
+		(
+		#{cultivateId},
+		#{majorId},
+		#{cultivateBusiness},
+		#{cultivateSkills},
+		#{cultivateProcess},
+		#{cultivatePercent},
+		#{cultivateStandard},
+		#{cultivateLeastStudyTime},
+		#{cultivateMostStudyTime},
+		#{cultivateInnovateScore},
+		#{cultivateAllCoursePeriod},
+		#{cultivateAllCourseScore},
+		#{cultivateMajorOptScore},
+		#{cultivatePublicOptScore},
+		#{cultivateReqCoursePeriod},
+		#{cultivateReqCourseScore},
+		#{cultivateOptPeriod},
+		#{cultivateOptScore},
+		#{cultivateTheoryPeriod},
+		#{cultivateTheoryScore},
+		#{cultivatePracticePeriod},
+		#{cultivatePracticeScore},
+		#{cultivateCenterScore}
+		)
+	</insert>
+	<update id="editCultivate" parameterType="com.creidtsys.apps.courseManage.entity.CultivateScheme">
+		update cultivateScheme set 
+		major_id=#{majorId}, 
+		cultivate_business=#{cultivateBusiness}, 
+		cultivate_skills=#{cultivateSkills}, 
+		cultivate_process=#{cultivateProcess}, 
+		cultivate_percent=#{cultivatePercent}, 
+		cultivate_standard=#{cultivateStandard}, 
+		cultivate_least_study_time=#{cultivateLeastStudyTime}, 
+		cultivate_most_study_time=#{cultivateMostStudyTime}, 
+		cultivate_innovate_score=#{cultivateInnovateScore}, 
+		cultivate_all_course_period=#{cultivateAllCoursePeriod}, 
+		cultivate_all_course_score=#{cultivateAllCourseScore}, 
+		cultivate_major_opt_score=#{cultivateMajorOptScore}, 
+		cultivate_public_opt_score=#{cultivatePublicOptScore},
+		cultivate_req_course_period=#{cultivateReqCoursePeriod},
+		cultivate_req_course_score=#{cultivateReqCourseScore},
+		cultivate_opt_period=#{cultivateOptPeriod},
+		cultivate_opt_score=#{cultivateOptScore},
+		cultivate_theory_period=#{cultivateTheoryPeriod},
+		cultivate_theory_score=#{cultivateTheoryScore},
+		cultivate_practice_period=#{cultivatePracticePeriod},
+		cultivate_practice_score=#{cultivatePracticeScore},
+		cultivate_center_score=#{cultivateCenterScore}
+	
+		where cultivate_id =#{cultivateId}
+	</update>
+	<select id="getById" parameterType="String" resultMap="cultivateSchemeMapper">
+		select * from cultivateScheme where cultivate_id = #{cultivateId}
+	</select>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creidtsys.apps.manage.dao.PaperDao">
+	<resultMap type="com.creidtsys.apps.manage.entity.Paper" id="paper">
+		<id column="paper_id" property="paperId"/>
+		<result column="course_paper_id" property="coursePaperId"/>
+		<result column="paper_name" property="paperName"/>
+		<result column="major_paper_id" property="majorPaperId"/>
+		<result column="term_mark" property="termMark"/>
+		<result column="total_result" property="totalResult"/>
+		<result column="result_desc" property="resultDesc"/>
+		<result column="result_min" property="resultMin"/>
+		<result column="result_max" property="resultMax"/>
+		<result column="user_total" property="userTotal"/>
+		<result column="hard_degree" property="hardDegree"/>
+		<result column="paper_code" property="paperCode"/>
+		<result column="course_name" property="courseName"/>
+	</resultMap>
+	<select id="selectList" resultMap="paper" parameterType="String">
+		select p.*,c.* from paper p left join course c on p.course_paper_id = c.course_id
+	</select>
+	<delete id="deletePaper" parameterType="String">
+		delete from paper where paper_id =#{paperId}
+	</delete>
+	<update id="editPaper" parameterType="com.creidtsys.apps.manage.entity.Paper">
+		update paper set course_paper_id=#{coursePaperId},paper_name=#{paperName},major_paper_id=#{majorPaperId},term_mark=#{termMark}, total_result=#{totalResult},result_desc=#{resultDesc},result_min=#{resultMin},result_max=#{resultMax},user_total=#{userTotal},hard_degree=#{hardDegree},paper_code=#{paperCode} where paper_id=#{paperId}
+	</update>
+	<insert id="addPaper" parameterType="com.creidtsys.apps.manage.entity.Paper" >
+		insert into paper (paper_id,course_paper_id,paper_name,major_paper_id,term_mark,total_result,result_desc,result_min,result_max,user_total,hard_degree,paper_code) values (#{paperId},#{coursePaperId},#{paperName},#{majorPaperId},#{termMark},#{totalResult},#{resultDesc},#{resultMin},#{resultMax},#{userTotal},#{hardDegree},#{paperCode})
+	</insert>
+	<select id="getIdByCode" parameterType="String" resultType="String">
+		select paper_id from paper where paper_code = #{paperCode}
+	</select>
+	<select id="getById" parameterType="String" resultMap="paper">
+		select * from paper where paper_id = #{paperId}
+	</select>
+</mapper>

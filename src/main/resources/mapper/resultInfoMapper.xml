@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creidtsys.apps.manage.entity.ResultInfoMapper">
+	<resultMap type="com.creidtsys.apps.manage.entity.ResultInfo" id="resultInfo">
+		<id column="result_id" property="resultId"/>
+		<result column="ri_paper_id" property="riPaperId"/>
+		<result column="ri_user_id" property="riUserId"/>
+		<result column="ri_result" property="riResult"/>
+		<result column="ri_rate" property="riRate"/>
+		<result column="paper_name" property="paperName"/>
+		<result column="paper_id" property="paperId"/>
+		<result column="user_realname" property="userRealName"/>
+		<result column="user_loginname" property="userLoginName"/>
+		<result column="id" property="id"/>
+		<result column="course_id" property="courseId"/>
+		<result column="course_code" property="courseCode"/>
+		<result column="course_name" property="courseName"/>  
+		<result column="course_period" property="coursePeriod"/>
+		<result column="course_require" property="courseRequire"/>
+		<result column="course_score" property="courseScore"/>
+		<result column="course_form" property="courseForm"/>
+		<result column="course_refer" property="courseRefer"/>
+		<result column="course_feed" property="courseFeed"/> 
+		<result column="course_credit" property="courseCredit"/>
+		<result column="course_checked" property="courseChecked"/>
+		<result column="pd_lesson" property="pdLesson"/>
+		<result column="pl_lesson" property="plLesson"/>  
+		<result column="course_property" property="courseProperty"/>
+		<result column="pd_test" property="pdTest"/>
+		<result column="result_total" property="resultTotal"/>
+	</resultMap>
+	<select id="selectList" resultMap="resultInfo" parameterType="String">
+		select t.ri_paper_id,t.*,p.paper_name,p.paper_id,u.user_realname,u.user_loginname ,rank() over (PARTITION BY t.ri_paper_id order by t.ri_result desc ) riRate  from RESULT_INFO t
+    	inner join paper p on t.ri_paper_id=p.paper_id
+    	inner join uc_user u on t.ri_user_id=u.id
+		<if test="_parameter !=null and _parameter !=''">
+			and t.ri_paper_id=#{_parameter}
+		</if>
+	</select>
+	<insert id="add" parameterType="com.creidtsys.apps.manage.entity.ResultInfo">
+	insert into RESULT_INFO(result_id,ri_paper_id,ri_user_id,ri_result,ri_rate,result_total)
+				values(#{resultId,jdbcType=VARCHAR},#{riPaperId,jdbcType=VARCHAR},#{riUserId,jdbcType=VARCHAR},#{riResult,jdbcType=VARCHAR},#{riRate,jdbcType=VARCHAR},#{resultTotal,jdbcType=VARCHAR})
+	</insert>
+	<delete id="delete" parameterType="String">
+		delete from RESULT_INFO where result_id =#{resultId}
+	</delete>
+	<update id="edit" parameterType="com.creidtsys.apps.manage.entity.ResultInfo">
+		update RESULT_INFO set result_id=#{resultId},ri_paper_id=#{riPaperId},ri_user_id=#{riUserId},ri_result=#{riResult} where result_id=#{resultId}
+	</update>
+	<select id="isExist" parameterType="com.creidtsys.apps.manage.entity.ResultInfo" resultMap="resultInfo">
+		select * from RESULT_INFO where ri_paper_id=#{riPaperId,jdbcType=VARCHAR} and ri_user_id = #{riUserId,jdbcType=VARCHAR}
+	</select>
+	<select id="getChoosedCourse" parameterType="com.creidtsys.apps.manage.entity.ResultInfo" resultMap="resultInfo">
+		select c.* from course c where c.course_id in(
+       		select p.course_paper_id from  result_info r 
+              left join paper p 
+              on r.ri_paper_id = p.paper_id 
+             where 1=1
+      		 and r.ri_user_id=#{riUserId,jdbcType=VARCHAR}
+      	 )
+	</select>
+	<update id="editRe" parameterType="com.creidtsys.apps.manage.entity.ResultInfo">
+		update RESULT_INFO set ri_result = #{riResult} where result_id = #{resultId}
+	</update>
+</mapper>
