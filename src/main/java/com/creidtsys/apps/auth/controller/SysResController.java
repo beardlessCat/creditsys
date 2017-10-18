@@ -137,7 +137,13 @@ public class SysResController {
 	public JsonMessage addRole(String data) throws JsonParseException, JsonMappingException, IOException{
 		SysRes sysRes = mapper.readValue(data, new TypeReference<SysRes>() { });
 		sysRes.setResId(UUID.randomUUID().toString().replaceAll("-", "").toUpperCase());
-		sysResService.saveRole(sysRes);
+		String pid = sysRes.getResParentId() ;
+		if(pid!=null&&!"".equals(pid)){
+			sysResService.saveRole(sysRes);
+		}else{
+			sysRes.setResParentId("0");
+			sysResService.saveRole(sysRes);
+		}
 		return new JsonMessage().success();
 	}
 	/**

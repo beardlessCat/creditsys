@@ -25,16 +25,16 @@ $(function(){
 	$('#querybtn').bind('click', function(){
 		var companyName = $("#queryName").combobox("getValue");
 		initGrid(companyName,'1','10') ;
-	})
+	});
 	$('#clearBtn').bind('click', function(){
 		$("#queryName").textbox("setValue",'');
 		$("#courseId").textbox("setValue",'');
 		initdatagrid();
-	})
+	});
 	$("#courseId").combobox({
 		onChange: function (n,o) {
 			initUnit(n);
-	}
+		}
 	});
 	//点击添加按钮
 	$('#addbtn').bind('click', function(){

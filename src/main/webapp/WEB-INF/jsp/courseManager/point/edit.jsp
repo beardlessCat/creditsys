@@ -5,7 +5,6 @@
   					style="width: 800px">
   				<input type="hidden" id="companyId"  />				
   					<table id="areaList" calss="form" style="margin-left:20px;margin-top:20px;border-collapse:separate; border-spacing:10px 10px;">
-		  				
 		  				<tr>
 		  					<td class="form-label" align="right">知识点名称：</td>
 							<td class="form-control"><input id="pointName" 
@@ -35,7 +34,6 @@
 	  		$('#pointContent').textbox('setValue',selected.pointContent);
 	  		$('#pointRemake').textbox('setValue',selected.pointRemake);
 	  	}
-	  	
 	  	$(function(){
 	  		$("#courseId2").combobox({
 	  			onChange: function (n,o) {

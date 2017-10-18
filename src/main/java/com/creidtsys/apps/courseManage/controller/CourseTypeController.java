@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.courseManage.entity.Course;
 import com.creidtsys.apps.courseManage.entity.CourseType;
 import com.creidtsys.apps.courseManage.service.CourseTypeService;
 import com.creidtsys.utils.JsonMessage;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
 
 @Controller
 @RequestMapping("/courseType")
@@ -47,9 +49,18 @@ public class CourseTypeController {
 	}
 	@RequestMapping(value="/allType",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	private JsonMessage allCourse(){
+	private Map<String,Object> allCourse(String data) throws JsonParseException, JsonMappingException, IOException{
+		CourseType courseType= mapper.readValue(data, new TypeReference<CourseType>() { 
+		 });
+	    int page = Integer.parseInt(courseType.getPageNumber()) ;  
+        int rows =Integer.parseInt(courseType.getPageSize()) ;   
 		List<CourseType> list = courseTypeService.selectAll();
-		return new JsonMessage().success(list) ;
+		Map<String,Object> map =new HashMap<String, Object>() ;
+		map.put("total", list.size()) ;
+		PageHelper.startPage(page,rows);
+		List<CourseType> listPage = courseTypeService.selectAll(); 
+		map.put("rows", listPage) ;
+		return map ;
 	}
 	@RequestMapping(value="/add" ,method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

@@ -5,7 +5,6 @@
   				<input type="hidden" id="companyId"  />				
   					<table id="areaList" calss="form" style="margin-left:20px;margin-top:20px;border-collapse:separate; border-spacing:10px 10px;">
 		  				<tr>
-							
 								<td class="form-label" align="right">知识点名称：</td>
 							<td class="form-control"><input id="pointName" 
 								 class="easyui-textbox"
@@ -27,18 +26,13 @@
   				</div>
   				</div>	
   	<script type="text/javascript">
-
-	  	function doInit(dialog){
-	  	
-	  	}
-	  	
 	  	$(function(){
 	  		$("#courseId2").combobox({
 	  			onChange: function (n,o) {
 	  				initCobbobox(n);
-	  		}
+	  			}
 	  		});
-	  	})
+	  	}) ;
 	  
 	  	function doSave(dialog){
 	  		if(!vailNull()){
