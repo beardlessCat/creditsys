@@ -7,7 +7,21 @@
 <head>
 <script type="text/javascript">
 $(function(){
-	initdatagrid();
+	var pager = $("#dgzd").datagrid("getPager");
+	if (pager) {
+		$(pager).pagination({
+			onBeforeRefresh : function() {
+			},
+			onRefresh : function(pageNumber, pageSize) {
+			},
+			onChangePageSize : function(pageNumber, pageSize) {
+			},
+			onSelectPage : function(pageNumber, pageSize) {
+				initGrid('', pageNumber, pageSize);
+			}
+		});
+	} ;
+	initGrid('','1','10') ;
 	initCobbobox();
 	$('#querybtn').bind('click', function(){
 		var majorId = $("#queryName").combobox("getValue");
@@ -71,7 +85,7 @@ $(function(){
 						data :{majorDirectId:row.majorDirectId},
 						//成功返回之后调用的函数             
 						success : function(data) {
-								initdatagrid();
+							initGrid('','1','10') ;
 						},
 						//调用出错执行的函数
 						error : function() {
@@ -118,19 +132,21 @@ $(function(){
 	})
 });
 //初始化数据格
-function initdatagrid(majorId){
-	$.ajax({
-		url:'majorDirect/allDirect',
-		type:'POST',
-		dataType:'json',
-		data:{
-			majorId:majorId
-		},
-		success:function(data){
-			$("#dgzd").datagrid("loadData",data.data);
-		}
+function initGrid(majorDirectName, pageNumber, pageSize) {
+	if(pageNumber==null||pageNumber==""){
+		pageNumber = "1" ;
+	}
+	if(pageSize==null||pageSize==""){
+		pageSize = "10" ;
+	}
+	var jsonData = JSON.stringify({
+		'majorDirectName':majorDirectName ,
+		'pageNumber' : pageNumber,
+		'pageSize' : pageSize
 	});
+	initDataGrid('dgzd', 'majorDirect/allDirect', 'POST', 'json', jsonData);
 }
+
 function  foeDel(value, rec, rowIndex){
 	value ='<a href="javascript:void(0);" onclick="edit('+'\''+rowIndex+'\''+')">编辑</a>' +"|"+
 		   '<a href="javascript:void(0);" onclick="del('+'\''+rowIndex+'\''+')">删除</a>'  +"|"+
@@ -149,7 +165,7 @@ function  foeDel(value, rec, rowIndex){
 				<a id="delbtn" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
 				<a id="editbtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'">修改</a>
 			</div>
-			<table id="dgzd" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid">
+			<table id="dgzd" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid" pagination="true">
 			<thead>
 				<tr>  
 					<th data-options="field:'majorDirectId',halign:'center',align:'center',width:120,hidden:true">courseId</th>

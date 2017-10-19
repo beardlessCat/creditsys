@@ -3,6 +3,7 @@ package com.creidtsys.apps.auth.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.creidtsys.apps.auth.entity.SysRes;
 import com.creidtsys.apps.auth.entity.SysUserRes;
 
 /**
@@ -95,5 +96,23 @@ public interface SysUserResDao {
 	* @return List<Map<String,String>>    返回类型
 	 */
 	List<Map<String, String>> get(String userNo);
+	/**
+	 * 
+	* @Title: getLeafId 
+	* @Description: TODO 根据用户获取权限叶子节点
+	* @param userNo
+	* @return    
+	* @return List<SysRes>    返回类型
+	 */
+	List<SysUserRes> getLeafId(String userNo);
+	/**
+	 * 
+	* @Title: getResPid 
+	* @Description: TODO 递归根据机获取父节点
+	* @param resId
+	* @return    
+	* @return List<SysRes>    返回类型
+	 */
+	List<SysRes> getResPid(String resId);
 
 }

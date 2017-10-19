@@ -32,10 +32,10 @@ public class PlanRelationController {
 	private PlanRelationService planRelationService ;
 	@Resource
 	private MajorService majorService;
-	private String LISTTREE ="courseManager/planRelation/listTree";
-	private String LISTTYPE="courseManager/planRelation/listType";
-	private String LISTCOURSE = "courseManager/planRelation/listCourse";
-	private String LISTDIRECT ="courseManager/planRelation/listDirect";
+	private String LISTTREE ="jsp/courseManager/planRelation/listTree";
+	private String LISTTYPE="jsp/courseManager/planRelation/listType";
+	private String LISTCOURSE = "jsp/courseManager/planRelation/listCourse";
+	private String LISTDIRECT ="jsp/courseManager/planRelation/listDirect";
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping("/chooseCourse")
 	private String chooseCourse(){

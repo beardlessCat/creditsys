@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.creidtsys.apps.courseManage.entity.Course;
 import com.creidtsys.apps.courseManage.entity.CourseType;
 import com.creidtsys.apps.courseManage.service.CourseTypeService;
 import com.creidtsys.utils.JsonMessage;

@@ -28,7 +28,7 @@ $(function(){
 	}) ;
 	$('#clearBtn').bind('click', function(){
 		$("#queryName").textbox("setValue",'');
-		initdatagrid();
+		initGrid('','1','10') ;
 	})
 	//点击添加按钮
 	$('#addbtn').bind('click', function(){

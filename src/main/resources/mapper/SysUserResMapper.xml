@@ -33,6 +33,19 @@
 		 order by res.res_order ) res_temp 
  	where res_temp.res_type   <![CDATA[ <> ]]> '2'
 	</select> 
+	<select id="getLeafId" parameterType="String" resultMap="BaseResultMap">
+			select sur.ur_res_id
+		           from sys_user_res_info sur ,sys_user_info u
+		    where sur.ur_user_id  = u.user_id and u.user_no = #{_parameter,jdbcType=VARCHAR}
+             union
+            select srr.rr_res_id
+               FROM sys_role_res_info srr ,sys_user_info u ,sys_user_role_info ur
+              where srr.rr_role_id  = ur.ur_role_id and ur.ur_user_id =  u.user_id 
+              and u.user_no = #{_parameter,jdbcType=VARCHAR}
+	</select>
+	<select id="getResPid" parameterType="String" resultMap="BaseResultMap">
+		select * from sys_res_info where FIND_IN_SET (res_id ,getResPid(#{resId}))
+	</select>
 	<!-- 根据上级组织查询所有组织机构， -->
 	<select id="getResByUser" resultMap="BaseResultMap" parameterType="String">
 		SELECT sri.*

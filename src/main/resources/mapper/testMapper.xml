@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creidtsys.apps.manage.Test">
+	<resultMap type="com.creidtsys.apps.courseManage.entity.Node" id="node">
+		<id column="id" property="id"/>
+		<result column="nodename" property="nodename"/>
+		<result column="pid" property="pid"/>  
+	</resultMap>
+	<select id="testMysql" resultMap="node" parameterType="int">
+		select * from treenodes where FIND_IN_SET (id ,getParentList(#{id}))
+	</select>
+</mapper>

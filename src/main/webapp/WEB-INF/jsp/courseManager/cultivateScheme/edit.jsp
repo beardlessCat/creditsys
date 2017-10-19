@@ -193,7 +193,7 @@
   				success : function(data) {
   					if(data.meta.success){
   						$.messager.alert('提示','修改成功!','info');
-  						initdatagrid(row.majorName);
+  						initGrid('','1','10') ;
   		           		dialog.close();
   		               }else{
   		                   $.messager.alert('error', 'error');

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.sys.courseManage.entity.MajorDirectMapper">
+<mapper namespace="com.creidtsys.apps.courseManage.dao.MajorDirectDao">
 	<resultMap type="com.creidtsys.apps.courseManage.entity.MajorDirect" id="majorDirect">
 		<id column="major_direct_id" property="majorDirectId"/>
 		<result column="major_direct_name" property="majorDirectName"/>

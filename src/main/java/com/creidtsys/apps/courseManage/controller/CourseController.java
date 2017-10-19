@@ -20,7 +20,6 @@ import com.creidtsys.apps.courseManage.entity.CourseRelation;
 import com.creidtsys.apps.courseManage.service.CourseDependService;
 import com.creidtsys.apps.courseManage.service.CourseRelationService;
 import com.creidtsys.apps.courseManage.service.CourseService;
-import com.creidtsys.apps.manage.entity.Company;
 import com.creidtsys.apps.manage.entity.ResultInfo;
 import com.creidtsys.apps.manage.service.ResultInfoService;
 import com.creidtsys.utils.JsonMessage;

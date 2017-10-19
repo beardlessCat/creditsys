@@ -33,18 +33,18 @@
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
 		<!-- MySQL数据库配置 -->
-		<!-- <property name="url" value="jdbc:mysql://localhost:3306/ma?useUnicode=true&amp;characterEncoding=utf-8" 
-			/> <property name="username" value="root" /> <property name="password" value="root" 
-			/> -->
+		<property name="url" value="jdbc:mysql://localhost:3306/credit?useUnicode=true&amp;characterEncoding=utf-8"/> 
+		<property name="username" value="root" /> 
+		<property name="password" value="root" /> 
 
 		<!-- SQL Server数据库配置 -->
 		<!-- <property name="url" value="jdbc:sqlserver://localhost:1433;DatabaseName=jeefw" 
 			/> <property name="username" value="jeefw" /> <property name="password" value="jeefw" 
 			/> -->
 		<!-- Oracle数据库配置 -->
-		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl" />
+	<!-- 	<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl" />
 		<property name="username" value="creditsys" />
-		<property name="password" value="creditsys" />
+		<property name="password" value="creditsys" /> -->
 		<!-- 超过时间限制是否回收 --> 
 		<!-- 配置初始化大小、最小、最大 -->  
 	    <property name="initialSize" value="1" />  

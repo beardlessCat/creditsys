@@ -168,7 +168,7 @@
 				//成功返回之后调用的函数             
 				success : function(data) {
 						$.messager.alert('提示','保存成功!','warning');
-						initdatagrid(selected.majorName);
+						initGrid('','1','10') ;
 						$("#addbtns").hide();
 		           		dialog.close();
 				},

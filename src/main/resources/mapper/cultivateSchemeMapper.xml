@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.sys.manage.entity.CultivateSchemeMapper">
+<mapper namespace="com.creidtsys.apps.courseManage.dao.CultivateSchemeDao">
 	<resultMap type="com.creidtsys.apps.courseManage.entity.CultivateScheme" id="cultivateSchemeMapper">
 		<id column="cultivate_id" property="cultivateId"/>
 		<result column="major_id" property="majorId"/>
@@ -31,7 +31,20 @@
 		<result column="major_name" property="majorName"/>
 	</resultMap>
 	<select id="selectAll" parameterType="String" resultMap="cultivateSchemeMapper">
-		select v.*,c.* from cultivateScheme v left join major c on v.major_id = c.major_id 
+		select v.*,
+	       c.major_code,
+	       c.major_name,
+	       c.major_english_name,
+	       c.major_length,
+	       c.major_degree,
+	       c.major_academy,
+	       c.major_purpose,
+	       c.major_condition,
+	       c.major_overview
+	  from cultivateScheme v
+	  left join major c
+	    on v.major_id = c.major_id
+
 		<if test="_parameter!=null and _parameter!=''">
     		where v.major_id=#{_parameter}
     	</if>

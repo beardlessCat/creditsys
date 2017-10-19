@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.courseManage.entity.Course;
 import com.creidtsys.apps.courseManage.entity.CultivateScheme;
 import com.creidtsys.apps.courseManage.entity.Major;
 import com.creidtsys.apps.courseManage.service.CultivateSchemeService;
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
 
 @Controller
 @RequestMapping("/cultivateScheme")
@@ -34,11 +36,11 @@ public class CultivateSchemeController {
 	@Resource
 	private MajorService majorService;
 	
-	private final String LIST ="courseManager/cultivateScheme/list" ;
-	private final String TONEWJSP = "courseManager/cultivateScheme/add" ;
-	private final String TOEDITJSP ="courseManager/cultivateScheme/edit" ;
-	private final String TONESmajor ="courseManager/cultivateScheme/nescultivateScheme";
-	private final String TOMADIR = "courseManager/major/listMaDir";
+	private final String LIST ="jsp/courseManager/cultivateScheme/list" ;
+	private final String TONEWJSP = "jsp/courseManager/cultivateScheme/add" ;
+	private final String TOEDITJSP ="jsp/courseManager/cultivateScheme/edit" ;
+	private final String TONESmajor ="jsp/courseManager/cultivateScheme/nescultivateScheme";
+	private final String TOMADIR = "jsp/courseManager/major/listMaDir";
 	private static ObjectMapper mapper = new ObjectMapper();
 	@RequestMapping("/toMaDir")
 	public String toMaDir(){
@@ -59,9 +61,18 @@ public class CultivateSchemeController {
 	
 	@RequestMapping(value="/allCultivateScheme",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	private JsonMessage allCultivateScheme(String majorId){
-		List<CultivateScheme> list = cultivateSchemeService.selectAll(majorId);
-		return new JsonMessage().success(list) ;
+	private Map<String,Object> allCultivateScheme(String data) throws JsonParseException, JsonMappingException, IOException{
+		CultivateScheme course= mapper.readValue(data, new TypeReference<CultivateScheme>() { 
+		 });
+	    int page = Integer.parseInt(course.getPageNumber()) ;  
+        int rows =Integer.parseInt(course.getPageSize()) ;   
+		List<CultivateScheme> list = cultivateSchemeService.selectAll(course.getMajorId());
+		Map<String,Object> map =new HashMap<String, Object>() ;
+		map.put("total", list.size()) ;
+		PageHelper.startPage(page,rows);
+		List<CultivateScheme> listPage = cultivateSchemeService.selectAll(course.getMajorId());  
+		map.put("rows", listPage) ;
+		return map ;
 	}
 	
 	@RequestMapping(value="/delete",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)

@@ -1,6 +1,8 @@
 package com.creidtsys.apps.courseManage.entity;
 
-public class MajorDirect {
+import com.creidtsys.utils.Pager;
+
+public class MajorDirect extends Pager {
 	private String majorDirectId;
 	private String majorDirectName;
 	private String majorDirectDesc;

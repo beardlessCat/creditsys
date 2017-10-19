@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.creidtsys.apps.auth.dao.SysUserResDao;
+import com.creidtsys.apps.auth.entity.SysRes;
 import com.creidtsys.apps.auth.entity.SysUserRes;
 import com.creidtsys.apps.auth.service.SysUserResService;
 import com.creidtsys.utils.ShiroUtils;
@@ -89,7 +90,31 @@ public class SysUserResServiceImpl implements SysUserResService{
 	public List<Map<String, String>> getAuthMenu(String userNo) {
 		SysUserRes userRes = new SysUserRes() ;
 		// TODO Auto-generated method stub
-		List<Map<String,String>> list =userResDao.getAuthMenu(userNo) ;
+		/**
+		 * oracle 版本
+		 */
+		//List<Map<String,String>> listora =userResDao.getAuthMenu(userNo) ; //  17.10.19   liuyj注释
+		/**
+		 * mySql版本（不支持树形查询）
+		 * (1)获取已经授权资源树叶子节点的集合
+		 * (2)遍历集合，获得根节点以及根节点对应的集合
+		 * (3)将集合合并，取并集返回
+		 */
+		List<SysUserRes> leaflist = userResDao.getLeafId(userNo) ;
+		List<Map<String,String>> list = new ArrayList<Map<String,String>>() ;
+		for(SysUserRes sysRes:leaflist){
+			List<SysRes> listPid = userResDao.getResPid(sysRes.getUrResId()) ;
+			for(SysRes sysResP :listPid){
+				Map<String,String> map = new HashMap<String,String>() ;
+				map.put("RES_ID", sysResP.getResId()) ;
+				map.put("RES_NAME", sysResP.getResName()) ;
+				map.put("RES_URL",sysResP.getResUrl()) ;
+				map.put("RES_PARENT_ID", sysResP.getResParentId()) ;
+				if(!list.contains(map)){
+					list.add(map) ;
+				}
+			}
+		}
 		return list;
 	}
 
