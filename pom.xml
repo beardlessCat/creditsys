@@ -196,11 +196,11 @@
 		    <artifactId>aspectjweaver</artifactId>
 		    <version>1.5.4</version>
 		</dependency> 
-		 <dependency>
+		 <!-- <dependency>
 			<groupId>com.oracle</groupId>
  			<artifactId>odbc6</artifactId>
      		<version>0.0.1-SNAPSHOT</version> 
-		</dependency> 
+		</dependency>  -->
 		<!-- 分页插件 -->  
         <dependency>  
             <groupId>com.github.pagehelper</groupId>  
