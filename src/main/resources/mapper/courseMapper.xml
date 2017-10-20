@@ -23,7 +23,7 @@
 		<result column="CType_desc" property="ctypeDesc"/>
 	</resultMap>
 	<select id="selectList" parameterType="String" resultMap="course">
-		select t.*, t.rowid,p.* from COURSE t inner join course_type p on p.ctype_id = t.course_property  
+		select t.*,p.* from COURSE t inner join course_type p on p.ctype_id = t.course_property  
 	</select>
 	<delete id="delete" parameterType="String" >
 		delete from  course where course_id = #{courseId}

@@ -29,8 +29,10 @@
   			}
   			 var s = '';
   		     for(var i=0; i<selectlayer.length; i++){
-  		         if (s != '') s += ',';
-  		         s += selectlayer[i].resId;
+  		    	 if (selectlayer[i].resType=="2"){
+  		    		if (s != '') s += ',';
+  	  		         s += selectlayer[i].resId;
+  		    	 }
   		     }
   			 $.ajax({
   				type : "POST",

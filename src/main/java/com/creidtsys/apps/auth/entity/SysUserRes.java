@@ -1,6 +1,5 @@
 package com.creidtsys.apps.auth.entity;
 
-import com.creidtsys.utils.Pager;
 
 /**
  * 

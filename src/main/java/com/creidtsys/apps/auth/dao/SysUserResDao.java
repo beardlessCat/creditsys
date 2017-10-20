@@ -113,6 +113,6 @@ public interface SysUserResDao {
 	* @return    
 	* @return List<SysRes>    ∑µªÿ¿‡–Õ
 	 */
-	List<SysRes> getResPid(String resId);
+	List<SysUserRes> getResPid(String resId);
 
 }

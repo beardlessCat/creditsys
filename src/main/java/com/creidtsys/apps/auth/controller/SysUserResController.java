@@ -45,8 +45,11 @@ public class SysUserResController {
 	 */
 	@RequestMapping(value="/getResByUser",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-	public Map<String,Object> getResByUser(String userId){
-		List<SysUserRes> list = sysUserResService.getResByUser(userId);
+	public Map<String,Object> getResByUser(String userNo){
+		//17.10.20 i改为传递userNo，并返回节点之上的所有节点
+	//	List<SysUserRes> list = sysUserResService.getResByUser(userId);
+	//	List<SysUserRes> list = sysUserResService.getAllByNo("admin") ;
+		List<Map<String, String>> list =sysUserResService.getAuthMenu(userNo) ;
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("rows", list);
 		return map;

@@ -73,28 +73,29 @@ function allotRes(rowIndex){
          }
      });
 }
-function initTreeGrid(roleId,userId){
+function initTreeGrid(roleId,userNo){
 	$("#restree").treegrid({
         url: 'sysUserRes/getResByUser',
-        idField: 'resId',
-        treeField: 'resName',
+        idField: 'RES_ID',
+        treeField: 'RES_NAME',
         lines:true,
     	checkOnSelect:true,
 		striped: true,
 		border:false,
 		queryParams:{
-			'userId':userId
+			'userNo':userNo
         },  
         columns:[[    
-          	        {field:'resName',width:'100%',align:'left',halign:'center'}  
+          	        {field:'RES_NAME',width:'100%',align:'left',halign:'center'}  
           	    ]]      ,
         customAttr: {
-            parentField: 'resParentId'
+            parentField: 'RES_PARENT_ID'
         }
     }).treegrid('followCustomHandle');
+	
 }
 function clickRow(index,row){	
-	initTreeGrid(row.roleId,row.userId) ;
+	initTreeGrid(row.roleId,row.userNo) ;
 	var title = "【"+row.userName+"】已经分配的资源" ;
 	 $('#allotesRes').panel({
 			title:title
@@ -103,10 +104,10 @@ function clickRow(index,row){
 
 </script>
 	<div id="allotesRes" data-options="region:'east',collapsible:false,split:true,tools:'#treeTools'" style="width:250px;">
-			<table id="restree" style="height: 91%"></table>	
+			<ul id="restree"  class="easyui-tree"></ul>
 		</div>   
 		<div data-options="region:'center'" style="width:100%">
-			<table id="user" data-options="region:'center',singleSelect:true,rownumbers:true,onClickRow:clickRow" class="easyui-datagrid" pagination="true">
+			<table id="user" data-options="region:'center',singleSelect:true,rownumbers:true,onClickRow:clickRow,fit: true," class="easyui-datagrid" pagination="true">
 			<thead>
 				<tr>   
 					<th data-options="field:'userId',halign:'center',align:'center',width:120,hidden:true">用户标识</th>
@@ -122,7 +123,6 @@ function clickRow(index,row){
 					<th data-options="field:'lastLogin',halign:'center',align:'center',width:150">上次登录时间</th>
 					<th data-options="field:'remark',halign:'center',align:'center',width:150">备注</th>	
 					<th data-options="field:'manage',halign:'center',align:'center',width:200,formatter:userManage">操作</th>
-					
 				</tr>
 			</thead>
 		</table>

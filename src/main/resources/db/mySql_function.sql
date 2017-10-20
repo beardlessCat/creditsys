@@ -4,9 +4,9 @@ CREATE FUNCTION `getResPid`(rootId VARCHAR(32))
      BEGIN 
       declare fid LONGTEXT default  '0';
       declare str LONGTEXT default rootId;
-      while rootId>0 do
+      while rootId !='' do
       set fid=(SELECT res_parent_id FROM sys_res_info  WHERE rootId=res_id); 
-     IF fid > 0 THEN  
+     IF fid !='' THEN  
      SET str=concat(str,',',fid);   
      SET rootId=fid;  
      ELSE SET rootId=fid;  
@@ -39,9 +39,9 @@ CREATE FUNCTION `getResChild`(rootId VARCHAR(32))
      BEGIN 
       declare fid LONGTEXT default  '0';
       declare str LONGTEXT default rootId;
-      while rootId>0 do
+      while rootId !='' do
       set fid=(SELECT sr_pid FROM course_relation  WHERE rootId=sr_id); 
-     IF fid > 0 THEN  
+     IF fid !='' THEN  
      SET str=concat(str,',',fid);   
      SET rootId=fid;  
      ELSE SET rootId=fid;  

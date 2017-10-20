@@ -88,5 +88,6 @@ public interface SysUserResService {
 	* @return List    ∑µªÿ¿‡–Õ
 	 */
 	List findRoots(List<Map<String, String>> list);
+	List<SysUserRes> getAllByNo(String userNo);
 
 }

@@ -41,7 +41,7 @@
 		where role_id = #{roleId,jdbcType=VARCHAR} 
 	</update>	
 	<select id="getResByRole" parameterType="String" resultMap="BaseResultMap">
-		select t.res_id, t.res_name, t.res_parent_id, t.res_url ,'' checked
+		select t.res_id,t.res_type, t.res_name, t.res_parent_id, t.res_url ,'' checked
 		  from sys_res_info t
 		 where t.res_id not in
 		       (SELECT sri.res_id
@@ -51,7 +51,7 @@
 	   		
 	   	union
 	   	
-		SELECT sri.res_id, sri.res_name, sri.res_parent_id, sri.res_url ,'true' checked
+		SELECT sri.res_id, sri.res_type,sri.res_name, sri.res_parent_id, sri.res_url ,'true' checked
 		  FROM sys_res_info sri, sys_role_res_info suri
 		 where sri.res_id = suri.rr_res_id
 	   		and rr_role_id=#{_parameter,jdbcType=VARCHAR}

@@ -82,13 +82,13 @@ public class SysUserResServiceImpl implements SysUserResService{
 		List<SysUserRes> list =userResDao.getResByNo(userNo) ;
 		return list;
 	}
+	
 	/**启用注解
 	 * 
 	 */
 	@Override
 	@Cacheable(value = "myCache") 
 	public List<Map<String, String>> getAuthMenu(String userNo) {
-		SysUserRes userRes = new SysUserRes() ;
 		// TODO Auto-generated method stub
 		/**
 		 * oracle 版本
@@ -103,7 +103,7 @@ public class SysUserResServiceImpl implements SysUserResService{
 		List<SysUserRes> leaflist = userResDao.getLeafId(userNo) ;
 		List<Map<String,String>> list = new ArrayList<Map<String,String>>() ;
 		for(SysUserRes sysRes:leaflist){
-			List<SysRes> listPid = userResDao.getResPid(sysRes.getUrResId()) ;
+			List<SysUserRes> listPid = userResDao.getResPid(sysRes.getUrResId()) ;
 			for(SysRes sysResP :listPid){
 				Map<String,String> map = new HashMap<String,String>() ;
 				map.put("RES_ID", sysResP.getResId()) ;
@@ -118,6 +118,19 @@ public class SysUserResServiceImpl implements SysUserResService{
 		return list;
 	}
 
+	@Override
+	public List<SysUserRes> getAllByNo(String userNo) {
+		// TODO Auto-generated method stub
+		List<SysUserRes> leaflist = userResDao.getLeafId(userNo) ;
+		List<SysUserRes> list = new ArrayList<SysUserRes>() ;
+		for(SysUserRes sysRes:leaflist){
+			List<SysUserRes> listPid = userResDao.getResPid(sysRes.getUrResId()) ;
+			//去重
+			listPid.removeAll(list) ;
+			list.addAll(listPid) ;
+		}
+		return list;
+	}
 	@Override
 	public List findRoots(List list){
 		List result = new ArrayList();
@@ -160,4 +173,8 @@ public class SysUserResServiceImpl implements SysUserResService{
 		menuList.add(_map);
 		return menuList;
 	}
+
+	
+
+
 }
