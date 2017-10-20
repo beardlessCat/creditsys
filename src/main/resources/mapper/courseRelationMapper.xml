@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.sys.manage.entity.CourseRelationMapper">
+<mapper namespace="com.creidtsys.apps.courseManage.dao.CourseRelationDao">
 	<resultMap type="com.creidtsys.apps.courseManage.entity.CourseRelation" id="courseRelation">
 		<id column="sr_id" property="srId"/>
 		<result column="sr_Pid" property="srPid"/>
@@ -24,16 +24,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTreeGrid" parameterType="String" resultMap="courseRelation">
 		select * from course_relation where 1=1 <if test="_parameter !=null and _parameter !=''"></if>
 	</select>
-	<delete id="del" parameterType="String">
+	<!-- oracleb版本
 		delete from course_relation where sr_id in(  
 			SELECT sr_id  
 			FROM  
 			course_relation  
 				CONNECT BY PRIOR sr_id = sr_pid start WITH sr_id = #{srId} )
+	 -->
+	<!-- mysql版本 -->
+	<delete id="del" parameterType="String">
+		delete from course_relation where sr_id in(  
+			 FIND_IN_SET (sr_id ,getCourseRelaChild(#{srId}))
+			 )
 	</delete>
+	<!-- oracle 版本 -->
 	<select id="getCourse" parameterType="String" resultMap="courseRelation">
 		select * from (select * from course_relation  CONNECT BY PRIOR sr_pid = sr_id start WITH sr_other_id = #{srOtherId} 
 		) where sr_type='1'
+	</select>
+	<select id="getCourseIdBySrid" parameterType="String" resultMap="courseRelation">
+	
+		select * from  course_relation where sr_id in(  FIND_IN_SET (sr_id ,getCourseRelaPid(#{srId}))) and sr_type='1'
+	
 	</select>
 	<select id="getBySrPid" parameterType="String" resultMap="courseRelation">
 		select * from course_relation where sr_Pid = #{srPid}
