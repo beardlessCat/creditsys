@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.creidtsys.apps.courseManage.entity.Course;
 import com.creidtsys.apps.courseManage.entity.CultivateScheme;
 import com.creidtsys.apps.courseManage.entity.Major;
 import com.creidtsys.apps.courseManage.service.CultivateSchemeService;
@@ -104,7 +103,6 @@ public class CultivateSchemeController {
 	public List<Map<String,String>> initMajor(String majorId)
 	{
 		List<Major> majors=majorService.selectAll(majorId);
-		
 		List<Map<String,String>> listMap = new ArrayList<Map<String,String>>();
 		for(int i=0;i<majors.size();i++){
 			Map<String,String> newMap = new HashMap<String, String>() ;

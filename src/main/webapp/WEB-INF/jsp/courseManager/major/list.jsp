@@ -4,6 +4,7 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" href="<%=basePath%>static/css/major.css">
 <head>
 <script type="text/javascript">
 $(function(){
@@ -106,17 +107,6 @@ $(function(){
 	            useiframe:false,//默认false，扩展属性
 	            width:'90%',
 	            height:'80%',
-	            toolbar:[{
-	                text:'保存',
-	                iconCls:'icon-save',
-	                handler: 'doSave'
-	            },'-',{
-	                text: '关闭',
-	                iconCls: 'icon-cancel',
-	                handler: function(dialog){
-	                    dialog.close();
-	                }
-	            }],
 	            onLoad: function(dialog, cotent){//参数扩展，dialog表示弹出页面，cotent表示弹出页面的body
 	                if(cotent && cotent.doInit){//判断弹出页面是否加载完，是否有这个方法
 	                    cotent.doInit(dialog);//调用dialog页面的方法
@@ -159,6 +149,23 @@ $(function(){
 	        });
 	})
 });
+function dbclick(rowIndex, rowData){
+	$.showModalDialog({
+        title: '专业详情',
+        content:'url:major/toMajorInfo',
+        data: {
+        	selected: rowData,
+        	},//扩展属性，给dilog页面传值
+        useiframe:false,//默认false，扩展属性
+        width:'878px',
+        height:'70%',
+        onLoad: function(dialog, cotent){//参数扩展，dialog表示弹出页面，cotent表示弹出页面的body
+            if(cotent && cotent.doInit){//判断弹出页面是否加载完，是否有这个方法
+                cotent.doInit(dialog);//调用dialog页面的方法
+            }
+        }
+    });
+}
 //初始化数据格
 function initGrid(majorName, pageNumber, pageSize) {
 	if(pageNumber==null||pageNumber==""){
@@ -184,7 +191,7 @@ function  foeDel(value, rec, rowIndex){
 </script>
 </head>
 <body class="easyui-layout">   
-		<div data-options="region:'center'">
+		<div data-options="region:'center'" style="height:214.011px !important;">
 	    		<div id="tb" style="padding-bottom: 5px">
 				专业名称     <input id="queryName" class="easyui-textbox"/>
 		     	<a id="querybtn" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
@@ -203,7 +210,7 @@ function  foeDel(value, rec, rowIndex){
 		     	</shiro:hasPermission>
 				
 			</div>
-			<table id="dgzd" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid" pagination="true">
+			<table id="dgzd" data-options="region:'center',rownumbers:true,singleSelect:true,height:'90%',onDblClickRow:dbclick" class="easyui-datagrid" pagination="true" >
 			<thead>
 				<tr>  
 					<th data-options="field:'majorId',halign:'center',align:'center',width:120,hidden:true">majorId</th>
@@ -221,9 +228,5 @@ function  foeDel(value, rec, rowIndex){
 			</thead>      
 		</table>
 		</div>   	
-    </div>   
-     <div id="treeTools">
-			<a href="javascript:" onclick="undoSelTreeNode()"  class="icon-undo" title="取消选择"></a>
-	 </div>
 	</body>
 </html>

@@ -7,7 +7,6 @@
   	var courseSid ;
 	function doInit(dialog){
 		courseSid = dialog.getData("courseSid");
-		console.log("courseSid-->"+courseSid);
 		initownTree();
   		};
   		function initownTree(){ 

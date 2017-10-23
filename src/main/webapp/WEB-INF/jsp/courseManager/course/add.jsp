@@ -6,23 +6,16 @@
   					<table id="areaList" calss="form" style="margin-left:20px;margin-top:20px;border-collapse:separate; border-spacing:10px 10px;">
 		  				<tr>
 							<td class="form-label" align="right">课程类型：</td>
-							<td class="form-control" ><input id="courseType"
-								 class="easyui-combobox"
-								data-options="required:true" style="width:250px"></td>	
-								<td class="form-label" align="right">先修课程：</td>
-							<td class="form-control"><input id="coursePid" 
-								 class="easyui-combobox"
-								data-options="required:true,multiple:true" style="width:250px"></td>
+							<td class="form-control" ><input id="courseType" class="easyui-combobox" data-options="required:true" style="width:250px"></td>	
+							<td class="form-label" align="right">先修课程：</td>
+							<td class="form-control">
+							<input id="coursePid"  class="easyui-combobox" data-options="required:true,multiple:true" style="width:250px"></td>
 						</tr>
 		  				<tr>
 							<td class="form-label" align="right">课程代码：</td>
-							<td class="form-control" ><input id="courseCode"
-								 class="easyui-textbox"
-								data-options="required:true" style="width:250px"></td>	
-								<td class="form-label" align="right">课程名称：</td>
-							<td class="form-control"><input id="courseName" 
-								 class="easyui-textbox"
-								data-options="required:true" style="width:250px"></td>
+							<td class="form-control" ><input id="courseCode" class="easyui-textbox" data-options="required:true" style="width:250px"></td>	
+							<td class="form-label" align="right">课程名称：</td>
+							<td class="form-control"><input id="courseName" class="easyui-textbox" data-options="required:true" style="width:250px"></td>
 						</tr>
 						<tr >
 							<td class="form-label" align="right">课时：</td> 
@@ -87,6 +80,14 @@
   		var node ;
 	  	function doInit(dialog){
 	  		initCobbobox() ;
+	  		initCourseCombo() ;
+	  	}
+	  	function initCourseCombo(){
+	  		$('#coursePid').combobox({    
+	  		    url:'course/initCourse',    
+	  		    valueField:'id',    
+	  		    textField:'text'   
+	  		});  
 	  	}
 	  	//初始化类型下拉框
 	  		function initCobbobox(){

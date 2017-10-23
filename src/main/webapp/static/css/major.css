@@ -1,0 +1,88 @@
+div.content{
+	width: 806px;
+	    height: 633px;
+    padding: 29px 29px 0;
+}
+.tit{
+	margin: 0 0 10px;
+    width: 700px;
+    font-family: arial,tahoma,'Microsoft Yahei','\5b8b\4f53',sans-serif;
+}
+div.summer{
+	    clear: both;
+    font-size: 14px;
+    word-wrap: break-word;
+    color: #333;
+    margin-bottom: 15px;
+    text-indent: 2em;
+    line-height: 24px;
+    zoom: 1;
+}
+div.para{
+	    font-size: 14px;
+    word-wrap: break-word;
+    color: #333;
+    margin-bottom: 15px;
+    text-indent: 2em;
+    line-height: 24px;
+    zoom: 1;
+}
+div.baseInfo{
+	margin: 20px 0 35px;
+    clear: both;
+    background: url(https://bkssl.bdimg.com/static/wiki-lemma/widget/lemma_content/mainContent/basicInfo/img/basicInfo-bg_7819f20.png)
+}
+.baseInfo-left{
+	width: 395px;
+    float: left;
+}
+.baseInfo-right{
+	width: 395px;
+    float: left;
+}
+   
+.item-name{
+	width: 90px;
+    padding: 0 5px 0 12px;
+    font-weight: 700;
+    margin-top: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    color: #999;
+}
+.item-value{
+	    zoom: 1;
+    color: #333;
+    width: 285px;
+    float: left;
+    position: relative;
+	top: -15px;
+    left: 95px;
+}
+div.level{
+	    display: block;
+    clear: both;
+    zoom: 1;
+    overflow: hidden;
+    font-size: 20px;
+    _border-left: 12px solid #4F9CEE;
+    line-height: 24px;
+    font-size: 22px;
+    font-weight: 400;
+    font-family: Microsoft YaHei,SimHei,Verdana;
+    margin: 35px 0 15px -30px;
+    _background: url(https://bkssl.bdimg.com/static/wiki-lemma/normal/resource/img/paraTitle-line_c5e6d61.png);
+    position: relative;
+}
+.text{
+	float: left;
+    display: block;
+    padding: 0 8px 0 18px;
+    line-height: 24px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #795548;
+    _background: #fff;
+}

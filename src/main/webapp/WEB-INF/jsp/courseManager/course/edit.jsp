@@ -91,8 +91,8 @@
 	  		initCobbobox();
 	  		selected= dialog.getData("selected");
 	  		courseId=selected.courseId;
+	  		initCourseCombo() ;
 	  		initcheckBox(courseId);
-	  		console.log(selected)
 	  		$('#courseCode').textbox('setValue',selected.courseCode);
 	  		$('#courseName').textbox('setValue',selected.courseName);
 	  		$('#coursePeriod').textbox('setValue',selected.coursePeriod);
@@ -117,7 +117,6 @@
 	  				courseSid:courseSid
 	  			},
 	  			success:function(data){
-	  				console.log(data.data)
 	  				selectlayer = new Array();
 	  	  			for(var i=0;i<data.data.length;i++){		
 	  	  					selectlayer[selectlayer.length] = data.data[i];
@@ -131,6 +130,13 @@
 	  			}
 	  			
 	  		});
+	  	}
+	  	function initCourseCombo(){
+	  		$('#coursePid').combobox({    
+	  		    url:'course/initCourse',    
+	  		    valueField:'id',    
+	  		    textField:'text'   
+	  		});  
 	  	}
 		function initCobbobox(){
 			$('#courseType').combobox({    

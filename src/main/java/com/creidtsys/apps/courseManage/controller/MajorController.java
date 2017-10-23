@@ -37,7 +37,12 @@ public class MajorController {
 	private final String TOEDITJSP ="jsp/courseManager/major/edit" ;
 	private final String TONESmajor ="jsp/courseManager/major/nesmajor";
 	private final String TOCUsC = "jsp/courseManager/major/listCuSc";
+	private final String MAJORINFO = "jsp/courseManager/major/majorInfo" ;
 	private static ObjectMapper mapper = new ObjectMapper();
+	@RequestMapping("/toMajorInfo")
+	private String toMajorInfo(){
+		return MAJORINFO ;
+	}
 	@RequestMapping("/toCusc")
 	public String toCusc(){
 		return TOCUsC;

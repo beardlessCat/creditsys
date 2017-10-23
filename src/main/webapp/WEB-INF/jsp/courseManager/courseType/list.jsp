@@ -146,9 +146,15 @@ function  foeDel(value, rec, rowIndex){
 				专业名称     <input id="queryName" class="easyui-combobox"/>
 		     	<a id="querybtn" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
 		     	<a id="clearBtn" class="easyui-linkbutton" data-options="iconCls:'icon-search'">清空</a>
-				<a id="addbtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新增</a>
-				<a id="delbtn" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
-				<a id="editbtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'">修改</a>
+		     	<shiro:hasPermission name="courseType:add">
+		     		<a id="addbtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新增</a>
+		     	</shiro:hasPermission>
+		     	<shiro:hasPermission name="courseType:del">
+		     		<a id="delbtn" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+		     	</shiro:hasPermission>
+		     	<shiro:hasPermission name="courseType:edit">
+		     		<a id="editbtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'">修改</a>
+		     	</shiro:hasPermission>
 			</div>
 			<table id="dgzd" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid" pagination="true">
 			<thead>

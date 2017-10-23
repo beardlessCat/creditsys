@@ -3,10 +3,11 @@
 <script type="text/javascript">
 var selected ;
 function doInit(dialog){
-	$("#addbtns").hide();
-	$("#editbtns").hide();
+	/* $("#addbtns").hide();
+	$("#editbtns").hide(); */
 	selected= dialog.getData("selected");
-	initdatagrid(selected.majorId);
+//	initdatagrid(selected.majorId);
+	initGrid(selected.majorId,'1','10') ;
 	}
 $(function(){
 	//点击添加按钮
@@ -99,22 +100,21 @@ $(function(){
 	})
 });
 //初始化数据格
-function initdatagrid(majorId){
-	$.ajax({
-		url:'cultivateScheme/allCultivateScheme',
-		type:'POST',
-		dataType:'json',
-		data:{majorId:majorId},
-		success:function(data){
-			$("#dgzds").datagrid("loadData",data.data);
-			if(data.data.length<=0) {
-				$("#addbtns").show();
-			}else{
-				$("#editbtns").show();
-			}
-		}
+function initGrid(majorId, pageNumber, pageSize) {
+	if(pageNumber==null||pageNumber==""){
+		pageNumber = "1" ;
+	}
+	if(pageSize==null||pageSize==""){
+		pageSize = "10" ;
+	}
+	var jsonData = JSON.stringify({
+		'majorId':majorId ,
+		'pageNumber' : pageNumber,
+		'pageSize' : pageSize
 	});
+	initDataGrid('dgzds', 'cultivateScheme/allCultivateScheme', 'POST', 'json', jsonData);
 }
+
 function  foeDel(value, rec, rowIndex){
 	value ='<a href="javascript:void(0);" onclick="edit('+'\''+rowIndex+'\''+')">编辑</a>' +"|"+
 		   '<a href="javascript:void(0);" onclick="del('+'\''+rowIndex+'\''+')">删除</a>'  +"|"+
@@ -130,8 +130,8 @@ function  foeDel(value, rec, rowIndex){
 		<a id="addbtns" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新增</a>
 		<a id="editbtns" class="easyui-linkbutton" data-options="iconCls:'icon-add'">修改</a>
 		<a id="toMadir" class="easyui-linkbutton" data-options="iconCls:'icon-add'">教学计划</a>
-	</div>
-	<table id="dgzds" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid">
+	</div> 
+	<table id="dgzds" data-options="region:'center',rownumbers:true,singleSelect:true,height:'90%, onMouseOverRow:over'" class="easyui-datagrid">
 	<thead>
 		<tr>  
 			<th data-options="field:'cultivateId',halign:'center',align:'center',width:120,hidden:true">cultivateId</th>

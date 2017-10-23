@@ -58,7 +58,7 @@
 				/sysDept/toAdd = perms["dpt:add"]
 				/sysDept/toEdit = perms["dept:edit"]
 				<!-- 资源权限拦截 -->
-				/sysRes/list = perms["res:serch"]
+				/sysRes/list = perms["res:serch"] 
 				/sysRes/toAdd = perms["res:add"]
 				/sysRest/toEdit = perms["res:edit"]
 				<!-- 专业权限拦截 -->
@@ -68,8 +68,20 @@
 				/major/toCusc = perms["major:pyfa"]
 				<!-- 课程权限拦截 -->
 				/course/list = perms["course:serch"]
-				/course/toAdd = perms["course:serch"]
-				/course/toEdit = perms["course:serch"]
+				/course/toAdd = perms["course:add"]
+				/course/toEdit = perms["course:edit"]
+				<!-- 指示单元权限拦截 -->
+				/unit/list = perms["unit:serch"]
+				/unit/toAdd = perms["unit:add"]
+				/unit/toEdit = perms["unit:edit"]
+				<!-- 知识点权限拦截   -->
+				/point/list = perms["point:serch"]
+				/point/toAdd = perms["point:add"]
+				/point/toEdit = perms["point:edit"]
+				<!-- 课程类型权限拦截 -->
+				/courseType/list = perms["courseType:serch"]
+				/courseType/toAdd = perms["courseType:add"]
+				/courseType/toEdit = perms["courseType:edit"]
 			</value>
 		</property>
 			 <!-- 
