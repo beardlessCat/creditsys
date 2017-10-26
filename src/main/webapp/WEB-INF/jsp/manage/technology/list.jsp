@@ -56,19 +56,19 @@ $(function(){
         }); 
 	})
 	function initGrid(technologyName, pageNumber, pageSize) {
-	if(pageNumber==null||pageNumber==""){
-		pageNumber = "1" ;
+		if(pageNumber==null||pageNumber==""){
+			pageNumber = "1" ;
+		}
+		if(pageSize==null||pageSize==""){
+			pageSize = "10" ;
+		}
+		var jsonData = JSON.stringify({
+			'technologyName':technologyName ,
+			'pageNumber' : pageNumber,
+			'pageSize' : pageSize
+		});
+		initDataGrid('dgzd', 'technology/allTechnology', 'POST', 'json', jsonData);
 	}
-	if(pageSize==null||pageSize==""){
-		pageSize = "10" ;
-	}
-	var jsonData = JSON.stringify({
-		'technologyName':technologyName ,
-		'pageNumber' : pageNumber,
-		'pageSize' : pageSize
-	});
-	initDataGrid('dgzd', 'technology/allTechnology', 'POST', 'json', jsonData);
-}
 	$('#editbtn').bind('click', function(){
 		var row = $("#dgzd").treegrid("getSelected");
 		if(row==null){

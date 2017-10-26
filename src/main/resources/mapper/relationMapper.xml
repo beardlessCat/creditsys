@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.sys.manage.entity.RelationMapper">
+<mapper namespace="com.creidtsys.apps.manage.dao.RelationDao">
 	<resultMap type="com.creidtsys.apps.manage.entity.Relation" id="relation">
 		<id column="relation_id" property="relationId"/>
 		<result column="relation_pid" property="relationPid"/>

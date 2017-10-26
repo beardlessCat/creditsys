@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.creidtsys.apps.manage.entity.PaperRelationMapper">
+<mapper namespace="com.creidtsys.apps.manage.dao.PaperRelationDao">
 	<resultMap type="com.creidtsys.apps.manage.entity.PaperRelation" id="paperRelation">
 		<id column="pr_id" property="prId"/>
 		<result column="pr_pid" property="prPid"/>
@@ -66,5 +66,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<select id="selectByOtherId" parameterType="String" resultMap="paperRelation">
 		select * from paper_relation CONNECT BY PRIOR pr_id = pr_pid start WITH  other_id = #{otherId}
+	</select>
+	<select id="getChild" parameterType="String" resultMap="paperRelation">
+			select * from paper_relation where FIND_IN_SET (pr_id ,getPaperReChild(#{prId}))
+	</select>
+	<select id="getByOtherId" parameterType="String" resultMap="paperRelation">
+		select * from paper_relation where other_id = #{otherId}
 	</select>
 </mapper>

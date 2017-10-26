@@ -18,18 +18,23 @@
   	function doInit(dialog){
   		type =dialog.getData("type");
   		selected = dialog.getData("selected");
-  		initdatagrid();
+  		initGrid('','1','1000') ;
   	}
-function initdatagrid(companyName){
-	$.ajax({
-		url:'position/allPosition',
-		type:'GET',
-		dataType:'json',
-		success:function(data){
-			$("#listPosi").datagrid("loadData",data.data);
+  	function initGrid(positionName, pageNumber, pageSize) {
+		if(pageNumber==null||pageNumber==""){
+			pageNumber = "1" ;
 		}
-	});
-}
+		if(pageSize==null||pageSize==""){
+			pageSize = "10" ;
+		}
+		var jsonData = JSON.stringify({
+			'positionName':positionName ,
+			'pageNumber' : pageNumber,
+			'pageSize' : pageSize
+		});
+		initDataGrid('listPosi', 'position/allPosition', 'POST', 'json', jsonData);
+	}
+
   	function doChoose(dialog){
   		var allChosoe = $("#listPosi").datagrid("getSelections");
   		if(allChosoe==null){

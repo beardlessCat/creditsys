@@ -1,6 +1,9 @@
 package com.creidtsys.apps.manage.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,14 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.manage.entity.Paper;
 import com.creidtsys.apps.manage.entity.PaperDetial;
 import com.creidtsys.apps.manage.entity.PaperRelation;
 import com.creidtsys.apps.manage.service.PaperDetialService;
 import com.creidtsys.apps.manage.service.PaperRelationService;
 import com.creidtsys.utils.JsonMessage;
 import com.creidtsys.utils.UtilTools;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
 @Controller
 @RequestMapping(value="/paperDetial")
 public class PaperDetialController {
@@ -44,9 +51,18 @@ public class PaperDetialController {
     
     @RequestMapping(value="/allData",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-	public JsonMessage queryData(){
+	public Map<String,Object> queryData(String data) throws JsonParseException, JsonMappingException, IOException{
+    	PaperDetial paperDetial= mapper.readValue(data, new TypeReference<PaperDetial>() { 
+		 });
+		int page = Integer.parseInt(paperDetial.getPageNumber()) ;  
+        int rows =Integer.parseInt(paperDetial.getPageSize()) ; 
 		List<PaperDetial> list = paperDetialService.findAll();
-		return new JsonMessage().success(list);
+		Map<String,Object> map =new HashMap<String, Object>() ;
+		map.put("total", list.size()) ;
+		PageHelper.startPage(page,rows);
+		List<PaperDetial> listPage = paperDetialService.findAll(); 
+		map.put("rows", listPage) ;
+    	return map ;
 	}
     @RequestMapping(value="/delete",method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

@@ -20,20 +20,23 @@
   	function doInit(dialog){
   		type =dialog.getData("type");
   		selected = dialog.getData("selected");
-  		initdatagrid();
+  		initGrid('','1','10') ;
   	}
-  function initdatagrid(companyName){
-  		$.ajax({
-  			url:'point/allPoint',
-  			type:'POST',
-  			dataType:'json',
-  			data:{
-  			},
-  			success:function(data){
-  				$("#listPoint").datagrid("loadData",data.data);
-  			}
+  	function initGrid(pointName, pageNumber, pageSize) {
+  		if(pageNumber==null||pageNumber==""){
+  			pageNumber = "1" ;
+  		}
+  		if(pageSize==null||pageSize==""){
+  			pageSize = "10" ;
+  		}
+  		var jsonData = JSON.stringify({
+  			'pointName':pointName ,
+  			'pageNumber' : pageNumber,
+  			'pageSize' : pageSize
   		});
-	}
+  		initDataGrid('listPoint', 'point/allPoint', 'POST', 'json', jsonData);
+  	}
+
   	function doChoose(dialog){
   		var allChosoe = $("#listPoint").datagrid("getSelections");
   		if(allChosoe==null){

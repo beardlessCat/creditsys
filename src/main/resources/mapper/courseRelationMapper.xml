@@ -33,9 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 -->
 	<!-- mysql版本 -->
 	<delete id="del" parameterType="String">
-		delete from course_relation where sr_id in(  
+		delete from course_relation where   
 			 FIND_IN_SET (sr_id ,getCourseRelaChild(#{srId}))
-			 )
+			 
 	</delete>
 	<!-- oracle 版本 -->
 	<select id="getCourse" parameterType="String" resultMap="courseRelation">

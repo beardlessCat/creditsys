@@ -43,11 +43,11 @@ public class ResultInfoController {
 	private PaperService paperService ;
 	private File readFile ;
 	private List<ResultInfo> resultIdList ;
-	private final String  LIST ="manage/resultInfo/list" ;
-	private final String TONEWJSP = "manage/resultInfo/add" ;
-	private final String TOEDITJSP ="manage/resultInfo/edit" ;	
-	private final String TOADDINFO = "manage/resultInfo/addInfo";
-	private final String TOADDMANY ="manage/resultInfo/addMany" ;
+	private final String  LIST ="jsp/manage/resultInfo/list" ;
+	private final String TONEWJSP = "jsp/manage/resultInfo/add" ;
+	private final String TOEDITJSP ="jsp/manage/resultInfo/edit" ;	
+	private final String TOADDINFO = "jsp/manage/resultInfo/addInfo";
+	private final String TOADDMANY ="jsp/manage/resultInfo/addMany" ;
 	private static ObjectMapper mapper = new ObjectMapper();	
 	@RequestMapping("/toAddMany")
 	public String toAddMany(){

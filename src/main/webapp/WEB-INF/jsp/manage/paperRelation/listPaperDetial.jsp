@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <div class="easyui-layout" data-options="fit:true">
-	<table id="listDetial" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid">
+	<table id="listDetial" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid" pagination="true">
 			<thead>
 				<tr>  
 					<th data-options="field:'detialId',halign:'center',align:'center',width:120,hidden:true">id</th>
@@ -16,19 +16,21 @@
   				</div>	
   	<script type="text/javascript">
   	$(function(){
-  		initdatagrid();
-  	})
-  	
-  function initdatagrid(companyName){
-	$.ajax({
-		url:'paperDetial/allData',
-		type:'POST',
-		dataType:'json',
-		success:function(data){
-			$("#listDetial").datagrid("loadData",data.data);
+  		initGrid('','1','1000') ;
+  	}) ;
+  	function initGrid(coursePaperId, pageNumber, pageSize) {
+		if(pageNumber==null||pageNumber==""){
+			pageNumber = "1" ;
 		}
-	});
-}
+		if(pageSize==null||pageSize==""){
+			pageSize = "10" ;
+		}
+		var jsonData = JSON.stringify({
+			'pageNumber' : pageNumber,
+			'pageSize' : pageSize
+		});
+		initDataGrid('listDetial', 'paperDetial/allData', 'POST', 'json', jsonData);
+	}
   	function doChoose(dialog){
   		var node = $("#listDetial").datagrid("getSelected")
   		$('#prName').textbox("setValue",node.detialName);

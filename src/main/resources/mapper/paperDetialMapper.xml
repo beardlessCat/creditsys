@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.creidtsys.apps.manage.entity.PaperDetialMapper">
+<mapper namespace="com.creidtsys.apps.manage.dao.PaperDetialDao">
 	<resultMap type="com.creidtsys.apps.manage.entity.PaperDetial" id="paperDetial">
 		<id column="detial_id" property="detialId"/>
 		<result column="detial_name" property="detialName"/>

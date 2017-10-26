@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.creidtsys.apps.manage.entity.ResultInfoMapper">
+<mapper namespace="cn.sys.manage.entity.ResultInfoMapper">
 	<resultMap type="com.creidtsys.apps.manage.entity.ResultInfo" id="resultInfo">
 		<id column="result_id" property="resultId"/>
 		<result column="ri_paper_id" property="riPaperId"/>
@@ -31,8 +31,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="pd_test" property="pdTest"/>
 		<result column="result_total" property="resultTotal"/>
 	</resultMap>
+	<!-- ,rank() over (PARTITION BY t.ri_paper_id order by t.ri_result desc ) riRate -->
 	<select id="selectList" resultMap="resultInfo" parameterType="String">
-		select t.ri_paper_id,t.*,p.paper_name,p.paper_id,u.user_realname,u.user_loginname ,rank() over (PARTITION BY t.ri_paper_id order by t.ri_result desc ) riRate  from RESULT_INFO t
+		select t.ri_paper_id,t.*,p.paper_name,p.paper_id,u.user_realname,u.user_loginname   from RESULT_INFO t
     	inner join paper p on t.ri_paper_id=p.paper_id
     	inner join uc_user u on t.ri_user_id=u.id
 		<if test="_parameter !=null and _parameter !=''">

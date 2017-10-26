@@ -48,8 +48,8 @@ public class PaperRelationController {
 	}
 	@RequestMapping(value="/paperRelation" ,method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-	public Map<String,Object> getData(String  paperName){
-		List<PaperRelation> list= paperRelationService.getTreeGrid(paperName);
+	public Map<String,Object> getData(String  otherId){
+		List<PaperRelation> list= paperRelationService.getTreeGrid(otherId);
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("rows", list);
 		return map;

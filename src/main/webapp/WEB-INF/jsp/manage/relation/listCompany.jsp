@@ -18,28 +18,30 @@
 				</tr>
 			</thead>      
 		</table>
-  				</div>	
+  </div>	
   	<script type="text/javascript">
   	var type ;
 	var selected;
   	function doInit(dialog){
   		type =dialog.getData("type");
   		selected = dialog.getData("selected");
-  		initdatagrid();
+  		initGrid('','1','1000') ;
   	}
-  	function initdatagrid(companyName){
-	$.ajax({
-		url:'company/allCompany',
-		type:'GET',
-		dataType:'json',
-		data:{
-			companyName:companyName
-		},
-		success:function(data){
-			$("#listcomp").datagrid("loadData",data);
-		}
-	});
-}
+  	function initGrid(companyType, pageNumber, pageSize) {
+  		if(pageNumber==null||pageNumber==""){
+  			pageNumber = "1" ;
+  		}
+  		if(pageSize==null||pageSize==""){
+  			pageSize = "10" ;
+  		}
+  		var jsonData = JSON.stringify({
+  			'companyTypeId':companyType ,
+  			'pageNumber' : pageNumber,
+  			'pageSize' : pageSize
+  		});
+  		initDataGrid('listcomp', 'company/selectByCon', 'POST', 'json', jsonData);
+  	}
+  
   	function doChoose(dialog){
   		var allChosoe = $("#listcomp").datagrid("getSelections");
   		if(allChosoe==null){

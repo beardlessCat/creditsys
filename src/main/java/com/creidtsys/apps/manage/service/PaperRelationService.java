@@ -8,51 +8,22 @@ import org.springframework.stereotype.Service;
 
 import com.creidtsys.apps.manage.entity.PaperRelation;
 
-@Service
-public class PaperRelationService {
-	@Autowired
-	private SqlSessionFactory sessionFactory ;
+public interface PaperRelationService {
+	
 
-	public List<PaperRelation> getTreeGrid(String paperName) {
-		// TODO Auto-generated method stub
-		List<PaperRelation> list = sessionFactory.openSession().selectList("cn.sys.manage.entity.PaperRelationMapper.selectList",paperName);
-		return list;
-	}
+	public List<PaperRelation> getTreeGrid(String paperName)  ;
 
-	public void addRelation(PaperRelation paperRelation) {
-		// TODO Auto-generated method stub
-		sessionFactory.openSession().insert("cn.sys.manage.entity.PaperRelationMapper.addRelation",paperRelation);
-	}
+	public void addRelation(PaperRelation paperRelation) ;
 
-	public void deletePosition(String prId) {
-		// TODO Auto-generated method stub
-		sessionFactory.openSession().delete("cn.sys.manage.entity.PaperRelationMapper.delRelation",prId);
-	}
+	public void deletePosition(String prId) ;
+	public PaperRelation getRealtionById(String prId) ;
 
-	public PaperRelation getRealtionById(String prId) {
-		// TODO Auto-generated method stub
-		PaperRelation paperRelation = sessionFactory.openSession().selectOne("cn.sys.manage.entity.PaperRelationMapper.getRealtionById",prId);
-		return paperRelation;
-	}
+	public void editRelation(PaperRelation paperRelation) ;
 
-	public void editRelation(PaperRelation paperRelation) {
-		// TODO Auto-generated method stub
-		sessionFactory.openSession().update("cn.sys.manage.entity.PaperRelationMapper.editRelation",paperRelation);
-	}
+	public void deleteByOtherId(String otherId) ;
 
-	public void deleteByOtherId(String otherId) {
-		// TODO Auto-generated method stub
-		sessionFactory.openSession().delete("cn.sys.manage.entity.PaperRelationMapper.deleteByOtherId",otherId);
-	}
+	public void eidtByOtherId(PaperRelation paperRelation)  ;
 
-	public void eidtByOtherId(PaperRelation paperRelation) {
-		// TODO Auto-generated method stub
-		sessionFactory.openSession().update("cn.sys.manage.entity.PaperRelationMapper.eidtByOtherId", paperRelation);
-	}
-
-	public List<PaperRelation> selectByOtherId(String otherId) {
-		// TODO Auto-generated method stub
-		List<PaperRelation> list = sessionFactory.openSession().selectList("cn.sys.manage.entity.PaperRelationMapper.selectByOtherId",otherId);
-		return list;
-	}
+	public List<PaperRelation> selectByOtherId(String otherId) ;
+	
 }

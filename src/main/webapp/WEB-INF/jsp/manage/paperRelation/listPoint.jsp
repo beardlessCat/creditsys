@@ -20,20 +20,23 @@
   		selected = dialog.getData("node");
   		console.log('pr'+pr)
   		console.log('node'+selected)
-  		initdatagrid();
+  		initGrid('','1','1000') ;
   	}
-  function initdatagrid(){
-  		$.ajax({
-  			url:'point/allPoint',
-  			type:'POST',
-  			dataType:'json',
-  			data:{
-  			},
-  			success:function(data){
-  				$("#listPoint").datagrid("loadData",data.data);
-  			}
+  	function initGrid(pointName, pageNumber, pageSize) {
+  		if(pageNumber==null||pageNumber==""){
+  			pageNumber = "1" ;
+  		}
+  		if(pageSize==null||pageSize==""){
+  			pageSize = "10" ;
+  		}
+  		var jsonData = JSON.stringify({
+  			'pointName':pointName ,
+  			'pageNumber' : pageNumber,
+  			'pageSize' : pageSize
   		});
-	}
+  		initDataGrid('listPoint', 'point/allPoint', 'POST', 'json', jsonData);
+  	}
+  
   	function doChoose(dialog){
   		var node = $("#listPoint").datagrid("getSelected")  		
   		$('#prName').textbox("setValue",node.pointName);

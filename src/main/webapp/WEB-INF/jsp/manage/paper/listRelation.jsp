@@ -5,7 +5,7 @@ var selected ;
 function doInit(dialog){
 	selected =dialog.getData("selected");
 	pr = selected.paperName;
-	initTree(selected.paperName);
+	initTree(selected.paperId);
 }
 $(function(){
 	$('#clearBtn2').bind('click', function(){
@@ -101,7 +101,7 @@ function choosePoint(title,type,node,pr){
 	}) 
 
 }
-function initTree(prName){
+function initTree(paperId){
 	$("#restree").treegrid({
             url: 'paperRelation/paperRelation',
             idField: 'prId',
@@ -110,7 +110,7 @@ function initTree(prName){
         	checkOnSelect:true,
 			striped: true,
 			border:false,
-			queryParams:{paperName:prName},
+			queryParams:{otherId:paperId},
 			rownumbers:true, 
             columns:[[    
                         {field:'prName',title:'资源名称',width:'30%',align:'left',halign:'center'},    
@@ -203,7 +203,7 @@ function editResource(prId){
         }
     });  
 }
-</script>、
+</script>
 <div class="easyui-layout" data-options="fit:true">
 		<div data-options="region:'center'">
 	    		<div id="tb" style="padding-bottom: 5px">
