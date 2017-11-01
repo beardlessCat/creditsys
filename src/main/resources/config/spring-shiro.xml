@@ -81,7 +81,7 @@
 				<!-- 课程类型权限拦截 -->
 				/courseType/list = perms["courseType:serch"]
 				/courseType/toAdd = perms["courseType:add"]
-				/courseType/toEdit = perms["courseType:edit"]
+				/courseType/toEdit = perms["courseType:edit"] 
 			</value>
 		</property>
 			 <!-- 
