@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 	</select>
 	<select id="getAllPoint" parameterType="String" resultMap="relation">
-		     select distinct(other_id) from( select * from relation CONNECT BY PRIOR relation_id = relation_pid start WITH   relation_id = #{relationId}) where  relation_type = '4'
+			select distinct(other_id) from relation where FIND_IN_SET(relation_id,getCompRelaChild(#{relationId})) and relation_type= '4'
 	</select>
 	<select id="getPosition" parameterType="String" resultMap="relation">
 		select * from relation where  relation_id = #{relationId}

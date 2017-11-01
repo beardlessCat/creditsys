@@ -1,5 +1,6 @@
 package com.creidtsys.apps.courseManage.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.creidtsys.apps.auth.entity.User;
 import com.creidtsys.apps.auth.service.UserService;
 import com.creidtsys.apps.courseManage.entity.Course;
 import com.creidtsys.apps.courseManage.entity.CourseDepend;
@@ -38,7 +38,9 @@ import com.creidtsys.apps.manage.service.RelationService;
 import com.creidtsys.apps.manage.service.ResultInfoService;
 import com.creidtsys.utils.JsonMessage;
 import com.creidtsys.utils.UtilTools;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -66,10 +68,10 @@ public class RecommendCourseController {
 	private List<String> allCourseList =null ;
 	private List<String> choosedCourseList =null ;
 	private String positionNameS = null ;
-	private final String CHOOSEINDEX="courseManager/recommendCourse/recommendIndex";
-	private final String LISTTREE ="courseManager/recommendCourse/listTree" ;
-	private final String INDEX ="/auth/echarsJsp/index";
-	private final String PLAN="courseManager/recommendCourse/recommeddByplan";
+	private final String CHOOSEINDEX="/jsp/courseManager/recommendCourse/recommendIndex";
+	private final String LISTTREE ="/jsp/courseManager/recommendCourse/listTree" ;
+	private final String INDEX ="/jsp/auth/echarsJsp/index";
+	private final String PLAN="/jspcourseManager/recommendCourse/recommeddByplan";
 	@RequestMapping("/toPlan")
 	private String toPlan(){
 		return PLAN ;
@@ -88,14 +90,20 @@ public class RecommendCourseController {
 	}
 	@RequestMapping(value="/getAllPoint",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	private List<Map<String,String>>  allCourse(String relationId){
-		
-		List<Relation> list = relationService.getAllPoint(relationId);
+	private List<Map<String,String>>  allCourse(String data) throws JsonParseException, JsonMappingException, IOException{
+		Relation relation= mapper.readValue(data, new TypeReference<Relation>() { 
+		 });
+		//根据职位获得对应的全部知识点
+		List<Relation> list = relationService.getAllPoint(relation.getRelationId());
+		//定义存放所有知识点对应的课程id的集合
 		List<String> sIdList = new ArrayList<String>();
-		Relation relation = relationService.getPosition(relationId);
+		//获得选中的职位名称
 		String positionName = relation.getRelationRes();
+		positionNameS=positionName ;
+		//循环获得知识点对应的课程id
 		for(int i=0;i<list.size();i++ ){
 			String pointId = list.get(i).getOtherId();
+			//根据知识点查询课程id
 			List<CourseRelation> reList =  courseRelationService.getCourse(pointId); 
 			for(int j=0;j<reList.size();j++){
 				String sId = reList.get(j).getSrOtherId();
@@ -114,7 +122,7 @@ public class RecommendCourseController {
 		
 		allCourseList = new ArrayList<String>(finalList);
 		
-		positionNameS=positionName ;
+		
 
 		List<String> pdRootList = new ArrayList<String>() ;
 		List<String> pIdList = new ArrayList<String>();

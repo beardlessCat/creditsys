@@ -3,7 +3,7 @@
 <script type="text/javascript">
 function doInit(dialog){
 	initTree();
-	initCombobox();
+	//initCombobox();
 	}
  $(function(){
 	$('#querybtn').bind('click', function(){
@@ -73,7 +73,8 @@ function doSave(dialog){
 		dataType:'json',
 		async: false,
 		data:{
-			relationId:node.relationId
+			relationId:node.relationId,
+			relationRes:mode.relationRes
 		},
 		success:function(data){
 			 dialog.close();
