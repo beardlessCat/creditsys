@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-10-19 19:33:54
+Date: 2017-11-01 16:43:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -99,6 +99,7 @@ INSERT INTO `course` VALUES ('2765201705261005616', 'GDSX', '¸ßµÈÊýÑ§', '1', '1'
 INSERT INTO `course` VALUES ('3422201705041405702', 'WLBC', 'ÍøÂç±à³Ì', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2', '1');
 INSERT INTO `course` VALUES ('3715201705261005949', 'WLAN', 'ÍøÂç°²È«', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '×¨Òµ±ØÐÞ¿Î', '1');
 INSERT INTO `course` VALUES ('3811201705032105230', 'HTML', 'web¿ª·¢»ù´¡', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4');
+INSERT INTO `course` VALUES ('4138201710231910565', 'AAA', '1', '21', '1', '1', '1', '11', '1', '1', '1', '1', '1', '2', '1');
 INSERT INTO `course` VALUES ('4157201705032105108', 'WEB', 'WEBÓ¦ÓÃ¿ª·¢', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5', '×¨ÒµÈÎÑ¡¿Î', '5');
 INSERT INTO `course` VALUES ('4165201705261005775', 'DXYY', '´óÑ§Ó¢Óï', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '4890201705261005249', '1');
 INSERT INTO `course` VALUES ('4353201706192206788', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '8623201705110905787', '1');
@@ -108,6 +109,7 @@ INSERT INTO `course` VALUES ('5874201705032105170', 'JAVA', 'JAVA', '3', '3', '3
 INSERT INTO `course` VALUES ('6162201705261005194', 'SJYS', 'Êý¾ÝÔËËã', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '×¨ÒµÏÞÑ¡¿Î', '1');
 INSERT INTO `course` VALUES ('625120170504140540', 'JS', 'html»ù´¡', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '×¨ÒµÈÎÑ¡¿Î', '1');
 INSERT INTO `course` VALUES ('7123201705261005105', 'SJMS', 'Éè¼ÆÄ£Ê½', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '×¨ÒµÏÞÑ¡¿Î', '1');
+INSERT INTO `course` VALUES ('8598201710231910319', '12', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2', '1');
 INSERT INTO `course` VALUES ('8753201705261005214', 'SJJG', 'Êý¾Ý½á¹¹', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '×¨Òµ±ØÐÞ¿Î', '1');
 INSERT INTO `course` VALUES ('9123201705041705865', 'GDJSJWL', '¸ßµÈ¼ÆËã»úÍøÂç', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '×¨ÒµÏÞÑ¡¿Î', '1');
 INSERT INTO `course` VALUES ('9430201705261005592', 'DXSJY', '´óÑ§Éú¾ÍÒµÖ¸µ¼', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '»ù´¡Ñ¡ÐÞ¿Î', '1');
@@ -131,8 +133,10 @@ CREATE TABLE `course_depend` (
 -- ----------------------------
 -- Records of course_depend
 -- ----------------------------
+INSERT INTO `course_depend` VALUES ('1281201710231910798', '1439201705032105196', '4138201710231910565', '11111', '1', 'checked', 'C++');
 INSERT INTO `course_depend` VALUES ('148020170526100505', '0', '4354201705032105593', '11111', 'C', 'checked', '0');
 INSERT INTO `course_depend` VALUES ('1557201706122106623', '9720201705041405897', '3422201705041405702', '11111', 'ÍøÂç±à³Ì', 'checked', '¼ÆËã»úÍøÂç');
+INSERT INTO `course_depend` VALUES ('3142201710231910565', '5874201705032105170', '4138201710231910565', '11111', '1', 'unChecked', 'JAVA');
 INSERT INTO `course_depend` VALUES ('3241201706192206599', '0', '4165201705261005775', '11111', '´óÑ§Ó¢Óï', 'checked', '0');
 INSERT INTO `course_depend` VALUES ('4109201710171610532', '8753201705261005214', '9720201705041405897', '11111', '¼ÆËã»úÍøÂç', 'checked', 'Êý¾Ý½á¹¹');
 INSERT INTO `course_depend` VALUES ('4434201705261005764', '0', '1412201705261005696', '11111', '±à³Ì¼¼Êõ', 'checked', '0');
@@ -143,12 +147,15 @@ INSERT INTO `course_depend` VALUES ('5785201705261005736', '0', '276520170526100
 INSERT INTO `course_depend` VALUES ('6259201705261005190', '3422201705041405702', '2055201705082205649', '11111', 'ÎÞÏßÍøÂç', 'checked', 'ÍøÂç±à³Ì');
 INSERT INTO `course_depend` VALUES ('6332201706192206851', '0', '4353201706192206788', '11111', '1', 'checked', '0');
 INSERT INTO `course_depend` VALUES ('6734201706122106469', '0', '625120170504140540', '11111', 'html»ù´¡', 'checked', '0');
+INSERT INTO `course_depend` VALUES ('6793201710231910931', '3422201705041405702', '4138201710231910565', '11111', '1', 'unChecked', 'ÍøÂç±à³Ì');
+INSERT INTO `course_depend` VALUES ('7149201710231910580', '0', '8598201710231910319', '11111', '1', 'checked', '0');
 INSERT INTO `course_depend` VALUES ('7223201705261005265', '0', '8753201705261005214', '11111', 'Êý¾Ý½á¹¹', 'checked', '0');
 INSERT INTO `course_depend` VALUES ('7348201705261005998', '0', '3715201705261005949', '11111', 'ÍøÂç°²È«', 'checked', '0');
 INSERT INTO `course_depend` VALUES ('7424201706122106869', '3811201705032105230', '4157201705032105108', '11111', 'WEBÓ¦ÓÃ¿ª·¢', 'checked', 'web¿ª·¢»ù´¡');
 INSERT INTO `course_depend` VALUES ('7543201705261005899', '1439201705032105196', '5874201705032105170', '11111', 'JAVA', 'checked', 'C++');
 INSERT INTO `course_depend` VALUES ('7691201706122106752', '625120170504140540', '3811201705032105230', '11111', 'web¿ª·¢»ù´¡', 'checked', 'html»ù´¡');
 INSERT INTO `course_depend` VALUES ('8245201705261005743', '9720201705041405897', '9123201705041705865', '11111', '¸ßµÈ¼ÆËã»úÍøÂç', 'checked', '¼ÆËã»úÍøÂç');
+INSERT INTO `course_depend` VALUES ('8333201710231910865', '4165201705261005775', '4138201710231910565', '11111', '1', 'checked', '´óÑ§Ó¢Óï');
 INSERT INTO `course_depend` VALUES ('8650201706122106828', '5874201705032105170', '4157201705032105108', '11111', 'WEBÓ¦ÓÃ¿ª·¢', 'checked', 'JAVA');
 INSERT INTO `course_depend` VALUES ('8837201705261005152', '0', '7123201705261005105', '11111', 'Éè¼ÆÄ£Ê½', 'checked', '0');
 INSERT INTO `course_depend` VALUES ('9154201705261005198', '0', '4633201705261005145', '11111', 'Êý¾Ý·ÖÎö', 'checked', '0');
@@ -196,6 +203,7 @@ INSERT INTO `course_relation` VALUES ('3299201705032105113', '168120170503210551
 INSERT INTO `course_relation` VALUES ('3372201705041405543', '5446201705041405952', 'ÎïÀí²ã', '3', '1', '1', '1', '2120201705041405367', '1');
 INSERT INTO `course_relation` VALUES ('3392201705041405732', '0', 'ÍøÂç±à³Ì', '1', '1', '1', '×¨Òµ±ØÐÞ¿Î', '3422201705041405702', null);
 INSERT INTO `course_relation` VALUES ('3406201705032105437', '1793201705032105137', 'Ò»£¨web£©', '2', 'q', 'q', 'q', '2726201705032105625', 'ÈëÃÅ');
+INSERT INTO `course_relation` VALUES ('4215201710231910659', '0', '1', '1', '21', '1', '2', '4138201710231910565', null);
 INSERT INTO `course_relation` VALUES ('4281201705032105407', '8958201705032105211', 'ÍøÂç±à³Ì', '2', 'q', 'q', 'q', '2698201705032105577', '¾«Í¨');
 INSERT INTO `course_relation` VALUES ('4315201705032105701', '6282201705032105701', 'jsÊ¹ÓÃ', '3', '1', '1', '1', '9759201705032105882', '1');
 INSERT INTO `course_relation` VALUES ('4660201706192206823', '0', '1', '1', '1', '1', '8623201705110905787', '4353201706192206788', null);
@@ -209,6 +217,7 @@ INSERT INTO `course_relation` VALUES ('5408201705032105243', '0', 'C++', '1', '2
 INSERT INTO `course_relation` VALUES ('5446201705041405952', '5724201705041405963', 'µÚÒ»ÕÂ', '2', '1', '1', '1', '4956201705041405732', 'ÎïÀí²ã');
 INSERT INTO `course_relation` VALUES ('5483201705032105501', '5408201705032105243', 'Ò»£¨C++£©', '2', 'q', 'q', 'q', '6854201705032105425', 'ÈëÃÅ');
 INSERT INTO `course_relation` VALUES ('5585201705082205678', '0', 'ÎÞÏßÍøÂç', '1', '48', 'ÊµÑé', '×¨ÒµÏÞÑ¡¿Î', '2055201705082205649', null);
+INSERT INTO `course_relation` VALUES ('5641201710231910448', '0', '1', '1', '1', '1', '2', '8598201710231910319', null);
 INSERT INTO `course_relation` VALUES ('5724201705041405963', '0', '¼ÆËã»úÍøÂç', '1', '64', '±ØÐÞ', '2', '9720201705041405897', null);
 INSERT INTO `course_relation` VALUES ('5859201705032105580', '9326201705032105199', 'CÊä³öÓï¾ä', '3', '1', '1', '1', '1367201705032105881', '1');
 INSERT INTO `course_relation` VALUES ('5931201705032105212', '4281201705032105407', 'socket', '3', '1', '1', '1', '5396201705032105785', '1');
@@ -229,7 +238,7 @@ INSERT INTO `course_relation` VALUES ('7820201705261005625', '0', '´óÑ§Éú¾ÍÒµÖ¸µ
 INSERT INTO `course_relation` VALUES ('7826201706122106781', '8971201706122106277', 'socket', '3', null, null, null, '2923201706122106664', 'socket');
 INSERT INTO `course_relation` VALUES ('7844201705261005168', '0', 'Êý¾Ý·ÖÎö', '1', '1', '1', '×¨ÒµÏÞÑ¡¿Î', '4633201705261005145', null);
 INSERT INTO `course_relation` VALUES ('7998201705032105228', '4714201705032105573', 'Cweb¿ª·¢', '3', '1', '1', '1', '737020170503210505', '3');
-INSERT INTO `course_relation` VALUES ('8505201705032105555', '6282201705032105701', 'ÍøÕ¾²¿Êð', '3', '1', '1', '1', '4185201705032105600', '1');
+INSERT INTO `course_relation` VALUES ('8505201705032105555', '6282201705032105701', 'ÍøÕ¾²¿Êð', '3', '1', '1', '1', '9489201705032105887', '1');
 INSERT INTO `course_relation` VALUES ('8635201705251805566', '5724201705041405963', '°¢ÈøµÂ', '2', null, null, null, '2464201705251805328', '°¢ÈøµÂ');
 INSERT INTO `course_relation` VALUES ('8795201705191305220', '5446201705041405952', 'javaÑ­»·', '3', '48', 'ÊÇ', '×¨Òµ±ØÐÞ¿Î', '1508201705032105969', '1');
 INSERT INTO `course_relation` VALUES ('8914201706122106649', '3392201705041405732', '¶àÏß³Ì1', '2', null, null, null, '2807201706122106398', '¶àÏß³Ì');
@@ -349,7 +358,7 @@ CREATE TABLE `major` (
 -- ----------------------------
 -- Records of major
 -- ----------------------------
-INSERT INTO `major` VALUES ('001', 'JSJ001', 'ÍøÂç¹¤³Ì', 'fdb', '4', 'sdv', 'E438D7BABA384CC3B229FEBC0AAADBBF', 'dfb', 'bdf', 'gbhrt');
+INSERT INTO `major` VALUES ('001', 'JSJ001', 'ÍøÂç¹¤³Ì', 'fdb', '4', 'sdv', 'E438D7BABA384CC3B229FEBC0AAADBBF', 'ÍøÂç¹¤³Ì×¨ÒµÊÇ½²¼ÆËã»ú¿ÆÑ§»ù´¡ÀíÂÛ¡¢¼ÆËã»úÈíÓ²¼þÏµÍ³¼°Ó¦ÓÃÖªÊ¶¡¢ÍøÂç¹¤³ÌµÄ×¨ÒµÖªÊ¶¼°Ó¦ÓÃÖªÊ¶¡£ÍøÂç¹¤³Ì×¨Òµ¾ßÓÐ´´ÐÂÒâÊ¶£¬¾ßÓÐ±¾×¨ÒµÁìÓò·ÖÎöÎÊÌâºÍ½â¾öÎÊÌâµÄÄÜÁ¦£¬¾ß±¸Ò»¶¨µÄÊµ¼ù¼¼ÄÜ£¬²¢¾ßÓÐÁ¼ºÃµÄÍâÓïÓ¦ÓÃÄÜÁ¦µÄ¸ß¼¶ÑÐ¾¿Ó¦ÓÃÐÍ×¨ÃÅÈË²Å', 'ÍøÂç¹¤³Ì×¨ÒµÊÇ½²¼ÆËã»ú¿ÆÑ§»ù´¡ÀíÂÛ¡¢¼ÆËã»úÈíÓ²¼þÏµÍ³¼°Ó¦ÓÃÖªÊ¶¡¢ÍøÂç¹¤³ÌµÄ×¨ÒµÖªÊ¶¼°Ó¦ÓÃÖªÊ¶¡£ÍøÂç¹¤³Ì×¨Òµ¾ßÓÐ´´ÐÂÒâÊ¶£¬¾ßÓÐ±¾×¨ÒµÁìÓò·ÖÎöÎÊÌâºÍ½â¾öÎÊÌâµÄÄÜÁ¦£¬¾ß±¸Ò»¶¨µÄÊµ¼ù¼¼ÄÜ£¬²¢¾ßÓÐÁ¼ºÃµÄÍâÓïÓ¦ÓÃÄÜÁ¦µÄ¸ß¼¶ÑÐ¾¿Ó¦ÓÃÐÍ×¨ÃÅÈË²Å', 'ÍøÂç¹¤³Ì×¨ÒµÊÇ½²¼ÆËã»ú¿ÆÑ§»ù´¡ÀíÂÛ¡¢¼ÆËã»úÈíÓ²¼þÏµÍ³¼°Ó¦ÓÃÖªÊ¶¡¢ÍøÂç¹¤³ÌµÄ×¨ÒµÖªÊ¶¼°Ó¦ÓÃÖªÊ¶¡£ÍøÂç¹¤³Ì×¨Òµ¾ßÓÐ´´ÐÂÒâÊ¶£¬¾ßÓÐ±¾×¨ÒµÁìÓò·ÖÎöÎÊÌâºÍ½â¾öÎÊÌâµÄÄÜÁ¦£¬¾ß±¸Ò»¶¨µÄÊµ¼ù¼¼ÄÜ£¬²¢¾ßÓÐÁ¼ºÃµÄÍâÓïÓ¦ÓÃÄÜÁ¦µÄ¸ß¼¶ÑÐ¾¿Ó¦ÓÃÐÍ×¨ÃÅÈË²Å¡£');
 INSERT INTO `major` VALUES ('002', 'JSJ002', '¼ÆËã»ú¿ÆÑ§', 'fdb', 'sdv', 'sdv', '1184A6C96E1D4F1380154618FA48A71D', 'dfb', 'bdf', 'gbhrt');
 INSERT INTO `major` VALUES ('003', 'JSJ003', 'Èí¼þ²âÊÔ', 'fdb', 'sdv', 'sdv', 'BDCA93ABE30C4862B4FA8A1BF0136082', 'dfb', 'bdf', 'gbhrt');
 INSERT INTO `major` VALUES ('5440201705091405622', 'JSJ004', 'Èí¼þ¹¤³Ì', 'fdb', 'sdv', 'sdv', '5', 'dfb', 'bdf', 'gbhrt');
@@ -515,6 +524,7 @@ INSERT INTO `plan_relation` VALUES ('5204201705261005740', '203820170526100548',
 INSERT INTO `plan_relation` VALUES ('5519201705261005798', '6252201705261005679', 'ÎÞÏßÍøÂç', '4', null, null, '001', null, null, null, null, null, null, null, null, null, '2055201705082205649', '4');
 INSERT INTO `plan_relation` VALUES ('567220170618170600', '5995201706181706681', '´óÑ§Ó¢Óï', '4', 'DXYY', '¹¤ÉÌ¹ÜÀí', '7376201705121205286', '1', null, '1', null, '1', '1', '1', null, 'ÊÇ', '4165201705261005775', '3');
 INSERT INTO `plan_relation` VALUES ('568220170618170608', '1822201706181706441', '±à³Ì¼¼Êõ', '4', null, null, '7376201705121205286', null, null, null, null, null, null, null, null, null, '1412201705261005696', '4');
+INSERT INTO `plan_relation` VALUES ('5704201710231310937', '0', '¼ÆËã»ú¿ÆÑ§½ÌÑ§¼Æ»®', '1', null, null, '002', null, null, null, null, null, null, null, null, null, null, '1');
 INSERT INTO `plan_relation` VALUES ('5800201706181706981', '5995201706181706681', 'ÍøÂç±à³Ì', '4', 'WLBC', '¹¤ÉÌ¹ÜÀíÑ§Ôº', '7376201705121205286', '1', null, '1', null, '1', '1', '1', null, 'ÊÇ', '3422201705041405702', '3');
 INSERT INTO `plan_relation` VALUES ('5881201706181706723', '508920170618170626', '×¨ÒµÏÞÑ¡¿Î', '2', null, null, '7376201705121205286', null, null, null, null, null, null, null, null, null, '3658201705110905184', '2');
 INSERT INTO `plan_relation` VALUES ('5995201706181706681', '508920170618170626', '×¨Òµ±ØÐÞ¿Î', '2', null, null, '7376201705121205286', null, null, null, null, null, null, null, null, null, '2', '2');
@@ -626,12 +636,16 @@ INSERT INTO `relation` VALUES ('2165201706122106807', '2392201706122106467', 'we
 INSERT INTO `relation` VALUES ('2248201706122106804', '2615201706122106792', '¹ã¶ÈÓÅÏÈ±éÀú', '4', 'ÊìÁ·ÕÆÎÕ', 'ÊìÁ·ÕÆÎÕ', '4756201706122106975');
 INSERT INTO `relation` VALUES ('2392201706122106467', '9503201704131004601', '¿ª·¢¿ò¼Ü', '3', 'ÊìÏ¤Ä³ÖÖ¿ª·¢¿ò¼Ü', null, '3');
 INSERT INTO `relation` VALUES ('2615201706122106792', '9503201704131004601', 'Êý¾Ý½á¹¹', '3', '¶ÔÊý¾Ý½á¹¹ÓÐÒ»¶¨µÄÁË½â', null, 'DBC7FE9758DF4581A6DDA5EBD0513E62');
+INSERT INTO `relation` VALUES ('2731201710241110665', '9503201704131004601', 'echarts', '3', '°Ù¶ÈechartsµÄÓ¦ÓÃ', '±¨±í¿ª·¢', '3E10145869354333AEF4D1D840B6E7E7');
 INSERT INTO `relation` VALUES ('280520170612210644', '2615201706122106792', 'Éî¶ÈÓÅÏÈ±éÀú', '4', 'ÊìÁ·ÕÆÎÕ', 'ÊìÁ·ÕÆÎÕ', '1528201706122106966');
+INSERT INTO `relation` VALUES ('3646201710241110667', '9503201704131004601', '¿ª·¢¿ò¼Ü', '3', 'ssmÈý´ó¿ò¼ÜÁé»îÊ¹ÓÃ', '½øÐÐÐÞ¸ÄÒÔ¼°¸Ä½ø', '3');
 INSERT INTO `relation` VALUES ('4002201704131004927', '0', '°¢Àï°Í°Í', '1', '985', 'alibaba', '630A32FB679D46ACA22C9D8475BE8DFC');
+INSERT INTO `relation` VALUES ('4008201710241110663', '9503201704131004601', '¶àÏß³Ì', '3', '¶àÏß³Ì', '¶àÏß³Ì', '1684BCA40C7F4D29A4C6D6DF9BEFDE5C');
 INSERT INTO `relation` VALUES ('4580201706122106354', '7642201706122106129', 'htmlÊ¹ÓÃ', '4', 'ÊìÁ·ÕÆÎÕ', 'ÊìÁ·ÕÆÎÕ', '589120170503210537');
 INSERT INTO `relation` VALUES ('5567201706122106793', '6455201706122106514', '¶àÏß³Ì', '4', 'ÊìÁ·ÕÆÎÕ', 'ÊìÁ·ÕÆÎÕ', '7703201706122106593');
 INSERT INTO `relation` VALUES ('6455201706122106514', '9503201704131004601', '¶àÏß³Ì', '3', 'ÊìÏ¤¶àÏß³Ì', null, '1684BCA40C7F4D29A4C6D6DF9BEFDE5C');
 INSERT INTO `relation` VALUES ('7023201706122206612', '2392201706122106467', 'TCP', '4', 'ÊìÁ·ÕÆÎÕ', 'ÊìÁ·ÕÆÎÕ', '3142201706122106979');
+INSERT INTO `relation` VALUES ('7134201710241110664', '9503201704131004601', 'oraleÓ¦ÓÃ', '3', '½øÐÐorale µÄÎ¬»¤Óë¿ª·¢', 'oracleÓ¦ÓÃ11', '2');
 INSERT INTO `relation` VALUES ('7642201706122106129', '9503201704131004601', 'Ç°¶Î¼¼Êõ', '3', 'ÊìÁ·ÕÆÎÕÇ°¶Î¼¼Êõ', null, '4');
 INSERT INTO `relation` VALUES ('8278201706122106704', '2392201706122106467', 'ssh', '4', 'ÊìÁ·ÕÆÎÕ', 'ÊìÁ·ÕÆÎÕ', '4876201705032105202');
 INSERT INTO `relation` VALUES ('9421201706122206593', '2392201706122106467', 'UDP', '4', 'ÊìÁ·ÕÆÎÕ', 'ÊìÁ·ÕÆÎÕ', '2159201706122106938');
@@ -894,6 +908,7 @@ CREATE TABLE `sys_res_info` (
 -- ----------------------------
 -- Records of sys_res_info
 -- ----------------------------
+INSERT INTO `sys_res_info` VALUES ('001D38DA3CEE43D195089EB0FA6A6CB2', '¿Î³Ì²éÑ¯', 'course:serch', 'KCCX', 'D8E994F321B54B3383B9DF483985A509', '2', '2', '¿Î³Ì²éÑ¯È¨ÏÞ');
 INSERT INTO `sys_res_info` VALUES ('0AA88F88F1C44D04B9838981B821F6BF', '×¨Òµ¹ÜÀí', '/major/list', 'ZYGL', '8C24B8ECBB514913848DC93869DB269C', '1', '2', '×¨Òµ¹ÜÀí');
 INSERT INTO `sys_res_info` VALUES ('1', 'ÓÃ»§¹ÜÀí', null, 'YHGL', '8', '1', '1', 'ÓÃ»§¹ÜÀí');
 INSERT INTO `sys_res_info` VALUES ('10', '½ÇÉ«¹ÜÀí', '/sysRole/list', 'JSGL', '3', '1', '1', '½ÇÉ«¹ÜÀí');
@@ -903,10 +918,15 @@ INSERT INTO `sys_res_info` VALUES ('13', 'ÓÃ»§Ìí¼Ó', 'user:add', 'YHTJ', '9', '2
 INSERT INTO `sys_res_info` VALUES ('14', 'ÓÃ»§²éÑ¯', 'user:serch', 'YHCX', '9', '2', '2', 'ÓÃ»§²éÑ¯');
 INSERT INTO `sys_res_info` VALUES ('15', 'ÓÃ»§ÐÞ¸Ä', 'user:update', 'YHXG', '9', '2', '3', 'ÓÃ»§ÐÞ¸Ä');
 INSERT INTO `sys_res_info` VALUES ('16', 'ÓÃ»§É¾³ý', 'user:delete', 'YHSC', '9', '2', '4', 'ÓÃ»§É¾³ý');
+INSERT INTO `sys_res_info` VALUES ('16601F064B2F423D9E7C995AB37B9BD4', '×¨ÒµÌí¼Ó', 'major:add', 'ZYTJ', '0AA88F88F1C44D04B9838981B821F6BF', '2', '1', '×¨ÒµÌí¼ÓÈ¨ÏÞ');
 INSERT INTO `sys_res_info` VALUES ('17', '½ÇÉ«²éÑ¯', 'role:serch', 'JSCX', '10', '2', '5', '½ÇÉ«²éÑ¯');
+INSERT INTO `sys_res_info` VALUES ('18DC598AD1A144A387E58FF7EB81C7B7', 'µ¥ÔªÐÞ¸Ä', 'unit:edit', 'DYXG', '2BE158C0576E41FE87CBF336096A2513', '2', '3', 'ÖªÊ¶µ¥ÔªÐÞ¸Ä');
+INSERT INTO `sys_res_info` VALUES ('1F6EDC2A95EC4855B535D7C53838331C', 'µ¥Ôª²éÑ¯', 'unit:add', 'DYCX', '2BE158C0576E41FE87CBF336096A2513', '2', '2', 'Ö¸Ê¾µ¥Ôª²éÑ¯');
 INSERT INTO `sys_res_info` VALUES ('2', '×ÊÔ´È¨ÏÞ¹ÜÀí', null, 'QXGL', '8', '1', '2', '×ÊÔ´È¨ÏÞ¹ÜÀí');
 INSERT INTO `sys_res_info` VALUES ('2BE158C0576E41FE87CBF336096A2513', 'ÖªÊ¶µ¥Ôª¹ÜÀí', 'unit/list', 'ZSDYGL', '8C24B8ECBB514913848DC93869DB269C', '1', '3', 'ÖªÊ¶µ¥Ôª¹ÜÀí');
+INSERT INTO `sys_res_info` VALUES ('2F60AEF2E32E4BADAF3E64795C0F39C1', 'ÖªÊ¶µãÐÞ¸Ä', 'point:edit', 'ZSDXG', 'E3472BD29BCB4947BCB0A966B63E8032', '2', '3', 'ÖªÊ¶µãÐÞ¸Ä');
 INSERT INTO `sys_res_info` VALUES ('3', '½ÇÉ«¹ÜÀí', null, 'JSGL', '8', '1', '3', '½ÇÉ«¹ÜÀí');
+INSERT INTO `sys_res_info` VALUES ('308258ED7963473A86E27FEE4BB62224', '¿Î³ÌÌí¼Ó', 'course:add', 'KCTJ', 'D8E994F321B54B3383B9DF483985A509', '2', '1', '¿Î³ÌÌí¼ÓÈ¨ÏÞ');
 INSERT INTO `sys_res_info` VALUES ('309CD0A7533449BBB67FAE47CA45C925', '²¿ÃÅÌí¼Ó', 'dept:add', 'BMTJ', '536456D9054C4C849A6191AD1510FFB4', '2', '2', '²¿ÃÅÌí¼ÓÈ¨ÏÞ');
 INSERT INTO `sys_res_info` VALUES ('32602924F73343C9AC2E3355067E8482', '²¿ÃÅÐÞ¸Ä', 'dept:edit', 'BMXG', '536456D9054C4C849A6191AD1510FFB4', '2', '3', '²¿ÃÅÐÞ¸Ä');
 INSERT INTO `sys_res_info` VALUES ('3B07A427B0504A94ADB6722AD2442160', '²¿ÃÅ¹ÜÀí', null, 'BMGL', '8', '1', '4', '²¿ÃÅ¹ÜÀí');
@@ -914,20 +934,35 @@ INSERT INTO `sys_res_info` VALUES ('4', '½ÇÉ«Ìí¼Ó', 'role:add', 'A', '10', '2', 
 INSERT INTO `sys_res_info` VALUES ('5', '½ÇÉ«É¾³ý', 'role:delete', '1', '10', '2', '5', null);
 INSERT INTO `sys_res_info` VALUES ('536456D9054C4C849A6191AD1510FFB4', '²¿ÃÅ¹ÜÀí', '/sysDept/list', 'BMGL', '3B07A427B0504A94ADB6722AD2442160', '1', '1', '²¿ÃÅ¹ÜÀí');
 INSERT INTO `sys_res_info` VALUES ('538892B7CC8E45EE958A5AB0C6E6D3EC', 'È¨ÏÞÉ¾³ý', 'res:delete', 'QXSC', '11', '2', '4', 'È¨ÏÞÉ¾³ý');
+INSERT INTO `sys_res_info` VALUES ('5862D6E05B1944F28FA4F71D9B930F10', '¿Î³ÌÀàÐÍ²éÑ¯', 'coureType:serch', 'KCLXXG', '64AA36F0359E465A925210AC566AA7AA', '2', '2', '¿Î³ÌÀàÐÍ²éÑ¯');
+INSERT INTO `sys_res_info` VALUES ('62EB4B52B9E844A5AEA6EF97ED49C783', '¿Î³ÌÀàÐÍÐÞ¸Ä', 'coureType:edit', 'KCLXXG', '64AA36F0359E465A925210AC566AA7AA', '2', '3', '¿Î³ÌÀàÐÍÐÞ¸Ä');
 INSERT INTO `sys_res_info` VALUES ('64AA36F0359E465A925210AC566AA7AA', '¿Î³ÌÀàÐÍ¹ÜÀí', 'courseType/list', 'KCLXGL', '8C24B8ECBB514913848DC93869DB269C', '1', '5', '¿Î³ÌÀàÐÍ¹ÜÀí');
+INSERT INTO `sys_res_info` VALUES ('6DD15E6484A04B649AA6738093EA2206', 'ÅàÑø·½°¸', 'major:pyfa', 'PYFA', '0AA88F88F1C44D04B9838981B821F6BF', '2', '5', '²é¿´ÅàÑø·½°¸');
 INSERT INTO `sys_res_info` VALUES ('7', '½ÇÉ«ÐÞ¸Ä', 'role:update', '1', '10', '2', '6', null);
 INSERT INTO `sys_res_info` VALUES ('724DA4149C0F48B891413F39528B1408', '½ÇÉ«ÊÚÈ¨', 'role:authrole', 'QXSQ', '10', '2', '5', '¶Ô½ÇÉ«½øÐÐÊÚÈ¨');
+INSERT INTO `sys_res_info` VALUES ('73453365043B413CA70CAAFDA0F03E4E', '¿Î³ÌÀàÐÍÌí¼Ó', 'courseType:add', 'KCLXTJ', '64AA36F0359E465A925210AC566AA7AA', '2', '1', '¿Î³ÌÀàÐÍÌí¼ÓÈ¨ÏÞ');
+INSERT INTO `sys_res_info` VALUES ('774FB97A620D4F6B8D9810AF60602E4E', '¿Î³ÌÉ¾³ý', 'course:del', 'KCSC', 'D8E994F321B54B3383B9DF483985A509', '2', '4', '¿Î³ÌÉ¾³ýÈ¨ÏÞ');
 INSERT INTO `sys_res_info` VALUES ('8', 'È¨ÏÞÏµÍ³', null, 'QXXT', '0', '1', '7', null);
+INSERT INTO `sys_res_info` VALUES ('8832CE7A95D74B04A9A2DFCDF7BD51E1', 'µ¥ÔªÉ¾³ý', 'unit:del', 'DYSC', '2BE158C0576E41FE87CBF336096A2513', '2', '4', 'ÖªÊ¶µ¥ÔªÉ¾³ý');
 INSERT INTO `sys_res_info` VALUES ('8C24B8ECBB514913848DC93869DB269C', '½ÌÑ§¹ÜÀí', null, 'JXGL', 'A3B0E099966D4E568B9BCC323F384CF3', '1', '1', '½ÌÑ§¹ÜÀí');
+INSERT INTO `sys_res_info` VALUES ('8DA256EC98344B379FDB4F569F89E2E4', '×¨ÒµÉ¾³ý', 'major:del', 'ZYSC', '0AA88F88F1C44D04B9838981B821F6BF', '2', '4', '×¨ÒµÉ¾³ýÈ¨ÏÞ');
+INSERT INTO `sys_res_info` VALUES ('8E77BC00301040D48D3F9A822E158028', '¿Î³ÌÀàÐÍÉ¾³ý', 'coureType:del', 'KCLXSC', '64AA36F0359E465A925210AC566AA7AA', '2', '4', '¿Î³ÌÀàÐÍÉ¾³ý');
 INSERT INTO `sys_res_info` VALUES ('9', 'ÓÃ»§¹ÜÀí', '/sysUser/list', 'YHGL', '1', '1', '1', 'ÓÃ»§¹ÜÀí');
+INSERT INTO `sys_res_info` VALUES ('9248B73F21864F3CAEA96D639B5DCC7E', 'ÖªÊ¶µãÌí¼Ó', 'point:add', 'XSDTJ', 'E3472BD29BCB4947BCB0A966B63E8032', '2', '2', 'ÖªÊ¶µãÌí¼ÓÈ¨ÏÞ');
 INSERT INTO `sys_res_info` VALUES ('95926CBDD1F3446A9F957B784B8BB6B2', '²¿ÃÅÉ¾³ý', 'dept:delete', 'BMSC', '536456D9054C4C849A6191AD1510FFB4', '2', '4', '²¿ÃÅÉ¾³ý\n');
 INSERT INTO `sys_res_info` VALUES ('A3B0E099966D4E568B9BCC323F384CF3', '½ÌÎñ¹ÜÀí', null, 'JWGL', '0', '1', '2', '½ÌÎñÐÅÏ¢¹ÜÀí');
 INSERT INTO `sys_res_info` VALUES ('A82E708B688540BB8D50C5EFC2BB6378', 'È¨ÏÞÌí¼Ó', 'res:add', 'È¨ÏÞÌí¼Ó', '11', '2', '2', 'È¨ÏÞÌí¼Ó');
+INSERT INTO `sys_res_info` VALUES ('A8EA901AE58B4C3590ED7D85360527D2', 'ÖªÊ¶µãÉ¾³ý', 'point:del', 'ZSDSC', 'E3472BD29BCB4947BCB0A966B63E8032', '2', '4', 'ÖªÊ¶µãÉ¾³ýÈ¨ÏÞ');
+INSERT INTO `sys_res_info` VALUES ('AC64EB45E4A640D3910E1397AA244AD6', 'µ¥ÔªÌí¼Ó', 'unit:add', 'DYTJ', '2BE158C0576E41FE87CBF336096A2513', '2', '1', 'ÖªÊ¶µ¥ÔªÌí¼Ó');
+INSERT INTO `sys_res_info` VALUES ('B4739E9CFE0447BCACFDCAF99F0B8562', '¿Î³ÌÐÞ¸Ä', 'course:edit', 'KCXG', 'D8E994F321B54B3383B9DF483985A509', '2', '3', '¿Î³ÌÐÞ¸ÄÈ¨ÏÞ');
+INSERT INTO `sys_res_info` VALUES ('B4903B44A6B94BE29513757ED2F20F83', '×¨ÒµÐÞ¸Ä', 'major:edit', 'ZYXG', '0AA88F88F1C44D04B9838981B821F6BF', '2', '3', '×¨ÒµÐÞ¸ÄÈ¨ÏÞ');
 INSERT INTO `sys_res_info` VALUES ('D1CC0CDF04EC4BCDA60D361A5E888C61', '²¿ÃÅ²éÑ¯', 'dept:serch', 'BMCX', '536456D9054C4C849A6191AD1510FFB4', '2', '1', '²¿ÃÅ²éÑ¯È¨ÏÞ');
 INSERT INTO `sys_res_info` VALUES ('D8E994F321B54B3383B9DF483985A509', '¿Î³Ì¹ÜÀí', '/course/list', 'KCGL', '8C24B8ECBB514913848DC93869DB269C', '1', '1', '¿Î³Ì¹ÜÀí');
+INSERT INTO `sys_res_info` VALUES ('DD066777AA5543E4B0730EAAD0DA5F70', '×¨Òµ²éÑ¯', 'major:serch', 'ZYCX', '0AA88F88F1C44D04B9838981B821F6BF', '2', '2', '×¨Òµ²éÑ¯¹¦ÄÜ');
 INSERT INTO `sys_res_info` VALUES ('E01BE39DC5A744D4BEEA306F57331675', 'È¨ÏÞ²éÑ¯', 'res:serch', 'QXCX', '11', '2', '1', 'È¨ÏÞ²éÑ¯');
 INSERT INTO `sys_res_info` VALUES ('E3472BD29BCB4947BCB0A966B63E8032', 'ÖªÊ¶µã¹ÜÀí', 'point/list', 'ZSDGL', '8C24B8ECBB514913848DC93869DB269C', '1', '4', 'ÖªÊ¶µã¹ÜÀí');
 INSERT INTO `sys_res_info` VALUES ('E439746FF0424E3A8CF2A16A25F23455', 'È¨ÏÞÐÞ¸Ä', 'res:edit', 'QXXG', '11', '2', '3', 'È¨ÏÞÐÞ¸Ä');
+INSERT INTO `sys_res_info` VALUES ('FD286E39EB0B4415A2E57327BE2112FA', 'ÖªÊ¶µã²éÑ¯', 'point:serch', 'ZSDCX', 'E3472BD29BCB4947BCB0A966B63E8032', '2', '1', 'ÖªÊ¶µã²éÑ¯');
 
 -- ----------------------------
 -- Table structure for `sys_role_info`
@@ -966,14 +1001,13 @@ CREATE TABLE `sys_role_res_info` (
 -- ----------------------------
 -- Records of sys_role_res_info
 -- ----------------------------
-INSERT INTO `sys_role_res_info` VALUES ('1', '1');
-INSERT INTO `sys_role_res_info` VALUES ('1', '12');
-INSERT INTO `sys_role_res_info` VALUES ('1', '13');
-INSERT INTO `sys_role_res_info` VALUES ('1', '14');
-INSERT INTO `sys_role_res_info` VALUES ('1', '15');
-INSERT INTO `sys_role_res_info` VALUES ('1', '16');
-INSERT INTO `sys_role_res_info` VALUES ('1', '5');
-INSERT INTO `sys_role_res_info` VALUES ('1', '9');
+INSERT INTO `sys_role_res_info` VALUES ('1', '16601F064B2F423D9E7C995AB37B9BD4');
+INSERT INTO `sys_role_res_info` VALUES ('1', '48AEEE2E9B7A41688C0D1117A22A5868');
+INSERT INTO `sys_role_res_info` VALUES ('1', '6DD15E6484A04B649AA6738093EA2206');
+INSERT INTO `sys_role_res_info` VALUES ('1', '8DA256EC98344B379FDB4F569F89E2E4');
+INSERT INTO `sys_role_res_info` VALUES ('1', 'B4903B44A6B94BE29513757ED2F20F83');
+INSERT INTO `sys_role_res_info` VALUES ('1', 'D63CDB245E70403F97D78BFAEED0F881');
+INSERT INTO `sys_role_res_info` VALUES ('1', 'DD066777AA5543E4B0730EAAD0DA5F70');
 
 -- ----------------------------
 -- Table structure for `sys_user_info`
@@ -1022,6 +1056,7 @@ CREATE TABLE `sys_user_res_info` (
 -- ----------------------------
 -- Records of sys_user_res_info
 -- ----------------------------
+INSERT INTO `sys_user_res_info` VALUES ('1', '001D38DA3CEE43D195089EB0FA6A6CB2');
 INSERT INTO `sys_user_res_info` VALUES ('1', '0AA88F88F1C44D04B9838981B821F6BF');
 INSERT INTO `sys_user_res_info` VALUES ('1', '1');
 INSERT INTO `sys_user_res_info` VALUES ('1', '10');
@@ -1031,28 +1066,39 @@ INSERT INTO `sys_user_res_info` VALUES ('1', '13');
 INSERT INTO `sys_user_res_info` VALUES ('1', '14');
 INSERT INTO `sys_user_res_info` VALUES ('1', '15');
 INSERT INTO `sys_user_res_info` VALUES ('1', '16');
+INSERT INTO `sys_user_res_info` VALUES ('1', '16601F064B2F423D9E7C995AB37B9BD4');
 INSERT INTO `sys_user_res_info` VALUES ('1', '17');
 INSERT INTO `sys_user_res_info` VALUES ('1', '2');
 INSERT INTO `sys_user_res_info` VALUES ('1', '2BE158C0576E41FE87CBF336096A2513');
 INSERT INTO `sys_user_res_info` VALUES ('1', '3');
+INSERT INTO `sys_user_res_info` VALUES ('1', '308258ED7963473A86E27FEE4BB62224');
 INSERT INTO `sys_user_res_info` VALUES ('1', '309CD0A7533449BBB67FAE47CA45C925');
 INSERT INTO `sys_user_res_info` VALUES ('1', '32602924F73343C9AC2E3355067E8482');
 INSERT INTO `sys_user_res_info` VALUES ('1', '3B07A427B0504A94ADB6722AD2442160');
 INSERT INTO `sys_user_res_info` VALUES ('1', '4');
+INSERT INTO `sys_user_res_info` VALUES ('1', '48AEEE2E9B7A41688C0D1117A22A5868');
 INSERT INTO `sys_user_res_info` VALUES ('1', '5');
 INSERT INTO `sys_user_res_info` VALUES ('1', '536456D9054C4C849A6191AD1510FFB4');
 INSERT INTO `sys_user_res_info` VALUES ('1', '538892B7CC8E45EE958A5AB0C6E6D3EC');
 INSERT INTO `sys_user_res_info` VALUES ('1', '64AA36F0359E465A925210AC566AA7AA');
+INSERT INTO `sys_user_res_info` VALUES ('1', '6DD15E6484A04B649AA6738093EA2206');
 INSERT INTO `sys_user_res_info` VALUES ('1', '7');
 INSERT INTO `sys_user_res_info` VALUES ('1', '724DA4149C0F48B891413F39528B1408');
+INSERT INTO `sys_user_res_info` VALUES ('1', '7508892BC1E040FB96EF54B8F12DD06B');
+INSERT INTO `sys_user_res_info` VALUES ('1', '774FB97A620D4F6B8D9810AF60602E4E');
 INSERT INTO `sys_user_res_info` VALUES ('1', '8');
 INSERT INTO `sys_user_res_info` VALUES ('1', '8C24B8ECBB514913848DC93869DB269C');
+INSERT INTO `sys_user_res_info` VALUES ('1', '8DA256EC98344B379FDB4F569F89E2E4');
 INSERT INTO `sys_user_res_info` VALUES ('1', '9');
 INSERT INTO `sys_user_res_info` VALUES ('1', '95926CBDD1F3446A9F957B784B8BB6B2');
 INSERT INTO `sys_user_res_info` VALUES ('1', 'A3B0E099966D4E568B9BCC323F384CF3');
 INSERT INTO `sys_user_res_info` VALUES ('1', 'A82E708B688540BB8D50C5EFC2BB6378');
+INSERT INTO `sys_user_res_info` VALUES ('1', 'B4739E9CFE0447BCACFDCAF99F0B8562');
+INSERT INTO `sys_user_res_info` VALUES ('1', 'B4903B44A6B94BE29513757ED2F20F83');
 INSERT INTO `sys_user_res_info` VALUES ('1', 'D1CC0CDF04EC4BCDA60D361A5E888C61');
+INSERT INTO `sys_user_res_info` VALUES ('1', 'D63CDB245E70403F97D78BFAEED0F881');
 INSERT INTO `sys_user_res_info` VALUES ('1', 'D8E994F321B54B3383B9DF483985A509');
+INSERT INTO `sys_user_res_info` VALUES ('1', 'DD066777AA5543E4B0730EAAD0DA5F70');
 INSERT INTO `sys_user_res_info` VALUES ('1', 'E01BE39DC5A744D4BEEA306F57331675');
 INSERT INTO `sys_user_res_info` VALUES ('1', 'E3472BD29BCB4947BCB0A966B63E8032');
 INSERT INTO `sys_user_res_info` VALUES ('1', 'E439746FF0424E3A8CF2A16A25F23455');
@@ -1958,6 +2004,110 @@ INSERT INTO `up_user_resource_relation` VALUES ('F79ED4B7AEC44A2E833405AF9816261
 INSERT INTO `up_user_resource_relation` VALUES ('FA06AB9036904723A6E4CB5D3F6056D2', '4314065A5E0E43E9801158D489CB6F67', '182B90379E744DC0BEBEFD244913119A', 'checked');
 
 -- ----------------------------
+-- Function structure for `getCompRelaChild`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `getCompRelaChild`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `getCompRelaChild`(rootId VARCHAR(32)) RETURNS longtext CHARSET utf8
+BEGIN 
+       DECLARE str LONGTEXT ; 
+       DECLARE cid LONGTEXT ; 
+       SET str = ''; 
+       SET cid =rootId; 
+       WHILE cid is not null DO 
+         SET str= concat(str,',',cid); 
+         SELECT group_concat(relation_id) INTO cid FROM relation where FIND_IN_SET(relation_pid,cid)>0; 
+       END WHILE; 
+       RETURN str; 
+     END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `getCourseRelaChild`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `getCourseRelaChild`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `getCourseRelaChild`(rootId VARCHAR(32)) RETURNS longtext CHARSET utf8
+BEGIN 
+       DECLARE str LONGTEXT ; 
+       DECLARE cid LONGTEXT ; 
+       SET str = ''; 
+       SET cid =rootId; 
+       WHILE cid is not null DO 
+         SET str= concat(str,',',cid); 
+         SELECT group_concat(sr_id) INTO cid FROM course_relation where FIND_IN_SET(sr_pid,cid)>0; 
+       END WHILE; 
+       RETURN str; 
+     END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `getCourseRelaPid`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `getCourseRelaPid`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `getCourseRelaPid`(rootId VARCHAR(32)) RETURNS longtext CHARSET utf8
+BEGIN 
+      declare fid LONGTEXT default  '0';
+      declare str LONGTEXT default rootId;
+      while rootId !='' do
+      set fid=(SELECT sr_pid FROM course_relation  WHERE rootId=sr_id); 
+     IF fid !='' THEN  
+     SET str=concat(str,',',fid);   
+     SET rootId=fid;  
+     ELSE SET rootId=fid;  
+     END IF;  
+     END WHILE;
+ return str;
+     END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `getPaperReChild`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `getPaperReChild`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `getPaperReChild`(rootId VARCHAR(32)) RETURNS longtext CHARSET utf8
+BEGIN 
+       DECLARE str LONGTEXT ; 
+       DECLARE cid LONGTEXT ; 
+       SET str = ''; 
+       SET cid =rootId; 
+       WHILE cid is not null DO 
+         SET str= concat(str,',',cid); 
+         SELECT group_concat(pr_id) INTO cid FROM paper_relation where FIND_IN_SET(pr_pid,cid)>0; 
+       END WHILE; 
+       RETURN str; 
+     END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `getPaperRePid`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `getPaperRePid`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `getPaperRePid`(rootId VARCHAR(32)) RETURNS longtext CHARSET utf8
+BEGIN 
+      declare fid LONGTEXT default  '0';
+      declare str LONGTEXT default rootId;
+      while rootId !='' do
+      set fid=(SELECT pr_pid FROM paper_relation  WHERE rootId=pr_id); 
+     IF fid !='' THEN  
+     SET str=concat(str,',',fid);   
+     SET rootId=fid;  
+     ELSE SET rootId=fid;  
+     END IF;  
+     END WHILE;
+ return str;
+     END
+;;
+DELIMITER ;
+
+-- ----------------------------
 -- Function structure for `getResChild`
 -- ----------------------------
 DROP FUNCTION IF EXISTS `getResChild`;
@@ -1986,9 +2136,9 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `getResPid`(rootId VARCHAR(32)) RETUR
 BEGIN 
       declare fid LONGTEXT default  '0';
       declare str LONGTEXT default rootId;
-      while rootId>0 do
+      while rootId !='' do
       set fid=(SELECT res_parent_id FROM sys_res_info  WHERE rootId=res_id); 
-     IF fid > 0 THEN  
+     IF fid !='' THEN  
      SET str=concat(str,',',fid);   
      SET rootId=fid;  
      ELSE SET rootId=fid;  
