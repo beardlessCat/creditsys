@@ -107,7 +107,6 @@ function doSave(dialog){
 			relationId:node.relationId
 		},
 		success:function(data){	
-			
 			myDiagram2.model = new go.TreeModel(data);
 			doubleTreeLayout(myDiagram2,node.relationRes);
 		}

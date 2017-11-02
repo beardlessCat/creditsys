@@ -13,4 +13,6 @@ public interface RecommendCourseService {
 	public List<String> getList(List<String> list,Queue<String> queue) ;
 	//拼成数据格式
 	public List<Map<String,String>> initData(List<String> list)  ;
+	//获得全部需要课程
+	public List<String> getAllNeedCourse(Relation relation) ;
 }

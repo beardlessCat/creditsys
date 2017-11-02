@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.auth.service.SysUserService;
 import com.creidtsys.apps.auth.service.UserService;
 import com.creidtsys.apps.courseManage.entity.Course;
 import com.creidtsys.apps.courseManage.entity.CourseDepend;
@@ -38,6 +39,7 @@ import com.creidtsys.apps.manage.entity.ResultInfo;
 import com.creidtsys.apps.manage.service.RelationService;
 import com.creidtsys.apps.manage.service.ResultInfoService;
 import com.creidtsys.utils.JsonMessage;
+import com.creidtsys.utils.ShiroUtils;
 import com.creidtsys.utils.UtilTools;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -62,13 +64,14 @@ public class RecommendCourseController {
 	@Resource
 	private UserService userService;
 	@Resource
+	private SysUserService sysUserService ;
+	@Resource
 	private PlanRelationService planRelationService ;
 	@Resource
 	private MajorService majorService ;
 	private static ObjectMapper mapper = new ObjectMapper();
 	private List<String> needList ;
 	private String unChoosedStr = "";
-	private List<String> allCourseList =null ;
 	private List<String> choosedCourseList =null ;
 	private String positionNameS = null ;
 	private final String CHOOSEINDEX="/jsp/courseManager/recommendCourse/recommendIndex";
@@ -140,7 +143,8 @@ public class RecommendCourseController {
 		//获取当前用户
 		//UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
 		//获取用户id以判断是否已经对课程选择，判断条件用户与对应的课程的成绩中是否有数据
-		String userId = "" ;//userDetails.getPassword() ;
+		String userId = "1" ;//userDetails.getPassword() ;
+		
 		ResultInfo resultInfo = new ResultInfo();
 		resultInfo.setRiUserId(userId);
 		List<ResultInfo> inList = resultInfoService.getChoose(resultInfo);;
@@ -153,6 +157,10 @@ public class RecommendCourseController {
 				}
 			}*/
 		}
+		Relation relation = new Relation() ;
+		relation.setRelationId(relationId);
+        List<String> allCourseList = recommendCourseService.getAllNeedCourse(relation) ;
+
 		choosedCourseList = new ArrayList<String>(choosedList);
 		unChoosedStr="";
 		List<Map<String,String>> list = new ArrayList<Map<String,String>>() ;
@@ -211,9 +219,11 @@ public class RecommendCourseController {
 	@ResponseBody
 	private List<Map<String,String>>  allCourseUnChoosed(){
 		//获取当前用户
+		String userNo = ShiroUtils.getLoginName() ;
+		String userId = sysUserService.getUserByLoginName(userNo).getUserId() ;
+		
 	//	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
 		//获取用户id以判断是否已经对课程选择，判断条件用户与对应的课程的成绩中是否有数据
-		String userId ="" ;// userDetails.getPassword() ;
 		ResultInfo resultInfo = new ResultInfo();
 		resultInfo.setRiUserId(userId);
 		List<ResultInfo> inList = resultInfoService.getChoose(resultInfo);;
@@ -221,9 +231,9 @@ public class RecommendCourseController {
 		//----
 		if(inList.size()>0){
 			for(ResultInfo r:inList){
-				/*if(!choosedList.contains(r.getCourseId())){
+				if(!choosedList.contains(r.getCourseId())){
 					choosedList.add(r.getCourseId());
-				}*/
+				}
 			}
 		}
 		choosedCourseList = new ArrayList<String>(choosedList);

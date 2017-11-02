@@ -32,6 +32,8 @@ public class RecommendCourseServiceImpl implements RecommendCourseService{
 	//=====================================================换成dao
 	@Resource
 	private CourseDependDao courseDependDao ;
+	
+	
 	@Override
 	public List<Map<String, String>> getCourseGra(Relation relation) {
 		// TODO Auto-generated method stub
@@ -192,6 +194,35 @@ public class RecommendCourseServiceImpl implements RecommendCourseService{
 			}
 		}
 		return listMap ;
+	}
+	@Override
+	public List<String> getAllNeedCourse(Relation relation) {
+		// TODO Auto-generated method stub
+		//根据职位获得对应的全部知识点
+		List<Relation> list = relationDao.getAllPoint(relation.getRelationId());
+		//定义存放所有知识点对应的课程id的集合
+		List<String> sIdList = new ArrayList<String>();
+		//循环获得知识点对应的课程id
+		for(int i=0;i<list.size();i++ ){
+			String pointId = list.get(i).getOtherId();
+			//根据知识点查询课程id
+			List<CourseRelation> reList =  courseRelationService.getCourse(pointId); 
+			for(int j=0;j<reList.size();j++){
+				String sId = reList.get(j).getSrOtherId();
+				if(!sIdList.contains(sId)){
+					sIdList.add(sId);
+				}
+			}
+		}		
+		//新建newIdParamList 内容为课程id的集合
+		List<String> newIdParamList = new ArrayList<String>(sIdList) ;
+		Queue<String> queue = new LinkedList<String>();
+		for(String id :newIdParamList){
+			queue.offer(id);
+		}
+		//递归查询所有的相关课程
+		
+		return getList(newIdParamList,queue);
 	}
 
 }
