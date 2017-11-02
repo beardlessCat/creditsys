@@ -73,9 +73,11 @@ function doSave(dialog){
 		dataType:'json',
 		async: false,
 		data:{
-			relationId:node.relationId,
-			relationRes:mode.relationRes
-		},
+			data:JSON.stringify({
+				relationId:node.relationId,
+				relationRes:node.relationRes
+			})
+		} ,
 		success:function(data){
 			 dialog.close();
 			myDiagram.model = new go.TreeModel(data);

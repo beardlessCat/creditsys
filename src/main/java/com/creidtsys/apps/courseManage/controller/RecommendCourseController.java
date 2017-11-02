@@ -32,6 +32,7 @@ import com.creidtsys.apps.courseManage.service.CourseRelationService;
 import com.creidtsys.apps.courseManage.service.CourseService;
 import com.creidtsys.apps.courseManage.service.MajorService;
 import com.creidtsys.apps.courseManage.service.PlanRelationService;
+import com.creidtsys.apps.courseManage.service.RecommendCourseService;
 import com.creidtsys.apps.manage.entity.Relation;
 import com.creidtsys.apps.manage.entity.ResultInfo;
 import com.creidtsys.apps.manage.service.RelationService;
@@ -46,6 +47,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @RequestMapping("/recommendCourse") 
 public class RecommendCourseController {
+	@Resource
+	private RecommendCourseService recommendCourseService ;
 	@Resource
 	private RelationService relationService ;
 	@Resource
@@ -93,135 +96,19 @@ public class RecommendCourseController {
 	private List<Map<String,String>>  allCourse(String data) throws JsonParseException, JsonMappingException, IOException{
 		Relation relation= mapper.readValue(data, new TypeReference<Relation>() { 
 		 });
-		//根据职位获得对应的全部知识点
-		List<Relation> list = relationService.getAllPoint(relation.getRelationId());
-		//定义存放所有知识点对应的课程id的集合
-		List<String> sIdList = new ArrayList<String>();
-		//获得选中的职位名称
-		String positionName = relation.getRelationRes();
-		positionNameS=positionName ;
-		//循环获得知识点对应的课程id
-		for(int i=0;i<list.size();i++ ){
-			String pointId = list.get(i).getOtherId();
-			//根据知识点查询课程id
-			List<CourseRelation> reList =  courseRelationService.getCourse(pointId); 
-			for(int j=0;j<reList.size();j++){
-				String sId = reList.get(j).getSrOtherId();
-				if(!sIdList.contains(sId)){
-					sIdList.add(sId);
-				}
-			}
-		}				
-		List<String> newIdParamList = new ArrayList<String>(sIdList) ;
-		Queue<String> queue = new LinkedList<String>();
-		for(String id :newIdParamList){
-			queue.offer(id);
-		}
-		//获取没个课程的id
-		List<String> finalList= getList(newIdParamList,queue);
-		
-		allCourseList = new ArrayList<String>(finalList);
-		
-		
-
-		List<String> pdRootList = new ArrayList<String>() ;
-		List<String> pIdList = new ArrayList<String>();
-		for(String s :finalList){
-			List<CourseDepend> p = courseDependService.getBySid(s);
-			for(CourseDepend c:p){
-				String str = c.getCoursePid();
-				if(!pIdList.contains(str)){
-					pIdList.add(str);
-			}
-		}
+		List<Map<String,String>> list = recommendCourseService.getCourseGra(relation) ;
+	
+		return list ;
 	}
-		//pdRootList  根节点
-		for(String rootId:finalList){
-			if(!pIdList.contains(rootId)){
-				pdRootList.add(rootId) ;
-			}
-		}
-		//获取每个的pid
-		List<Map<String,String>> listMaps = initData(finalList);		
-		List<Map<String,String>> testList = new ArrayList<Map<String,String>>();
-		Map<String,String> root = new HashMap<String, String>();
-		root.put("key", positionName);
-		root.put("color", "#EF9EFA") ;
-		testList.add(root);
-		for(Map<String,String> m:listMaps){
-			//if(!choosedList.contains(m.get("sId"))&&!choosedList.contains(m.get("pSid"))){
-			Map<String,String> lmap = new HashMap<String, String>() ;
-			//判断是否有依赖，没有的话指向根节点
-			List<CourseDepend> tl =  courseDependService.getByPsid(m.get("sId"));
-			String color = "#CDDAF0";
-			if(tl.size()>0){
-				for(int l=0;l<tl.size();l++){
-					//判断叶子节点（根节点）
-					if(pdRootList.contains(tl.get(l).getCoursePid())){
-							lmap.put("parent", m.get("name"));
-							lmap.put("key", m.get("pname"));
-							lmap.put("dir", "left");
-							lmap.put("color", color);
-							if(!testList.contains(lmap)){
-								if(!lmap.get("key").equals("0")){
-									testList.add(lmap);
-								}
-							}
-							Map<String,String> mMap = new HashMap<String, String>() ;
-							mMap.put("parent", positionName);
-							mMap.put("key", m.get("name"));
-							mMap.put("dir", "left");
-							mMap.put("color", color);
-							if(!testList.contains(mMap)){
-								testList.add(mMap);
-							}
-					}else{
-						//不需指向职位节点
-						lmap.put("parent", m.get("name"));
-						lmap.put("key", m.get("pname"));
-						lmap.put("dir", "left");
-						lmap.put("color", color);
-						if(!testList.contains(lmap)){
-							if(!lmap.get("key").equals("0")){
-								testList.add(lmap);
-							}
-						}
-					}
-				}
-			}else{
-				//不需指向职位节点
-				//指向根节点
-				lmap.put("parent", m.get("name"));
-				lmap.put("key", m.get("pname"));
-				lmap.put("dir", "left");
-				lmap.put("color", color);
-				if(!testList.contains(lmap)){
-					if(!lmap.get("key").equals("0")){
-						testList.add(lmap);
-					}
-				}
-				Map<String,String> mMap = new HashMap<String, String>() ;
-				mMap.put("parent", positionName);
-				mMap.put("key", m.get("name"));
-				mMap.put("dir", "left");
-				mMap.put("color", color);
-				if(!testList.contains(mMap)){
-					testList.add(mMap);
-				}
-			}
-		}
-	//	}
-		return testList ;
-	}
-	//递归查询所有相关课程
+	//递归查询所有课程的依赖课程
 	public List<String> getList(List<String> list,Queue<String> queue){
 		List<CourseDepend> listde=  courseDependService.getBySid(queue.poll());
 		for(int n=0;n<listde.size();n++){
 			String pid = listde.get(n).getCoursePid() ;
 			if((!list.contains(pid))&&(pid!="0")){
-				list.add(pid);
-				queue.offer(pid);
-			}		
+					list.add(pid);
+					queue.offer(pid);
+				}		
 			}
 		if(queue.size()>0){
 			getList(list, queue);
