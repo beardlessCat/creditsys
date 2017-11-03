@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import com.creidtsys.apps.courseManage.entity.HTMLInfo;
 import com.creidtsys.apps.manage.entity.Relation;
 
 public interface RecommendCourseService {
@@ -17,4 +18,8 @@ public interface RecommendCourseService {
 	public List<String> getAllNeedCourse(Relation relation) ;
 	
 	public List<Map<String,String>> getTreeDate(List<String> list ,String positionName) ;
+	//初始化根据学习进度查询的树
+	List<Map<String, String>> getChoosedList(String userId, String relationId);
+	
+	HTMLInfo getRecInfo(String userId, String relationId);
 }

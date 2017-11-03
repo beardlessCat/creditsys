@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.sys.manage.entity.ResultInfoMapper">
+<mapper namespace="com.creidtsys.apps.manage.dao.ResultInfoDao">
 	<resultMap type="com.creidtsys.apps.manage.entity.ResultInfo" id="resultInfo">
 		<id column="result_id" property="resultId"/>
 		<result column="ri_paper_id" property="riPaperId"/>

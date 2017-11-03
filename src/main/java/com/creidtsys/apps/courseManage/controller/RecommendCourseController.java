@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.creidtsys.apps.auth.service.SysUserService;
 import com.creidtsys.apps.auth.service.UserService;
 import com.creidtsys.apps.courseManage.entity.Course;
-import com.creidtsys.apps.courseManage.entity.CourseDepend;
 import com.creidtsys.apps.courseManage.entity.CourseRelation;
 import com.creidtsys.apps.courseManage.entity.HTMLInfo;
 import com.creidtsys.apps.courseManage.entity.PlanRelation;
@@ -69,9 +68,6 @@ public class RecommendCourseController {
 	@Resource
 	private MajorService majorService ;
 	private static ObjectMapper mapper = new ObjectMapper();
-	private String unChoosedStr = "";
-	private List<String> choosedCourseList =null ;
-	private String positionNameS = null ;
 	private final String CHOOSEINDEX="/jsp/courseManager/recommendCourse/recommendIndex";
 	private final String LISTTREE ="/jsp/courseManager/recommendCourse/listTree" ;
 	private final String INDEX ="/jsp/auth/echarsJsp/index";
@@ -100,9 +96,6 @@ public class RecommendCourseController {
 		List<Map<String,String>> list = recommendCourseService.getCourseGra(relation) ;
 		return list ;
 	}
-	
-	
-	
 
 	@RequestMapping(value="/getHtmlInfo",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -112,163 +105,17 @@ public class RecommendCourseController {
 		//String userNo = ShiroUtils.getLoginName() ;
 		//String userId = sysUserService.getUserByLoginName(userNo).getUserId() ;
 		
-		//获取用户id以判断是否已经对课程选择，判断条件用户与对应的课程的成绩中是否有数据
+		HTMLInfo htmlInfo = recommendCourseService.getRecInfo("1",relationId) ;
 		
-		ResultInfo resultInfo = new ResultInfo();
-		resultInfo.setRiUserId("1");
-		List<ResultInfo> inList = resultInfoService.getChoose(resultInfo);;
-		List<String> choosedList = new ArrayList<String>() ;
-		if(inList.size()>0){
-			// -----------
-			for(ResultInfo r:inList){
-				if(!choosedList.contains(r.getCourseId())){
-					choosedList.add(r.getCourseId());
-				}
-			}
-		}
-		Relation relation = new Relation() ;
-		relation.setRelationId(relationId);
-		//所有的
-        List<String> allCourseList = recommendCourseService.getAllNeedCourse(relation) ;
-		choosedCourseList = new ArrayList<String>(choosedList);
-		unChoosedStr="";
-		List<Map<String,String>> list = new ArrayList<Map<String,String>>() ;
-		for(String s:allCourseList){
-			Course course = courseService.getById(s);
-			if(course!=null){
-				Map<String,String> map = new HashMap<String,String>();
-				map.put("id", s);
-				map.put("name", course.getCourseName());
-				list.add(map);
-			}
-		}
-		String allCourse="";
-		String choosed ="";
-		String unChoosed ="" ;
-		if(choosedCourseList.size()>0){
-			Queue<String> queue = new LinkedList<String>();
-			for(String id :choosedCourseList){
-				queue.offer(id);
-			}
-			//获得已选以及已选的依赖课程
-			List<String> allChoosedList = recommendCourseService.getList(choosedCourseList,queue);
-			for(Map<String,String> inMap: list){
-				if(allChoosedList.contains(inMap.get("id"))){
-					if("".equals(choosed)){
-						choosed+=inMap.get("name");
-					}else{
-						choosed+=","+inMap.get("name");
-					}
-				}else{
-					if("".equals(unChoosed)){
-						unChoosed+=inMap.get("name");
-						unChoosedStr+=inMap.get("id");
-					}else{
-						unChoosed+=","+inMap.get("name");
-						unChoosedStr+=","+inMap.get("id");
-						
-					}
-				}
-				if("".equals(allCourse)){
-					allCourse+=inMap.get("name");
-				}else{
-					allCourse+=","+inMap.get("name");
-				}
-			}
-		}
-		HTMLInfo htmlInfo = new HTMLInfo() ;
-		htmlInfo.setAllCourse(allCourse);
-		htmlInfo.setChoosed(choosed);
-		htmlInfo.setUnChoosed(unChoosed);
-		htmlInfo.setPositionName(positionNameS);
 		return new JsonMessage().success(htmlInfo) ;
 	}
 	@RequestMapping(value="/initChoosed",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	private List<Map<String,String>>  allCourseUnChoosed(){
+	private List<Map<String,String>>  allCourseUnChoosed(String relationId){
 		//获取当前用户
 		//String userNo = ShiroUtils.getLoginName() ;
 		//String userId = sysUserService.getUserByLoginName(userNo).getUserId() ;
-		//所有的		
-		Relation relation = new Relation() ;
-		relation.setRelationId(relation.getRelationId());
-        List<String> allCourseList = recommendCourseService.getAllNeedCourse(relation) ;
-		//已经选的
-        ResultInfo resultInfo = new ResultInfo();
-		resultInfo.setRiUserId("1");
-		List<ResultInfo> inList = resultInfoService.getChoose(resultInfo);
-		//获得已经选的所有相关的
-		List<String> choosedList = new ArrayList<String>() ;
-		List<String> allChoosedList = new ArrayList<String>();
-		if(inList.size()>0){
-			for(ResultInfo r:inList){
-				if(!choosedList.contains(r.getCourseId())){
-					choosedList.add(r.getCourseId());
-				}
-			}
-			Queue<String> queues = new LinkedList<String>();
-			for(String i :choosedList){
-				queues.offer(i);
-			}
-			allChoosedList =  recommendCourseService.getList(choosedList,queues) ;
-		}
-		//去除已经选的及其相关的
-		for(String s :allChoosedList ){
-			allCourseList.remove(s) ;
-		}
-		positionNameS = "java工程师" ;
-		List<Map<String,String>> list = new ArrayList<Map<String,String>>() ;
-		if(allCourseList.size()!=0){
-			Map<String, String> root =new HashMap<String, String>() ;
-			root.put("key", positionNameS);
-			root.put("color", "#EF9EFA") ;
-			list.add(root);
-			//遍历集合
-			for(int i=0;i<allCourseList.size();i++){				
-				//查询以该节点为依赖课程的课程集合
-				List<CourseDepend> lll = courseDependService.getByPsid(allCourseList.get(i));
-				Course course= courseService.getById(allCourseList.get(i));
-				//没有任何课程以他为依赖课程，则指向根节点,且全部位于集合内
-				boolean flag = false  ;
-				for(CourseDepend tC : lll){
-					if(allCourseList.contains(tC.getCourseSid())){
-						flag = true ;
-					}
-					if(flag){
-						continue ;
-					}
-				}
-				if(lll.size()>0 && flag){
-					//查找以该节点为pid的节点，在allCourseList中时，便指向，否则，抛弃
-					List<CourseDepend> idList = courseDependService.getByPsid(allCourseList.get(i));
-					for(int k =0;k<idList.size();k++){
-						//包含 ----指向该节点
-						if(allCourseList.contains(idList.get(k).getCourseSid())){
-							Course pCour = courseService.getById(idList.get(k).getCourseSid()) ;
-							Map<String,String> map = new HashMap<String,String>() ;
-							map.put("key",course.getCourseName());
-							map.put("parent", pCour.getCourseName());
-							map.put("dir", "left");
-							map.put("color", "#CDDAF0");
-							if(!list.contains(map)){
-								list.add(map);
-							}
-						}
-					}
-				}else{	
-					Map<String, String> map =new HashMap<String, String>() ;
-					if(course!=null){
-						map.put("key",course.getCourseName());
-						map.put("parent", positionNameS);
-						map.put("dir", "left");                  
-						map.put("color", "#CDDAF0");
-						if(!list.contains(map)){
-							list.add(map);
-							}
-					}
-				}
-			}
-		}
+		List<Map<String,String>> list = recommendCourseService.getChoosedList("1",relationId) ;
 		return list;
 	}
 	@RequestMapping(value="/reByPlan" )
@@ -291,8 +138,6 @@ public class RecommendCourseController {
 				}
 			}
 		}		
-		
-		
 		//通过用户获取专业id
 	//	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
 		String userId ="";// userDetails.getPassword();

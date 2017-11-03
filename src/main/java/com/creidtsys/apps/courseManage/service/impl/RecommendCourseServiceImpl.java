@@ -12,14 +12,20 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.creidtsys.apps.courseManage.dao.CourseDao;
 import com.creidtsys.apps.courseManage.dao.CourseDependDao;
 import com.creidtsys.apps.courseManage.dao.CourseRelationDao;
+import com.creidtsys.apps.courseManage.entity.Course;
 import com.creidtsys.apps.courseManage.entity.CourseDepend;
 import com.creidtsys.apps.courseManage.entity.CourseRelation;
+import com.creidtsys.apps.courseManage.entity.HTMLInfo;
 import com.creidtsys.apps.courseManage.service.CourseRelationService;
 import com.creidtsys.apps.courseManage.service.RecommendCourseService;
 import com.creidtsys.apps.manage.dao.RelationDao;
+import com.creidtsys.apps.manage.dao.ResultInfoDao;
 import com.creidtsys.apps.manage.entity.Relation;
+import com.creidtsys.apps.manage.entity.ResultInfo;
+import com.creidtsys.apps.manage.service.ResultInfoService;
 @Service("recommendCourseService")
 public class RecommendCourseServiceImpl implements RecommendCourseService{
 	@Resource
@@ -28,7 +34,10 @@ public class RecommendCourseServiceImpl implements RecommendCourseService{
 	private CourseRelationDao courseRelationDao ;
 	@Autowired
 	private CourseRelationService courseRelationService ;
-	
+	@Resource
+	private CourseDao courseDao ;
+	@Resource
+	private ResultInfoDao  resultInfoDao ;
 	//=====================================================换成dao
 	@Resource
 	private CourseDependDao courseDependDao ;
@@ -319,5 +328,163 @@ public class RecommendCourseServiceImpl implements RecommendCourseService{
 			}
 		}
 		return listMap ;
+	}
+	@Override
+	public List<Map<String, String>> getChoosedList(String userId,String relationId) {
+		// TODO Auto-generated method stub
+		//所有的		
+		Relation relation = new Relation() ;
+		relation.setRelationId(relationId);
+        List<String> allCourseList = getAllNeedCourse(relation) ;
+		//已经选的
+        ResultInfo resultInfo = new ResultInfo();
+		resultInfo.setRiUserId(userId);
+		List<ResultInfo> inList = resultInfoDao.getChoosedCourse(resultInfo);
+		//获得已经选的所有相关的
+		List<String> choosedList = new ArrayList<String>() ;
+		List<String> allChoosedList = new ArrayList<String>();
+		if(inList.size()>0){
+			for(ResultInfo r:inList){
+				if(!choosedList.contains(r.getCourseId())){
+					choosedList.add(r.getCourseId());
+				}
+			}
+			Queue<String> queues = new LinkedList<String>();
+			for(String i :choosedList){
+				queues.offer(i);
+			}
+			allChoosedList =  getList(choosedList,queues) ;
+		}
+		//去除已经选的及其相关的
+		for(String s :allChoosedList ){
+			allCourseList.remove(s) ;
+		}
+		String positionNameS = "java工程师" ;
+		List<Map<String,String>> list = new ArrayList<Map<String,String>>() ;
+		if(allCourseList.size()!=0){
+			Map<String, String> root =new HashMap<String, String>() ;
+			root.put("key", positionNameS);
+			root.put("color", "#EF9EFA") ;
+			list.add(root);
+			//遍历集合
+			for(int i=0;i<allCourseList.size();i++){				
+				//查询以该节点为依赖课程的课程集合
+				List<CourseDepend> lll = courseDependDao.getByPsid(allCourseList.get(i));
+				Course course= courseDao.getById(allCourseList.get(i));
+				//没有任何课程以他为依赖课程，则指向根节点,且全部位于集合内
+				boolean flag = false  ;
+				for(CourseDepend tC : lll){
+					if(allCourseList.contains(tC.getCourseSid())){
+						flag = true ;
+					}
+					if(flag){
+						continue ;
+					}
+				}
+				if(lll.size()>0 && flag){
+					//查找以该节点为pid的节点，在allCourseList中时，便指向，否则，抛弃
+					List<CourseDepend> idList = courseDependDao.getByPsid(allCourseList.get(i));
+					for(int k =0;k<idList.size();k++){
+						//包含 ----指向该节点
+						if(allCourseList.contains(idList.get(k).getCourseSid())){
+							Course pCour = courseDao.getById(idList.get(k).getCourseSid()) ;
+							Map<String,String> map = new HashMap<String,String>() ;
+							map.put("key",course.getCourseName());
+							map.put("parent", pCour.getCourseName());
+							map.put("dir", "left");
+							map.put("color", "#CDDAF0");
+							if(!list.contains(map)){
+								list.add(map);
+							}
+						}
+					}
+				}else{	
+					Map<String, String> map =new HashMap<String, String>() ;
+					if(course!=null){
+						map.put("key",course.getCourseName());
+						map.put("parent", positionNameS);
+						map.put("dir", "left");                  
+						map.put("color", "#CDDAF0");
+						if(!list.contains(map)){
+							list.add(map);
+						}
+					}
+				}
+			}
+		}
+		return list;
+	}
+	@Override
+	public HTMLInfo getRecInfo(String userId, String relationId) {
+		// TODO Auto-generated method stub
+		//获取用户id以判断是否已经对课程选择，判断条件用户与对应的课程的成绩中是否有数据
+		String unChoosedStr="";
+		String positionNameS = "" ;
+		ResultInfo resultInfo = new ResultInfo();
+		resultInfo.setRiUserId(userId);
+		List<ResultInfo> inList = resultInfoDao.getChoosedCourse(resultInfo);;
+		List<String> choosedList = new ArrayList<String>() ;
+		if(inList.size()>0){
+			for(ResultInfo r:inList){
+				if(!choosedList.contains(r.getCourseId())){
+					choosedList.add(r.getCourseId());
+				}
+			}
+		}
+		Relation relation = new Relation() ;
+		relation.setRelationId(relationId);
+		//所有的
+        List<String> allCourseList = getAllNeedCourse(relation) ;
+		List<String> choosedCourseList = new ArrayList<String>(choosedList);
+		
+		List<Map<String,String>> list = new ArrayList<Map<String,String>>() ;
+		for(String s:allCourseList){
+			Course course = courseDao.getById(s);
+			if(course!=null){
+				Map<String,String> map = new HashMap<String,String>();
+				map.put("id", s);
+				map.put("name", course.getCourseName());
+				list.add(map);
+			}
+		}
+		String allCourse="";
+		String choosed ="";
+		String unChoosed ="" ;
+		if(choosedCourseList.size()>0){
+			Queue<String> queue = new LinkedList<String>();
+			for(String id :choosedCourseList){
+				queue.offer(id);
+			}
+			//获得已选以及已选的依赖课程
+			List<String> allChoosedList = getList(choosedCourseList,queue);
+			for(Map<String,String> inMap: list){
+				if(allChoosedList.contains(inMap.get("id"))){
+					if("".equals(choosed)){
+						choosed+=inMap.get("name");
+					}else{
+						choosed+=","+inMap.get("name");
+					}
+				}else{
+					if("".equals(unChoosed)){
+						unChoosed+=inMap.get("name");
+						unChoosedStr+=inMap.get("id");
+					}else{
+						unChoosed+=","+inMap.get("name");
+						unChoosedStr+=","+inMap.get("id");
+					}
+				}
+				if("".equals(allCourse)){
+					allCourse+=inMap.get("name");
+				}else{
+					allCourse+=","+inMap.get("name");
+				}
+			}
+		}
+		HTMLInfo htmlInfo = new HTMLInfo() ;
+		htmlInfo.setAllCourse(allCourse);
+		htmlInfo.setChoosed(choosed);
+		htmlInfo.setUnChoosed(unChoosed);
+		htmlInfo.setPositionName(positionNameS);
+		return htmlInfo;
 	}
 }

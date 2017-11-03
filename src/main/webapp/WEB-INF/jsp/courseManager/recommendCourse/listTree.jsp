@@ -119,5 +119,5 @@ function doSave(dialog){
 		     	<a id="querybtn" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
 		     	<a id="clearBtn" class="easyui-linkbutton" data-options="iconCls:'icon-search'">清空</a>
 			</div>
-			<table id="restree" calss="easyui-datagrid" style="height: 700px%"></table>
+			<table id="restree" calss="easyui-datagrid" style="height: 700px"></table>
 		</div>   	 
