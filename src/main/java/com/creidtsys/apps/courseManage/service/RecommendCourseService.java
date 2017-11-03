@@ -15,4 +15,6 @@ public interface RecommendCourseService {
 	public List<Map<String,String>> initData(List<String> list)  ;
 	//获得全部需要课程
 	public List<String> getAllNeedCourse(Relation relation) ;
+	
+	public List<Map<String,String>> getTreeDate(List<String> list ,String positionName) ;
 }

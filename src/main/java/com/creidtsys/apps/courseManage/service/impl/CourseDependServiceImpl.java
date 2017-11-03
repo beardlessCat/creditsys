@@ -2,6 +2,8 @@ package com.creidtsys.apps.courseManage.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.creidtsys.apps.courseManage.dao.CourseDependDao;
@@ -9,6 +11,7 @@ import com.creidtsys.apps.courseManage.entity.CourseDepend;
 import com.creidtsys.apps.courseManage.service.CourseDependService;
 @Service("courseDependService")
 public class CourseDependServiceImpl implements CourseDependService{
+	@Resource
 	private CourseDependDao  courseDependDao ;
 	@Override
 	public void add(CourseDepend courseDepend) {

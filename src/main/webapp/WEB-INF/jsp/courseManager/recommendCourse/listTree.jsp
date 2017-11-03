@@ -99,7 +99,7 @@ function doSave(dialog){
 			$("#info").html(str);
 		}
 	});
-	$.ajax({
+	 $.ajax({
 		url:'recommendCourse/initChoosed',
 		type:'POST',
 		dataType:'json',
@@ -110,7 +110,7 @@ function doSave(dialog){
 			myDiagram2.model = new go.TreeModel(data);
 			doubleTreeLayout(myDiagram2,node.relationRes);
 		}
-	});
+	}); 
 }
 </script>
 <div data-options="region:'center'">
