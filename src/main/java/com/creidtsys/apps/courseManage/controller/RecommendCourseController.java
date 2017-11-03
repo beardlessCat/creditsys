@@ -71,7 +71,7 @@ public class RecommendCourseController {
 	private final String CHOOSEINDEX="/jsp/courseManager/recommendCourse/recommendIndex";
 	private final String LISTTREE ="/jsp/courseManager/recommendCourse/listTree" ;
 	private final String INDEX ="/jsp/auth/echarsJsp/index";
-	private final String PLAN="/jspcourseManager/recommendCourse/recommeddByplan";
+	private final String PLAN="/jsp/courseManager/recommendCourse/recommeddByplan";
 	@RequestMapping("/toPlan")
 	private String toPlan(){
 		return PLAN ;
@@ -104,9 +104,7 @@ public class RecommendCourseController {
 		//UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
 		//String userNo = ShiroUtils.getLoginName() ;
 		//String userId = sysUserService.getUserByLoginName(userNo).getUserId() ;
-		
 		HTMLInfo htmlInfo = recommendCourseService.getRecInfo("1",relationId) ;
-		
 		return new JsonMessage().success(htmlInfo) ;
 	}
 	@RequestMapping(value="/initChoosed",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
