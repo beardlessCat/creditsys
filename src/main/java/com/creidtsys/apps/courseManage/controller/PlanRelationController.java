@@ -128,7 +128,7 @@ public class PlanRelationController {
 	@ResponseBody
 	public List<Map<String,String>> initDirect() throws Exception{
 	//	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
-		String userId = "" ;//userDetails.getPassword();
+		String userId = "1" ;//userDetails.getPassword();
 		String majorId = majorService.getidByUserId(userId);
 		List<PlanRelation> list = planRelationService.getAllDirect(majorId); 
 		List<Map<String,String>> listMap = new ArrayList<Map<String,String>>();

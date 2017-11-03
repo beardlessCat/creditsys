@@ -25,7 +25,6 @@ import com.creidtsys.apps.manage.dao.RelationDao;
 import com.creidtsys.apps.manage.dao.ResultInfoDao;
 import com.creidtsys.apps.manage.entity.Relation;
 import com.creidtsys.apps.manage.entity.ResultInfo;
-import com.creidtsys.apps.manage.service.ResultInfoService;
 @Service("recommendCourseService")
 public class RecommendCourseServiceImpl implements RecommendCourseService{
 	@Resource
@@ -38,7 +37,6 @@ public class RecommendCourseServiceImpl implements RecommendCourseService{
 	private CourseDao courseDao ;
 	@Resource
 	private ResultInfoDao  resultInfoDao ;
-	//=====================================================换成dao
 	@Resource
 	private CourseDependDao courseDependDao ;
 	
@@ -73,11 +71,6 @@ public class RecommendCourseServiceImpl implements RecommendCourseService{
 				}
 				//递归查询所有的相关课程
 				List<String> finalList= getList(newIdParamList,queue);
-				
-			//	allCourseList = new ArrayList<String>(finalList);
-				
-				
-
 				List<String> pdRootList = new ArrayList<String>() ;
 				List<String> pIdList = new ArrayList<String>();
 				/**
@@ -233,11 +226,7 @@ public class RecommendCourseServiceImpl implements RecommendCourseService{
 		return getList(newIdParamList,queue);
 	}
 	public List<Map<String,String>> getTreeDate(List<String> finalList , String positionName){
-	
-
 		List<String> pdRootList = new ArrayList<String>() ;
-		
-		
 		//获取每个的pid
 		List<Map<String,String>> listMaps = initDataNoPid(finalList);		
 		List<Map<String,String>> testList = new ArrayList<Map<String,String>>();
@@ -436,7 +425,6 @@ public class RecommendCourseServiceImpl implements RecommendCourseService{
 		//所有的
         List<String> allCourseList = getAllNeedCourse(relation) ;
 		List<String> choosedCourseList = new ArrayList<String>(choosedList);
-		
 		List<Map<String,String>> list = new ArrayList<Map<String,String>>() ;
 		for(String s:allCourseList){
 			Course course = courseDao.getById(s);

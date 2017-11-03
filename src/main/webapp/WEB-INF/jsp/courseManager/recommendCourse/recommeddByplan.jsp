@@ -15,7 +15,6 @@ $(function(){
 		$("#planDircct").combobox("setValue","");
 		$('#position').combotree("setValue","");
 	})
-
 	$('#querybtn').bind('click', function(){
 		var id = $("#planDircct").combobox("getValue");
 		var relationId = $('#position').combotree("getValue"); 
@@ -54,20 +53,20 @@ function initTree(){
 			border:false,
 			rownumbers:true, 
             columns:[[    
-              	        {title:'名称',field:'prName',width:'33%',align:'left',halign:'center'},    
-              	        {field:'prType',title:'类型',width:'33%',align:'center',halign:'center',formatter:fo},    
-              	        {field:'prCode',title:'代码',width:'30%',align:'center',halign:'center',editor : 'text'}, 
-              	    	/* {field:'prDept',title:'开课单位',width:'12%',align:'center',halign:'center',editor : 'text'},  
-              	    	{field:'actualCredit',title:'实际学分',width:'12%',align:'center',halign:'center',editor : 'text'}, 
-              	    	{field:'chargeCrerdit',title:'收费学分',width:'12%',align:'center',halign:'center',editor : 'text'}, 
-              	    	{field:'checkStyle',title:'考察方式',width:'12%',align:'center',halign:'center',editor : 'text'}, 
-              	    	{field:'totalPeriod',title:'总学时',width:'12%',align:'center',halign:'center',editor : 'text'}, 
-              	    	{field:'talkPeriod',title:'讲课学时',width:'12%',align:'center',halign:'center',editor : 'text'}, 
-              	    	{field:'compPeriod',title:'上机学时',width:'12%',align:'center',halign:'center',editor : 'text'}, 
-              	    	{field:'testPeriod',title:'实验',width:'12%',align:'center',halign:'center',editor : 'text'},
-              	    	{field:'startTerm',title:'建议开课周学时',width:'12%',align:'center',halign:'center',editor : 'text'}, 
-              	    	{field:'ifCharge',title:'按学分收费',width:'12%',align:'center',halign:'center',editor : 'text'}, 
-              	    	{field:'otherId',title:'来源',width:'12%',align:'center',halign:'center',hidden:true},    
+         	        {title:'名称',field:'prName',width:'33%',align:'left',halign:'center'},    
+         	        {field:'prType',title:'类型',width:'33%',align:'center',halign:'center',formatter:fo},    
+         	        {field:'prCode',title:'代码',width:'30%',align:'center',halign:'center',editor : 'text'}, 
+         	    	/* {field:'prDept',title:'开课单位',width:'12%',align:'center',halign:'center',editor : 'text'},  
+         	    	{field:'actualCredit',title:'实际学分',width:'12%',align:'center',halign:'center',editor : 'text'}, 
+         	    	{field:'chargeCrerdit',title:'收费学分',width:'12%',align:'center',halign:'center',editor : 'text'}, 
+         	    	{field:'checkStyle',title:'考察方式',width:'12%',align:'center',halign:'center',editor : 'text'}, 
+         	    	{field:'totalPeriod',title:'总学时',width:'12%',align:'center',halign:'center',editor : 'text'}, 
+         	    	{field:'talkPeriod',title:'讲课学时',width:'12%',align:'center',halign:'center',editor : 'text'}, 
+         	    	{field:'compPeriod',title:'上机学时',width:'12%',align:'center',halign:'center',editor : 'text'}, 
+         	    	{field:'testPeriod',title:'实验',width:'12%',align:'center',halign:'center',editor : 'text'},
+         	    	{field:'startTerm',title:'建议开课周学时',width:'12%',align:'center',halign:'center',editor : 'text'}, 
+         	    	{field:'ifCharge',title:'按学分收费',width:'12%',align:'center',halign:'center',editor : 'text'}, 
+         	    	{field:'otherId',title:'来源',width:'12%',align:'center',halign:'center',hidden:true},    
         */       	    ]],
               	   customAttr: {
                        parentField: 'prPid'

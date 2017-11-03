@@ -2,7 +2,6 @@ package com.creidtsys.apps.manage.service;
 
 import java.util.List;
 
-import com.creidtsys.apps.courseManage.entity.HTMLInfo;
 import com.creidtsys.apps.manage.entity.ResultInfo;
 
 public interface ResultInfoService {
