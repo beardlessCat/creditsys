@@ -38,7 +38,7 @@ CREATE FUNCTION `getResChild`(rootId VARCHAR(32))
      RETURNS LONGTEXT 
      BEGIN 
       declare fid LONGTEXT default  '0';
-      declare str LONGTEXT default rootId;
+      declare str LONGTEXT default rootId;  
       while rootId !='' do
       set fid=(SELECT sr_pid FROM course_relation  WHERE rootId=sr_id); 
      IF fid !='' THEN  

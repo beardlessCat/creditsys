@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : credit
-Source Server Version : 50717
+Source Server         : localhost_3306
+Source Server Version : 50537
 Source Host           : localhost:3306
 Source Database       : credit
 
 Target Server Type    : MYSQL
-Target Server Version : 50717
+Target Server Version : 50537
 File Encoding         : 65001
 
-Date: 2017-11-01 16:43:10
+Date: 2017-11-05 22:06:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -860,8 +860,8 @@ CREATE TABLE `result_info` (
 -- ----------------------------
 -- Records of result_info
 -- ----------------------------
-INSERT INTO `result_info` VALUES ('6923201706202106824', '5276201704112204689', '00832A3C99D2464698A6D0F0C01FF971', '59.0', null, '70');
-INSERT INTO `result_info` VALUES ('9293201706202106764', '5276201704112204689', '345706D83FE846F3A410EA36AF5EB214', '65.0', null, '70');
+INSERT INTO `result_info` VALUES ('6923201706202106824', '5276201704112204689', '1', '59.0', null, '70');
+INSERT INTO `result_info` VALUES ('9293201706202106764', '5276201704112204689', '1', '65.0', null, '70');
 
 -- ----------------------------
 -- Table structure for `sys_dept_info`
@@ -2103,6 +2103,26 @@ BEGIN
      END IF;  
      END WHILE;
  return str;
+     END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `getPlanReChild`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `getPlanReChild`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `getPlanReChild`(rootId VARCHAR(32)) RETURNS longtext CHARSET utf8
+BEGIN 
+       DECLARE str LONGTEXT ; 
+       DECLARE cid LONGTEXT ; 
+       SET str = ''; 
+       SET cid =rootId; 
+       WHILE cid is not null DO 
+         SET str= concat(str,',',cid); 
+         SELECT group_concat(pr_id) INTO cid FROM plan_relation where FIND_IN_SET(pr_pid,cid)>0; 
+       END WHILE; 
+       RETURN str; 
      END
 ;;
 DELIMITER ;

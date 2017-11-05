@@ -8,7 +8,9 @@
 <script type="text/javascript">
 $(function(){
 	initTree();
+	//职位
 	initCombotree();
+	 //专业方向
 	initCobbobox();
 	clearBtn
 	$('#clearBtn').bind('click', function(){
@@ -24,6 +26,7 @@ $(function(){
 			  return;
 		}
 		if(t.tree('getSelected')!=null){
+			//选择职业
 			if(t.tree('getSelected').relationType!="2"){
 				$.messager.alert('提示','请选择职业!','warning');
 				return;
@@ -31,6 +34,7 @@ $(function(){
 			var relationId = t.tree('getSelected').relationId; // 得到选择的节点  
 			initRecommendTree(id,relationId);
 		}else{
+			//未选择职业
 			initRecommendTree(id,"");
 		}	
 	})

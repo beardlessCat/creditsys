@@ -138,8 +138,11 @@ public class RecommendCourseController {
 		}		
 		//通过用户获取专业id
 	//	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
-		String userId ="";// userDetails.getPassword();
-		String majorId = majorService.getidByUserId(userId);
+	//	String userId ="";// userDetails.getPassword();
+	//	String majorId = majorService.getidByUserId(userId);
+	//	写死majorid ,userId进行测试
+		String majorId = "001" ;
+		String userId = "1" ;
 		PlanRelation cond = new PlanRelation();
 		cond.setMajorId(majorId);
 		cond.setPrId(id);
@@ -200,10 +203,9 @@ public class RecommendCourseController {
 		List<String> allChoosedList = new ArrayList<String>();
 		if(inList.size()>0){
 			for(ResultInfo r:inList){
-				//----
-				/*if(!choosedList.contains(r.getCourseId())){
+				if(!choosedList.contains(r.getCourseId())){
 					choosedList.add(r.getCourseId());
-				}*/
+				}
 			}
 			Queue<String> queues = new LinkedList<String>();
 			for(String i :choosedList){
@@ -221,9 +223,11 @@ public class RecommendCourseController {
 				}
 			}
 		}
+		
+	//写死入学时间测试
 		//Collections.reverse(allVourseList);
 	//	User user = userService.getById(userId);
-		String date ="" ;// user.getUserIp();
+		String date ="2015.9.1" ;// user.getUserIp();
 		String currentTerm = getInfo(date);
 		int index =0 ;
 		for(Map<String,String> cm:listTerm){
@@ -232,6 +236,10 @@ public class RecommendCourseController {
 			}
 		}
 	//	int size =allVourseList.size()%(7-index)==0?allVourseList.size()/(7-index):allVourseList.size()/(7-index)+1;
+	
+		//判断学生所属学期 需要进行优化
+		
+		
 		int size =allVourseList.size()/(7-index);
 		List<List<String>> listSp= createList(allVourseList,size,7-index);
 		List<Map<String,String>> listdata = new ArrayList<Map<String,String>>();
@@ -268,7 +276,7 @@ public class RecommendCourseController {
 		int month = Integer.parseInt(date.split("\\.")[1]);		
 		Calendar calendar = Calendar.getInstance();
 		int cyera = calendar.get(Calendar.YEAR);
-		int cmonth = calendar.get(calendar.MONTH)+1;
+		int cmonth = calendar.get(Calendar.MONTH)+1;
 		int cxy = cyera-year;
 		int xxm = cmonth - month;
 		String TeamYear = "";
