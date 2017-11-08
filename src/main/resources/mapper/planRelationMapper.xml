@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 		select t.* from plan_relation t where t.pr_degree='3' and t.pr_type='4' and major_id= #{majorId}
 		union 
-		select * from (select t.* from plan_relation t start with t.pr_id=#{prId} connect by prior t.pr_id = t.pr_pid   ) where pr_type='4' and major_id= #{majorId}
+		select k.* from (select * from plan_relation where FIND_IN_SET(pr_id,getPlanReChild(#{prId}) ) ) k  where k.pr_type='4' and k.major_id= #{majorId}
 		
 	</select>
 	<select id="oneData" parameterType="String" resultMap="planRelation">
@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="check" parameterType="String" resultMap="planRelation">
 		select * from plan_relation where major_id =#{majorId} 
-	</select>
+	</select> 
 	<insert id="addCourse" parameterType="com.creidtsys.apps.courseManage.entity.PlanRelation">
 	insert into plan_relation(pr_id,pr_pid,pr_name,pr_type,pr_code,other_id,pr_degree,major_id,actual_credit,check_style,talk_period,comp_period,test_period,if_charge   )
 				values(#{prId,jdbcType=VARCHAR},

@@ -129,7 +129,11 @@ public class PlanRelationController {
 	public List<Map<String,String>> initDirect() throws Exception{
 	//	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
 		String userId = "1" ;//userDetails.getPassword();
-		String majorId = majorService.getidByUserId(userId);
+	//	String majorId = majorService.getidByUserId(userId);
+	//	String userId = "1" ;//userDetails.getPassword();
+	//	String majorId = majorService.getidByUserId(userId);
+		//写死专业进行测试
+		String majorId = "001" ;
 		List<PlanRelation> list = planRelationService.getAllDirect(majorId); 
 		List<Map<String,String>> listMap = new ArrayList<Map<String,String>>();
 		for(int i=0;i<list.size();i++){
