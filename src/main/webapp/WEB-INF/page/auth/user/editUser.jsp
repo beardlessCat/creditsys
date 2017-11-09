@@ -93,7 +93,6 @@
 	function doInit(dialog){
 		commonComboTree('userDeptId','sysDept/initDeptTree') ;
 		selected = dialog.getData("selected")[0];
-		console.log(selected)
 	 	$("#userName").textbox("setValue",selected.userName);
 		$("#userDeptId").combotree("setValue",selected.userDeptId);
 		$("#userNo").textbox("setValue",selected.userNo);
@@ -114,7 +113,7 @@
 		datas = JSON.stringify({
 			"userId":selected.userId ,
 			"userName":$('#userName').textbox('getValue'),
-			"userDeptId":"1",
+			"userDeptId":$('#userDeptId').combotree('getValue'),
 			"userNo":$('#userNo').textbox('getValue'),
 			"userPwd":$('#userPwd').textbox('getValue'),
 			"userSex":$('#userSex').combobox('getValue'),

@@ -91,7 +91,8 @@
 		delete from sys_user_info where user_id = #{userId,jdbcType=VARCHAR}
 	</delete>
 	<update id="editUser" parameterType="com.creidtsys.apps.auth.entity.SysUser">
-		update sys_user_info set  
+		update sys_user_info set 
+			user_dept_id =#{userDeptId,jdbcType=VARCHAR} ,
 			user_pwd = #{userPwd,jdbcType=VARCHAR},
 			user_name = #{userName,jdbcType=VARCHAR},
 			card_id = #{cardId,jdbcType=VARCHAR},
@@ -108,7 +109,7 @@
 			user_no = #{userNo,jdbcType=VARCHAR},
 			user_sex = #{userSex,jdbcType=VARCHAR}
 		where 
-			user_dept_id = #{userDeptId,jdbcType=VARCHAR}
+			user_id = #{userId,jdbcType=VARCHAR}
 	</update>
 	<select id="getUserByLoginName" parameterType="String" resultMap="BaseResultMap">
 		select * from sys_user_info where user_no = #{userNo,jdbcType=VARCHAR}

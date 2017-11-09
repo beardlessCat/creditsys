@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.creidtsys.apps.auth.entity.SysUser;
 import com.creidtsys.apps.auth.service.SysUserService;
 import com.creidtsys.apps.auth.service.UserService;
 import com.creidtsys.apps.courseManage.entity.Course;
@@ -38,6 +39,7 @@ import com.creidtsys.apps.manage.entity.ResultInfo;
 import com.creidtsys.apps.manage.service.RelationService;
 import com.creidtsys.apps.manage.service.ResultInfoService;
 import com.creidtsys.utils.JsonMessage;
+import com.creidtsys.utils.ShiroUtils;
 import com.creidtsys.utils.UtilTools;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -101,19 +103,18 @@ public class RecommendCourseController {
 	@ResponseBody
 	public JsonMessage getHtmlInfo(String relationId){
 		//获取当前用户
-		//UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
-		//String userNo = ShiroUtils.getLoginName() ;
-		//String userId = sysUserService.getUserByLoginName(userNo).getUserId() ;
-		HTMLInfo htmlInfo = recommendCourseService.getRecInfo("1",relationId) ;
+		String userNo = ShiroUtils.getLoginName() ;
+		String userId = sysUserService.getUserByLoginName(userNo).getUserId() ;
+		HTMLInfo htmlInfo = recommendCourseService.getRecInfo(userId,relationId) ;
 		return new JsonMessage().success(htmlInfo) ;
 	}
 	@RequestMapping(value="/initChoosed",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	private List<Map<String,String>>  allCourseUnChoosed(String relationId){
 		//获取当前用户
-		//String userNo = ShiroUtils.getLoginName() ;
-		//String userId = sysUserService.getUserByLoginName(userNo).getUserId() ;
-		List<Map<String,String>> list = recommendCourseService.getChoosedList("1",relationId) ;
+		String userNo = ShiroUtils.getLoginName() ;
+		String userId = sysUserService.getUserByLoginName(userNo).getUserId() ;
+		List<Map<String,String>> list = recommendCourseService.getChoosedList(userId,relationId) ;
 		return list;
 	}
 	@RequestMapping(value="/reByPlan" )
@@ -137,12 +138,10 @@ public class RecommendCourseController {
 			}
 		}		
 		//通过用户获取专业id
-	//	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
-	//	String userId ="";// userDetails.getPassword();
-	//	String majorId = majorService.getidByUserId(userId);
-	//	写死majorid ,userId进行测试
-		String majorId = "001" ;
-		String userId = "1" ;
+		String userNo = ShiroUtils.getLoginName() ;
+		SysUser sysUser = sysUserService.getUserByLoginName(userNo) ;
+		String userId = sysUser.getUserId();
+		String majorId = sysUser.getUserDeptId() ;
 		PlanRelation cond = new PlanRelation();
 		cond.setMajorId(majorId);
 		cond.setPrId(id);
