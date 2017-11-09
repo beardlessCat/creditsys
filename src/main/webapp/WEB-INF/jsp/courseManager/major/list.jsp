@@ -219,7 +219,7 @@ function  foeDel(value, rec, rowIndex){
 					<th data-options="field:'majorEnglishName',halign:'center',align:'center',width:120">英文名称</th>
 					<th data-options="field:'majorLength',halign:'center',align:'center',width:120">学制</th>
 					<th data-options="field:'majorDegree',halign:'center',align:'center',width:120">学位</th>	
-					<th data-options="field:'majorAcademy',halign:'center',align:'center',width:120">对等机构</th>
+					<th data-options="field:'majorAcademy',halign:'center',align:'center',width:120">所属学院</th>
 					<th data-options="field:'majorPurpose',halign:'center',align:'center',width:120">专业目标</th>
 					<th data-options="field:'majorCondition',halign:'center',align:'center',width:120">专业条件</th>
 					<th data-options="field:'majorOverview',halign:'center',align:'center',width:120">专业概述</th>

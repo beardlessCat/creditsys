@@ -1,6 +1,7 @@
 package com.creidtsys.apps.auth.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,12 +29,15 @@ import com.creidtsys.apps.auth.entity.SysUser;
 import com.creidtsys.apps.auth.service.SysUserService;
 import com.creidtsys.security.realm.ShiroDbRealm;
 import com.creidtsys.utils.CipherUtil;
+import com.creidtsys.utils.DateUtils;
 import com.creidtsys.utils.JsonMessage;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
+
+import freemarker.template.utility.DateUtil;
 /**
  * 
 * @ClassName: SysUserController
@@ -184,6 +188,7 @@ public class SysUserController {
 		String pwd =  CipherUtil.generatePassword(sysUser.getUserPwd());
 		sysUser.setUserPwd(pwd);
 		sysUser.setUserId(UUID.randomUUID().toString().replaceAll("-", "").toUpperCase());
+		sysUser.setLastLogin(DateUtils.format(new Date(), "yyyy-MM-dd"));
 		userService.saveUser(sysUser);
 		return new JsonMessage().success();
 	}

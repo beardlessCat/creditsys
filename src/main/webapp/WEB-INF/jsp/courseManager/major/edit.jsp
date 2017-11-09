@@ -10,7 +10,7 @@
 							<td class="form-control" ><input id="majorCode"
 								 class="easyui-textbox"
 								data-options="required:true" style="width:250px"></td>	
-								<td class="form-label" align="right">对等机构：</td>
+								<td class="form-label" align="right">所属学院：</td>
 							<td class="form-control"><input id="majorAcademy" 
 								 class="easyui-combobox"
 								data-options="required:true" style="width:250px"></td>
@@ -60,7 +60,7 @@
   		var selected ;
   		var majorId;
 	  	function doInit(dialog){
-	  		initCombotree()
+	  		commonComboTree('majorAcademy','sysDept/initDeptTree')	; 
 	  		selected= dialog.getData("selected");
 	  		majorId=selected.majorId;
 	  		$('#majorCode').textbox('setValue',selected.majorCode);
@@ -72,33 +72,6 @@
 			$('#majorPurpose').textbox('setValue',selected.majorPurpose);
 			$('#majorCondition').textbox('setValue',selected.majorCondition);
 			$('#majorOverview').textbox('setValue',selected.majorOverview);
-	  	}
-	  	function initCombotree(){
-	  		$('#majorAcademy').combotree({
-	  			editable:false,
-	  			required:true,
-	  			cascadeCheck:false,//取消树级联
-	  			customAttr:{
-	  				dataModel: 'simpleData',
-	  				idField: 'id',
-	  	            textField: 'deptName',
-	  	            parentField: 'pid'
-	  			}
-	  		}).combotree('followCustomHandle');
-	  		$.ajax({
-	  			type : 'GET',
-	  	        url: 'dept/deptTree',
-	  	        data:{},
-	  	        dataType:'json',
-	  	        success: function(data){
-	  	            if(data){
-	  	            	$('#majorAcademy').combotree('loadData',data.data);
-	  	            }
-	  	        },
-	  	        error: function(){
-	  	            $.messager.alert('提示','组织机构初始化失败!','warning');
-	  	        }
-	  		});
 	  	}
   		function doSave(dialog){ 
   			if(!vailNull()){

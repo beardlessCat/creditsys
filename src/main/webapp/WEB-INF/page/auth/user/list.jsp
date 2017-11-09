@@ -88,7 +88,7 @@ function forPro(v){
 		     	<shiro:hasPermission name="user:add">
 		     		<a id="addbtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新增</a>
 		     	</shiro:hasPermission>
-				<shiro:hasPermission name="user:edit">
+				<shiro:hasPermission name="user:update">
 					<a id="editbtn" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改 </a>	
 				</shiro:hasPermission>
 				<shiro:hasPermission name="user:delete">

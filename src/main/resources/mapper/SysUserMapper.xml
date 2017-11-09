@@ -25,7 +25,6 @@
 		user_id,user_dept_id,user_pwd,user_name,card_id	,user_addr,	user_contact,enter_date,leave_date,	user_profess,	
 		user_status	,user_email,last_login,	school_year,remark,	user_no	,user_sex	
 	</sql>
-
 	<!-- 查询所有用户 -->
 	<select id="getAllUser" resultMap="BaseResultMap" parameterType="com.creidtsys.apps.auth.entity.SysUser">
 		select p.user_id,
@@ -77,12 +76,13 @@
 			#{cardId,jdbcType=VARCHAR},
 			#{userAddr,jdbcType=VARCHAR},
 			#{userContact,jdbcType=VARCHAR},
-			to_date(#{enterDate,jdbcType=VARCHAR},'yyyy-mm-dd'),
-			to_date(#{leaveDate,jdbcType=VARCHAR},'yyyy-mm-dd'),
+			#{enterDate,jdbcType=VARCHAR},
+			#{leaveDate,jdbcType=VARCHAR},
 			#{userProfess,jdbcType=VARCHAR},
 			#{userStatus,jdbcType=VARCHAR},
 			#{userEmail,jdbcType=VARCHAR},
-			sysdate,#{schoolYear,jdbcType=VARCHAR},
+			#{lastLogin,jdbcType=VARCHAR},
+			#{schoolYear,jdbcType=VARCHAR},
 			#{remark,jdbcType=VARCHAR},
 			#{userNo,jdbcType=VARCHAR},
 			#{userSex,jdbcType=VARCHAR})
@@ -97,8 +97,8 @@
 			card_id = #{cardId,jdbcType=VARCHAR},
 			user_addr = #{userAddr,jdbcType=VARCHAR},	
 			user_contact = #{userContact,jdbcType=VARCHAR},
-			enter_date = to_date(#{enterDate,jdbcType=VARCHAR},'yyyy-mm-dd'),
-			leave_date = to_date(#{leaveDate,jdbcType=VARCHAR},'yyyy-mm-dd'),	
+			enter_date = #{enterDate,jdbcType=VARCHAR},
+			leave_date = #{leaveDate,jdbcType=VARCHAR},	
 			user_profess = #{userProfess,jdbcType=VARCHAR},	
 			user_status	= #{userStatus,jdbcType=VARCHAR},
 			user_email = #{userEmail,jdbcType=VARCHAR},

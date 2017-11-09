@@ -95,7 +95,7 @@
 		         where sri.res_id = suri.ur_res_id
 	   				and ur_user_id=#{_parameter,jdbcType=VARCHAR})
 	   	union
-		SELECT sri.res_id,sri.res_typr, sri.res_name, sri.res_parent_id, sri.res_url,'true' checked
+		SELECT sri.res_id,sri.res_type, sri.res_name, sri.res_parent_id, sri.res_url,'true' checked
 		  FROM sys_res_info sri, sys_user_res_info suri
 		 where sri.res_id = suri.ur_res_id
 	   		and ur_user_id=#{_parameter,jdbcType=VARCHAR}

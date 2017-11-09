@@ -27,17 +27,21 @@
 		order by dept_order
 	</select>
 	<select id="getTreeDate" parameterType="String" resultMap="BaseResultMap">
-		     SELECT  
-        <include refid="Base_Column_List" />  
-        FROM  
-        sys_dept_info  
-        WHERE  1=1 
-        <if test="deptId != null">  
-            AND dept_id like #{deptId,jdbcType=VARCHAR}  
-        </if>  
-        <if test="deptParentId != null">  
-            AND dept_parent_id like #{deptParentId,jdbcType=VARCHAR}  
-        </if>  
+	select t.* from (
+		select dept_id,dept_name ,dept_parent_id 
+		from sys_dept_info		  
+		union
+		select major_id dept_id,major_name dept_name,MAJOR_ACADEMY dept_parent_id  from major
+	) t
+	where 1=1
+	<if test="deptId != null">  
+           AND t.dept_id like #{deptId,jdbcType=VARCHAR}  
+       </if>  
+       <if test="deptParentId != null">  
+           AND t.dept_parent_id like #{deptParentId,jdbcType=VARCHAR}  
+       </if>
+		
+        
 	
 	</select>
 	<insert id="addDept" parameterType="com.creidtsys.apps.auth.entity.SysDept">

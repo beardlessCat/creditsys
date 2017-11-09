@@ -51,21 +51,21 @@
 				/sysUser/toEdit = perms["user:update"]
 				<!-- 角色权限拦截 -->
 				/sysRole/list=perms["role:serch"]
-				/sysUser/toAdd = perms["role:add"]
-				/sysUser/toEdit = perms["role:update"]
+				/sysRole/toAdd = perms["role:add"]
+				/sysRole/toEdit = perms["role:update"]
 				<!-- 部门权限拦截 -->
-				/sysDept/list = perms["dept:serch"]
+				<!-- /sysDept/list = perms["dept:serch"]
 				/sysDept/toAdd = perms["dpt:add"]
-				/sysDept/toEdit = perms["dept:edit"]
+				/sysDept/toEdit = perms["dept:edit"] -->
 				<!-- 资源权限拦截 -->
 				/sysRes/list = perms["res:serch"] 
 				/sysRes/toAdd = perms["res:add"]
 				/sysRest/toEdit = perms["res:edit"]
 				<!-- 专业权限拦截 -->
-				/major/list = perms["major:serch"]
+				<!-- /major/list = perms["major:serch"]
 				/major/toAdd = perms["major:add"]
 				/major/toEdit =  perms["major:edit"]
-				/major/toCusc = perms["major:pyfa"]
+				/major/toCusc = perms["major:pyfa"] -->
 				<!-- 课程权限拦截 -->
 				/course/list = perms["course:serch"]
 				/course/toAdd = perms["course:add"]
