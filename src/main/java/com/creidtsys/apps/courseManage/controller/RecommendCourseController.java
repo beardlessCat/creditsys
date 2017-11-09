@@ -223,10 +223,8 @@ public class RecommendCourseController {
 			}
 		}
 		
-	//写死入学时间测试
-		//Collections.reverse(allVourseList);
-	//	User user = userService.getById(userId);
-		String date ="2015.9.1" ;// user.getUserIp();
+		//获得入学时间
+		String date = sysUser.getEnterDate();
 		String currentTerm = getInfo(date);
 		int index =0 ;
 		for(Map<String,String> cm:listTerm){
@@ -269,10 +267,10 @@ public class RecommendCourseController {
 		map.put("rows", listdata);
 		return map;
 	}
-	
+	//获得当前学期
 	private String getInfo(String date){
-		int year = Integer.parseInt(date.split("\\.")[0]);
-		int month = Integer.parseInt(date.split("\\.")[1]);		
+		int year = Integer.parseInt(date.split("\\-")[0]);
+		int month = Integer.parseInt(date.split("\\-")[1]);		
 		Calendar calendar = Calendar.getInstance();
 		int cyera = calendar.get(Calendar.YEAR);
 		int cmonth = calendar.get(Calendar.MONTH)+1;
@@ -282,29 +280,28 @@ public class RecommendCourseController {
 		String terM ="";	
 		if(xxm<=0){
 			terM="下学期";
-			if(cxy==1){
+			if(cxy==0){
 				TeamYear = "大一";
-			}else if(cxy==2){
+			}else if(cxy==1){
 				TeamYear = "大二";
-			}else if(cxy==3){
+			}else if(cxy==2){
 				TeamYear = "大三";
-			}else if(cxy==5){
+			}else if(cxy==3){
 				TeamYear = "大四";
 			}
 			
 		}else{
 			terM="上学期";
-			if(cxy==1){
+			if(cxy==0){
 				TeamYear = "大一";
-			}else if(cxy==2){
+			}else if(cxy==1){
 				TeamYear = "大二";
-			}else if(cxy==3){
+			}else if(cxy==2){
 				TeamYear = "大三";
-			}else if(cxy==4){
+			}else if(cxy==3){
 				TeamYear = "大四";
 			}
 		}
-		System.out.println(TeamYear+terM );
 		return TeamYear+terM ;
 	}
 	//等分list

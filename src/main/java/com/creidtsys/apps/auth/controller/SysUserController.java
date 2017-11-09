@@ -82,12 +82,11 @@ public class SysUserController {
 	@RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request, Model model) {
 		ModelAndView modelView = new ModelAndView();
-		String result = "login";
 		// 取得用户名
 		String username = request.getParameter("username");
 		// 取得 密码，并用MD5加密
-		String password = CipherUtil.generatePassword(request.getParameter("password"));
-		// String password = request.getParameter("password");
+		//String password = CipherUtil.generatePassword(request.getParameter("password"));
+		 String password = request.getParameter("password");
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		Subject currentUser = SecurityUtils.getSubject();
 		try {
