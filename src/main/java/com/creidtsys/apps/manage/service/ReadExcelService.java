@@ -10,24 +10,25 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
-import com.creidtsys.apps.auth.service.UserService;
+import com.creidtsys.apps.auth.service.SysUserService;
 import com.creidtsys.apps.manage.entity.ResultDetial;
 import com.creidtsys.apps.manage.entity.ResultInfo;
 import com.creidtsys.utils.UtilTools;
-import com.sun.rowset.internal.Row;
+
 
 @Service
 public class ReadExcelService {
 	@Resource
 	private PaperService paperService ;
 	@Resource
-	private UserService userService ;
+	private SysUserService sysUserService ;
 	@Resource
 	private ResultInfoService resultInfoService ;
 	@Resource
@@ -87,7 +88,7 @@ public class ReadExcelService {
    * @return
    */
   private List<ResultInfo> readExcelValue(Workbook wb){ 
-   /*    Sheet sheet=wb.getSheetAt(0);
+       Sheet sheet=wb.getSheetAt(0);
        this.totalRows=sheet.getPhysicalNumberOfRows();
        if(totalRows>=1 && sheet.getRow(0) != null){//判断行数大于一，并且第一行必须有标题（这里有bug若文件第一行没值就完了）
             this.totalCells=sheet.getRow(0).getPhysicalNumberOfCells();
@@ -108,10 +109,10 @@ public class ReadExcelService {
                 	   String paperId = paperService.getIdByCode(getValue(cell));
                 	   resultInfo.setRiPaperId(paperId);
                    }else if(c==3){
-                	   String userId = userService.getIdByName(getValue(cell)) ;
+                	   String userId = sysUserService.getUserByLoginName(getValue(cell)).getUserId() ;
                 	   resultInfo.setRiUserId(userId);
                 	   loName =getValue(cell) ;
-                	   resultInfo.setUserLoginName(getValue(cell));
+                	   resultInfo.setUserNo(getValue(cell));
                    }
                }
            }
@@ -119,8 +120,7 @@ public class ReadExcelService {
     		   nameList.add(loName);
     		   resultInfoList.add(resultInfo);
     	   }
-       }*/
-	   List<ResultInfo> resultInfoList=new ArrayList<ResultInfo>();//声明一个对象集合
+       }
        return resultInfoList;
   }
   
@@ -161,10 +161,10 @@ public void addResultDetial(File file, ResultInfo resultInfo) throws Exception {
        is.close();
 }
 
-//-----------------------------
+
 private void readExcelValues(Workbook wb,ResultInfo resultInfo) {
 	String resultId =resultInfo.getResultId() ;
-	/*String name = resultInfo.getUserLoginName();
+	String name = resultInfo.getUserNo() ;
 	double totalResult =0;
     List<ResultDetial> list = new ArrayList<ResultDetial>();
     Sheet sheet=wb.getSheetAt(0);
@@ -203,7 +203,7 @@ private void readExcelValues(Workbook wb,ResultInfo resultInfo) {
     }
     resultInfo.setRiResult((Double.toString(totalResult)));
     resultInfoService.editRe(resultInfo);
-*/
+
     
 }
 public static String subZeroAndDot(String s){  

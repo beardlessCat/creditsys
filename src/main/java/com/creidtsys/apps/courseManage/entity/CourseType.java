@@ -1,8 +1,9 @@
 package com.creidtsys.apps.courseManage.entity;
 
-import com.creidtsys.utils.Pager;
+import com.creidtsys.apps.auth.entity.SysUser;
 
-public class CourseType extends Pager{
+@SuppressWarnings("serial")
+public class CourseType extends SysUser{
 	private String ctypeId;
 	private String ctypeName ;
 	private String ctypeDesc ;

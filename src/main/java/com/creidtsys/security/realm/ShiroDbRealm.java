@@ -23,7 +23,6 @@ import com.creidtsys.apps.auth.entity.SysUser;
 import com.creidtsys.apps.auth.entity.SysUserRes;
 import com.creidtsys.apps.auth.service.SysUserResService;
 import com.creidtsys.apps.auth.service.SysUserService;
-import com.creidtsys.apps.auth.service.UserService;
 /**
  * 
 * @ClassName: ShiroDbRealm
@@ -34,8 +33,7 @@ import com.creidtsys.apps.auth.service.UserService;
  */
 public class ShiroDbRealm extends AuthorizingRealm {
   
-    @Autowired
-	private UserService userService;
+ 
 	@Autowired
 	private SysUserService sysUserService ;
 	@Autowired

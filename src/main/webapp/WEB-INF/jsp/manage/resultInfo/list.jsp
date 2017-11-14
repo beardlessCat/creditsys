@@ -75,7 +75,7 @@ $(function(){
 	$('#info').bind('click', function(){
 		var row = $("#dgzd").treegrid("getSelected");
 		 $.showModalDialog({
-	           title: '编辑题目成绩--'+row.userRealName,
+	           title: '编辑题目成绩--'+row.userName,
 	           content:'url:resultInfo/addInfo',
 	           data: {
 	           	selected: row,
@@ -280,7 +280,7 @@ function addInfo(rowIndex){
        });
 }
 function forRate(v,r,index){
-	return  toPercent((r.resultTotal-v)/(r.resultTotal-1));
+	return  toPercent((r.resultTotal-r.riRate)/(r.resultTotal-1));
 }
 function toPercent(point){
     var str=Number(point*100).toFixed(1);
@@ -303,13 +303,13 @@ function toPercent(point){
 			<table id="dgzd" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid">
 			<thead>
 				<tr>
-					<th data-options="field:'userLoginName',halign:'center',align:'center',width:120,hidden:true">userLoginName</th>  
+					<th data-options="field:'userNo',halign:'center',align:'center',width:120,hidden:true">userLoginName</th>  
 					<th data-options="field:'resultId',halign:'center',align:'center',width:120,hidden:true">id</th>
 					<th data-options="field:'paperName',halign:'center',align:'center',width:120">试卷名称</th>
-					<th data-options="field:'userRealName',halign:'center',align:'center',width:120">学生姓名</th>
+					<th data-options="field:'userName',halign:'center',align:'center',width:120">学生姓名</th>
 					<th data-options="field:'riResult',halign:'center',align:'center',width:120">得分</th>
 					<th data-options="field:'riRate',halign:'center',align:'center',width:120">排名</th>
-					<th data-options="field:'riRate',halign:'center',align:'center',width:120,formatter:forRate">排名百分比</th>
+					<th data-options="field:'xx',halign:'center',align:'center',width:120,formatter:forRate">排名百分比</th>
 <!-- 					<th data-options="field:'caozuo',halign:'center',align:'center',width:200,formatter:foeDel">操作</th>
  -->				</tr>
 			</thead>      

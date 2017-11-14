@@ -11,8 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ri_rate" property="riRate"/>
 		<result column="paper_name" property="paperName"/>
 		<result column="paper_id" property="paperId"/>
-		<result column="user_realname" property="userRealName"/>
-		<result column="user_loginname" property="userLoginName"/>
+	 	<result column="user_no" property="userNo"/>
+		<result column="user_name" property="userName"/>
 		<result column="id" property="id"/>
 		<result column="course_id" property="courseId"/>
 		<result column="course_code" property="courseCode"/>
@@ -33,9 +33,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<!-- ,rank() over (PARTITION BY t.ri_paper_id order by t.ri_result desc ) riRate -->
 	<select id="selectList" resultMap="resultInfo" parameterType="String">
-		select t.ri_paper_id,t.*,p.paper_name,p.paper_id,u.user_realname,u.user_loginname   from RESULT_INFO t
+		select t.*,p.paper_name,p.paper_id,u.USER_NAME,u.USER_NO   from
+ 		(SELECT  a.result_id,a.ri_result,a.ri_user_id,a.result_total,
+			IF( @riPaperId = a.ri_paper_id,@rank := @rank + 1,@rank :=1 ) AS riRate,
+			(@riPaperId := a.ri_paper_id) ri_paper_id
+          FROM result_info   a,  ( select @rank :=0,@riPaperId := NULL ) b
+		ORDER BY a.ri_paper_id, a.ri_result DESC  ) t
     	inner join paper p on t.ri_paper_id=p.paper_id
-    	inner join uc_user u on t.ri_user_id=u.id
+    	inner join sys_user_info u on t.ri_user_id=u.USER_ID
 		<if test="_parameter !=null and _parameter !=''">
 			and t.ri_paper_id=#{_parameter}
 		</if>

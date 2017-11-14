@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.creidtsys.apps.auth.entity.SysUser;
 import com.creidtsys.apps.auth.service.SysUserService;
-import com.creidtsys.apps.auth.service.UserService;
 import com.creidtsys.apps.courseManage.entity.Course;
 import com.creidtsys.apps.courseManage.entity.CourseRelation;
 import com.creidtsys.apps.courseManage.entity.HTMLInfo;
@@ -61,8 +60,6 @@ public class RecommendCourseController {
 	private ResultInfoService resultInfoService ;
 	@Resource
 	private CourseService courseService ;
-	@Resource
-	private UserService userService;
 	@Resource
 	private SysUserService sysUserService ;
 	@Resource

@@ -57,7 +57,7 @@ public class ResultInfoController {
 	public String toAddInfo(){
 		return TOADDINFO ;
 	}
-	@RequestMapping("/list")
+	@RequestMapping("/toList")
 	public String list(){
 		return LIST ;                                 
 	}

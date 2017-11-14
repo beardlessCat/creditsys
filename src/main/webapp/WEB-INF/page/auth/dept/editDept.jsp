@@ -42,11 +42,10 @@
 						 <textarea style="height:50px;width: 500" id="deptDesc"></textarea>					
 					</tr>
  				</table>
+  		</div>
   	</div>
-  	</div>
-  	<script type="text/javascript">
+<script type="text/javascript">
   	var selected ;
-  	
   	function doInit(dialog){
   		selected = dialog.getData("selected")[0];
   		commonComboTree('deptParentId','sysDept/initDeptTree')	;  	  		
@@ -59,18 +58,17 @@
   		$('#deptDesc').val(selected.deptDesc);  
 
   	}
-	  	function doSave(dialog){
-	  		datas = JSON.stringify({
-	  					"deptId" : selected.deptId ,
-						"deptName":$('#deptName').textbox('getValue'),
-		 				"deptParentId": $('#deptParentId').combotree('getValue'),
-						"deptLevel":$('#deptLevel').textbox('getValue'),
-						"deptOrder":$('#deptOrder').textbox('getValue'),
-						"deptIsValid":$('#deptIsValid').val(),
-						"deptLeader":$('#deptLeader').val() 
-						}) ;
-	
-	  		doActionForm('sysDept/edit',datas,initGrid,dialog) ;
-  		}
+  	function doSave(dialog){
+  		datas = JSON.stringify({
+  					"deptId" : selected.deptId ,
+					"deptName":$('#deptName').textbox('getValue'),
+	 				"deptParentId": $('#deptParentId').combotree('getValue'),
+					"deptLevel":$('#deptLevel').textbox('getValue'),
+					"deptOrder":$('#deptOrder').textbox('getValue'),
+					"deptIsValid":$('#deptIsValid').val(),
+					"deptLeader":$('#deptLeader').val() 
+					}) ;
 
-  	</script>
+  		doActionForm('sysDept/edit',datas,initGrid,dialog) ;
+ 		}
+</script>
