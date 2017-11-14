@@ -25,7 +25,7 @@ public class PaperRelationController {
 	
 	@Resource
 	private PaperRelationService paperRelationService ;
-	private final String TOADD = "jsp//manage/paperRelation/add" ;
+	private final String TOADD = "jsp/manage/paperRelation/add" ;
 	private final String TOLISTPAPERDETIAL="jsp/manage/paperRelation/listPaperDetial";
 	private final String TOEDIT="jsp/manage/paperRelation/edit" ;
 	private final String TOCHOOSEPOINT="jsp/manage/paperRelation/listPoint";
