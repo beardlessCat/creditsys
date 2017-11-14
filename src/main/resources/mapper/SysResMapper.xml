@@ -41,17 +41,8 @@
 	<update id="editRes" parameterType="com.creidtsys.apps.auth.entity.SysRes">
 		update sys_res_info set res_name=#{resName,jdbcType=VARCHAR},res_url =	#{resUrl,jdbcType=VARCHAR},res_code=#{resCode,jdbcType=VARCHAR},res_parent_id=#{resParentId,jdbcType=VARCHAR},res_type=#{resType,jdbcType=VARCHAR},res_order=#{resOrder,jdbcType=VARCHAR},	res_desc=#{resDesc,jdbcType=VARCHAR} where res_id =#{resId,jdbcType=VARCHAR} 
 	</update>
-	<!--  oracle版本
-		delete from sys_res_info where res_id in(  
-			SELECT res_id  
-			FROM  
-			sys_res_info  
-				CONNECT BY PRIOR res_id = res_parent_id start WITH res_id = #{resId} ) -->
-	<!-- plsql版本 -->
+	<!-- mysql版本 -->
 	<delete id="delRes" parameterType="String">
-		delete from sys_res_info where res_id in( 
-			select a.res_id from(
-			 select res_id from sys_res_info where FIND_IN_SET(res_id,getResChild(#{resId}))
-			 ) a)			
+		delete from sys_res_info where FIND_IN_SET(res_id,getResChild(#{resId}))	
 	</delete>
 </mapper>

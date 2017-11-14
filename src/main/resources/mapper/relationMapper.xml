@@ -19,11 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into relation(relation_id,relation_pid,relation_res,relation_type,relation_remake,relation_remain,other_id)values(#{relationId},#{relationPid},#{relationRes},#{relationType},#{relationRemake},#{relationRemain},#{otherId}) 
 	</insert>
 	<delete id="deleteRelation" parameterType="String">
-		delete from relation where relation_id in(  
-			SELECT relation_id  
-			FROM  
-			relation  
-				CONNECT BY PRIOR relation_id = relation_pid start WITH relation_id = #{relationId} )
+		delete from relation where FIND_IN_SET(relation_id,getCompRelaChild(#{relationId}))			
 	</delete>
 	<update id="edit" parameterType="com.creidtsys.apps.manage.entity.Relation">
 		update relation set relation_remake=#{relationRemake},relation_remain=#{relationRemain} where relation_id= #{relationId}
