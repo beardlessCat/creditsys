@@ -26,4 +26,10 @@ public interface PaperRelationDao {
 
 	PaperRelation getByOtherId(String otherId);
 
+	List<PaperRelation> getTitleList(String prId);
+
+	List<PaperRelation> getBigList(String prId);
+
+	List<PaperRelation> getSmallList(String prId);
+
 }

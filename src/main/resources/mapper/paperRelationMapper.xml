@@ -70,6 +70,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getChild" parameterType="String" resultMap="paperRelation">
 		select * from paper_relation where FIND_IN_SET (pr_id ,getPaperReChild(#{prId}))  order by pr_index
 	</select>
+	<select id="getTitleList" parameterType="String" resultMap="paperRelation">
+		select * from paper_relation where FIND_IN_SET (pr_id ,getPaperReChild(#{prId})) and type='1'  order by pr_index
+	</select>
+	<select id="getBigList" parameterType="String" resultMap="paperRelation">
+		select * from paper_relation where FIND_IN_SET (pr_id ,getPaperReChild(#{prId})) and type='2'   order by pr_index
+	</select>
+	<select id="getSmallList" parameterType="String" resultMap="paperRelation">
+		select * from paper_relation where FIND_IN_SET (pr_id ,getPaperReChild(#{prId})) and type='3'   order by pr_index
+	</select>
 	<select id="getByOtherId" parameterType="String" resultMap="paperRelation">
 		select * from paper_relation where other_id = #{otherId}
 	</select>

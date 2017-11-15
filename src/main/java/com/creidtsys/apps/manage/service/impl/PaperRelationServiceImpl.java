@@ -1,6 +1,9 @@
 package com.creidtsys.apps.manage.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -63,6 +66,41 @@ public class PaperRelationServiceImpl implements PaperRelationService{
 	public List<PaperRelation> selectByOtherId(String otherId) {
 		// TODO Auto-generated method stub
 		return paperRelationDao.selectByOtherId(otherId);
+	}
+
+	@Override
+	public List<PaperRelation> getTitleList(String paperId) {
+		// TODO Auto-generated method stub
+		PaperRelation paperRelation = paperRelationDao.getByOtherId(paperId) ;
+		// TODO Auto-generated method stub
+		//根据prid查询其所有子节点
+		return paperRelationDao.getTitleList(paperRelation.getPrId()) ;
+	}
+
+	@Override
+	public List<Map<String,Object>> getBigList(String paperId) {
+		// TODO Auto-generated method stub
+		PaperRelation paperRelation = paperRelationDao.getByOtherId(paperId) ;
+		List<PaperRelation> list=paperRelationDao.getBigList(paperRelation.getPrId()) ;
+		List<Map<String,Object>> listMap = new ArrayList<Map<String,Object>>() ;
+		for(PaperRelation relation:list){
+			List<PaperRelation> childList=paperRelationDao.getBigList(relation.getPrId()) ;
+			Map<String,Object> idMap = new HashMap<String, Object>() ;
+			idMap.put("parent", relation) ;
+			idMap.put("child", childList) ;
+			listMap.add(idMap) ;
+		}
+		//根据prid查询其所有子节点
+		return listMap ;
+	}
+
+	@Override
+	public List<PaperRelation> getSmallList(String paperId) {
+		// TODO Auto-generated method stub
+		PaperRelation paperRelation = paperRelationDao.getByOtherId(paperId) ;
+		// TODO Auto-generated method stub
+		//根据prid查询其所有子节点
+		return paperRelationDao.getSmallList(paperRelation.getPrId()) ;
 	}
 
 }

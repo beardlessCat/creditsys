@@ -25,16 +25,11 @@
     <pkg:xmlData>
       <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:ve="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml">
         <w:body>
-          
-          <#--  开始        -->
-          
-          <#--  title开始        -->
           <w:p w:rsidR="004358AB" w:rsidRDefault="00B8695A" w:rsidP="00B8695A">
             <w:pPr>
               <w:spacing w:line="220" w:lineRule="atLeast"/>
               <w:jc w:val="center"/>
               <w:rPr>
-                <w:rFonts w:hint="eastAsia"/>
                 <w:sz w:val="44"/>
                 <w:szCs w:val="44"/>
               </w:rPr>
@@ -45,15 +40,14 @@
                 <w:sz w:val="44"/>
                 <w:szCs w:val="44"/>
               </w:rPr>
-              <w:t>计算机网络试卷要点</w:t>
+              <w:t>${title}</w:t>
             </w:r>
           </w:p>
-          <#--  title结束       -->
-          
-          <#--  大题题号开始        -->
-          <w:p w:rsidR="00B8695A" w:rsidRDefault="00B8695A" w:rsidP="00B8695A">
+          <#list bigList as one>
+          <w:p w:rsidR="00B8695A" w:rsidRDefault="00B8695A" w:rsidP="00540A3C">
             <w:pPr>
               <w:pStyle w:val="4"/>
+              <w:spacing w:line="20" w:lineRule="atLeast"/>
               <w:rPr>
                 <w:rFonts w:hint="eastAsia"/>
               </w:rPr>
@@ -62,16 +56,13 @@
               <w:rPr>
                 <w:rFonts w:hint="eastAsia"/>
               </w:rPr>
-              <w:t>一：选择题</w:t>
+              <w:t>${one.parent.prName}：${one.parent.prType}</w:t>
             </w:r>
           </w:p>
-          
-           <#--  大题题号结束        -->
-           
-            <#--  小题题号开始        -->
-          <w:p w:rsidR="00DD7C4C" w:rsidRDefault="00B8695A" w:rsidP="00076F74">
+          <w:p w:rsidR="00540A3C" w:rsidRDefault="00540A3C" w:rsidP="00540A3C">
             <w:pPr>
-              <w:spacing w:line="180" w:lineRule="auto"/>
+              <w:spacing w:line="20" w:lineRule="atLeast"/>
+              <w:ind w:leftChars="200" w:left="440"/>
               <w:rPr>
                 <w:rFonts w:hint="eastAsia"/>
               </w:rPr>
@@ -80,7 +71,45 @@
               <w:rPr>
                 <w:rFonts w:hint="eastAsia"/>
               </w:rPr>
-              <w:t>1</w:t>
+              <w:t>分值：</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:hint="eastAsia"/>
+              </w:rPr>
+              <w:t>${one.parent.prScore}</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:hint="eastAsia"/>
+              </w:rPr>
+              <w:t>分</w:t>
+            </w:r>
+          </w:p>
+          <w:p w:rsidR="00540A3C" w:rsidRPr="00540A3C" w:rsidRDefault="00540A3C" w:rsidP="00540A3C">
+            <w:pPr>
+              <w:spacing w:line="20" w:lineRule="atLeast"/>
+              <w:ind w:leftChars="200" w:left="440"/>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:hint="eastAsia"/>
+              </w:rPr>
+              <w:t>描述：${one.parent.prDesc}</w:t>
+            </w:r>
+          </w:p>
+           <#list smallList as child>
+             <#if child.prPid=one.parent.prId> 
+          <w:p w:rsidR="00DD7C4C" w:rsidRDefault="00B8695A" w:rsidP="00540A3C">
+            <w:pPr>
+              <w:spacing w:line="180" w:lineRule="auto"/>
+              <w:ind w:leftChars="200" w:left="440"/>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:hint="eastAsia"/>
+              </w:rPr>
+              <w:t>${child.prName}</w:t>
             </w:r>
             <w:r>
               <w:rPr>
@@ -95,17 +124,10 @@
               <w:t>题目详情</w:t>
             </w:r>
           </w:p>
-          
-           <#--  大题题号结束       -->
-           
-            <#--  描述开始        -->
-          <w:p w:rsidR="00B8695A" w:rsidRDefault="008C3A00" w:rsidP="00DD7C4C">
+          <w:p w:rsidR="00B8695A" w:rsidRDefault="008C3A00" w:rsidP="00540A3C">
             <w:pPr>
               <w:spacing w:line="180" w:lineRule="auto"/>
-              <w:ind w:leftChars="200" w:left="440"/>
-              <w:rPr>
-                <w:rFonts w:hint="eastAsia"/>
-              </w:rPr>
+              <w:ind w:leftChars="400" w:left="880"/>
             </w:pPr>
             <w:r>
               <w:rPr>
@@ -117,18 +139,13 @@
               <w:rPr>
                 <w:rFonts w:hint="eastAsia"/>
               </w:rPr>
-              <w:t>对</w:t>
+              <w:t>${child.prDesc}</w:t>
             </w:r>
           </w:p>
-           <#--  题目描述结束        -->
-            <#--  分值开始开始        -->
-          <w:p w:rsidR="00B8695A" w:rsidRDefault="00B8695A" w:rsidP="00B8695A">
+          <w:p w:rsidR="00B8695A" w:rsidRDefault="00B8695A" w:rsidP="00540A3C">
             <w:pPr>
               <w:spacing w:line="180" w:lineRule="auto"/>
-              <w:ind w:leftChars="200" w:left="440"/>
-              <w:rPr>
-                <w:rFonts w:hint="eastAsia"/>
-              </w:rPr>
+              <w:ind w:leftChars="400" w:left="880"/>
             </w:pPr>
             <w:r>
               <w:rPr>
@@ -140,7 +157,7 @@
               <w:rPr>
                 <w:rFonts w:hint="eastAsia"/>
               </w:rPr>
-              <w:t>10000</w:t>
+              <w:t>${child.prScore}</w:t>
             </w:r>
             <w:r w:rsidR="005239F9">
               <w:rPr>
@@ -149,12 +166,10 @@
               <w:t>分</w:t>
             </w:r>
           </w:p>
-            <#--  分值结束       -->
-            <#-- 难度开始        -->
-          <w:p w:rsidR="00B8695A" w:rsidRPr="00B8695A" w:rsidRDefault="00B8695A" w:rsidP="00B8695A">
+          <w:p w:rsidR="00B8695A" w:rsidRPr="00B8695A" w:rsidRDefault="00B8695A" w:rsidP="00540A3C">
             <w:pPr>
               <w:spacing w:line="180" w:lineRule="auto"/>
-              <w:ind w:leftChars="200" w:left="440"/>
+              <w:ind w:leftChars="400" w:left="880"/>
             </w:pPr>
             <w:r>
               <w:rPr>
@@ -166,33 +181,22 @@
               <w:rPr>
                 <w:rFonts w:hint="eastAsia"/>
               </w:rPr>
-              <w:t>非常难</w:t>
+              <w:t>${child.prHard}</w:t>
             </w:r>
           </w:p>
-            <#--  难度结束        -->
+           </#if>
+          </#list>
+           </#list>
           <w:sectPr w:rsidR="00B8695A" w:rsidRPr="00B8695A" w:rsidSect="004358AB">
             <w:pgSz w:w="11906" w:h="16838"/>
             <w:pgMar w:top="1440" w:right="1800" w:bottom="1440" w:left="1800" w:header="708" w:footer="708" w:gutter="0"/>
             <w:cols w:space="708"/>
             <w:docGrid w:linePitch="360"/>
           </w:sectPr>
-          <#-- 结束        -->
-          
-          
-          
         </w:body>
       </w:document>
     </pkg:xmlData>
   </pkg:part>
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <pkg:part pkg:name="/word/theme/theme1.xml" pkg:contentType="application/vnd.openxmlformats-officedocument.theme+xml">
     <pkg:xmlData>
       <a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="Office 主题">
@@ -493,18 +497,23 @@
           <w:rsidRoot w:val="00D31D50"/>
           <w:rsid w:val="00076F74"/>
           <w:rsid w:val="00191B32"/>
+          <w:rsid w:val="00231B74"/>
           <w:rsid w:val="00323B43"/>
           <w:rsid w:val="003D37D8"/>
+          <w:rsid w:val="003F4F15"/>
           <w:rsid w:val="00426133"/>
           <w:rsid w:val="004358AB"/>
           <w:rsid w:val="005239F9"/>
+          <w:rsid w:val="00540A3C"/>
           <w:rsid w:val="008B7726"/>
           <w:rsid w:val="008C3A00"/>
           <w:rsid w:val="00B8695A"/>
+          <w:rsid w:val="00BC3F3A"/>
           <w:rsid w:val="00CE42CF"/>
           <w:rsid w:val="00D31D50"/>
           <w:rsid w:val="00DD7C4C"/>
           <w:rsid w:val="00DE1E29"/>
+          <w:rsid w:val="00EE3929"/>
           <w:rsid w:val="00EF2959"/>
         </w:rsids>
         <m:mathPr>
@@ -523,7 +532,7 @@
         <w:themeFontLang w:val="en-US" w:eastAsia="zh-CN"/>
         <w:clrSchemeMapping w:bg1="light1" w:t1="dark1" w:bg2="light2" w:t2="dark2" w:accent1="accent1" w:accent2="accent2" w:accent3="accent3" w:accent4="accent4" w:accent5="accent5" w:accent6="accent6" w:hyperlink="hyperlink" w:followedHyperlink="followedHyperlink"/>
         <w:shapeDefaults>
-          <o:shapedefaults v:ext="edit" spidmax="5122"/>
+          <o:shapedefaults v:ext="edit" spidmax="6146"/>
           <o:shapelayout v:ext="edit">
             <o:idmap v:ext="edit" data="1"/>
           </o:shapelayout>
@@ -593,10 +602,10 @@
     <pkg:xmlData>
       <Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">
         <Template>Normal.dotm</Template>
-        <TotalTime>0</TotalTime>
+        <TotalTime>1</TotalTime>
         <Pages>1</Pages>
-        <Words>8</Words>
-        <Characters>50</Characters>
+        <Words>10</Words>
+        <Characters>60</Characters>
         <Application>Microsoft Office Word</Application>
         <DocSecurity>0</DocSecurity>
         <Lines>1</Lines>
@@ -604,7 +613,7 @@
         <ScaleCrop>false</ScaleCrop>
         <Company/>
         <LinksUpToDate>false</LinksUpToDate>
-        <CharactersWithSpaces>57</CharactersWithSpaces>
+        <CharactersWithSpaces>69</CharactersWithSpaces>
         <SharedDoc>false</SharedDoc>
         <HyperlinksChanged>false</HyperlinksChanged>
         <AppVersion>12.0000</AppVersion>
@@ -617,8 +626,8 @@
         <dc:creator>Administrator</dc:creator>
         <cp:lastModifiedBy>Administrator</cp:lastModifiedBy>
         <cp:revision>2</cp:revision>
-        <dcterms:created xsi:type="dcterms:W3CDTF">2017-11-15T02:18:00Z</dcterms:created>
-        <dcterms:modified xsi:type="dcterms:W3CDTF">2017-11-15T02:18:00Z</dcterms:modified>
+        <dcterms:created xsi:type="dcterms:W3CDTF">2017-11-15T05:47:00Z</dcterms:created>
+        <dcterms:modified xsi:type="dcterms:W3CDTF">2017-11-15T05:47:00Z</dcterms:modified>
       </cp:coreProperties>
     </pkg:xmlData>
   </pkg:part>

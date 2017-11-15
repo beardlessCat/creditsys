@@ -165,6 +165,14 @@ $(function(){
             }
         }); 
 	})
+	$('#downLoad').bind('click', function(){
+		var row = $("#dgzds").treegrid("getSelected");
+		if(row==null){
+			$.messager.alert('提示','请选择一行!','warning');
+			return;
+		}
+		window.location.href='<%=basePath%>bill/downResumeDoc?paperId='+row.paperId ;
+	}) ;
 });
 //初始化数据格
 function initdatagrid(coursePaparId){
@@ -270,6 +278,7 @@ function edit(rowIndex){
             }
         });
 }
+
 $("#queryName").combobox({
 	onChange: function (n,o) {
 		initGrid(n,'1','10') ;
@@ -293,6 +302,7 @@ function initCourse(){
 				<a id="addbtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新增</a>
 				<a id="delbtn" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
 				<a id="editbtn" class="easyui-linkbutton" data-options="iconCls:'icon-add'">修改</a>
+				<a id="downLoad" class="easyui-linkbutton" data-options="iconCls:'icon-add'">下载试卷详情</a>
 				<a id="editinfo" class="easyui-linkbutton" data-options="iconCls:'icon-add'">编辑试卷内容</a>
 			</div>
 			<table id="dgzds" data-options="region:'center',rownumbers:true,singleSelect:true" class="easyui-datagrid" pagination="true">
