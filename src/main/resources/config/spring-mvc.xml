@@ -26,6 +26,16 @@
         <property name="prefix" value="/WEB-INF/"/>  
         <property name="suffix" value=".html" />    
         <property name="contentType" value="text/html;charset=UTF-8"></property>    
+    </bean>
+    <!-- 文件上传 -->
+    <bean id="multipartResolver" 
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+        <!-- 默认编码 -->
+        <property name="defaultEncoding" value="utf-8" /> 
+        <!-- 文件大小最大值 -->
+        <property name="maxUploadSize" value="10485760000" /> 
+        <!-- 内存中的最大值 -->
+        <property name="maxInMemorySize" value="40960" /> 
     </bean>  
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
