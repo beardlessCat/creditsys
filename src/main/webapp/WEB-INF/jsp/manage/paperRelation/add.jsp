@@ -35,23 +35,26 @@
 								data-options="required:true" style="width:250px">				
 						</tr>
 						<tr>
-							<td class="form-label" align="right">得分率：</td>
-							<td class="form-control" ><input id="prRate"
-								 class="easyui-textbox"
-								data-options="required:true" style="width:250px"></td>	
+							
+								<td class="form-label" align="right">上级资源：</td>
+							<td class="form-control"><input id="prPid"
+								 class="easyui-textbox"  
+								data-options="required:true,editable:false" style="width:250px">
 								<td class="form-label" align="right">资源描述：</td>
 							<td class="form-control"><input id="prDesc"
 								 class="easyui-textbox"  
 								data-options="required:true" style="width:250px">		
 						</tr>
-						<tr>
-						<td class="form-label" align="right">上级资源：</td>
-							<td class="form-control"><input id="prPid"
-								 class="easyui-textbox"  
-								data-options="required:true,editable:false" style="width:250px">	
-						</tr>
+					<!-- 	<tr>
+							<td class="form-label" align="right">得分率：</td>
+							<td class="form-control" ><input id="prRate"
+								 class="easyui-textbox"
+								data-options="required:true" style="width:250px"></td>	
+						</tr> -->
 							
   				</table>
+  				<div style="margin-top: 10px; margin-left: 50px;">
+  					<p style="color: #666">*注：名称指的是题目的题号，序号指的是所在级别排序的序号</p>  				
   				</div>
   				</div>	
   	<script type="text/javascript">
@@ -61,9 +64,11 @@
   		var node ;
   		var paperName;
   		var otherId ;
+  		var paperId ;
 	  	function doInit(dialog){
 	  		type = dialog.getData("type");
 	  		node = dialog.getData("node");
+	  		paperId = dialog.getData("paperId");
 	  		paperName =  dialog.getData("pr");
 	  		$('#prPid').textbox('setValue',node.prName);
 	  		if(type=='1'){
@@ -132,7 +137,7 @@
   		 				"prDesc": $("#prDesc").textbox('getValue'),
   		 				"prScore": $("#prScore").textbox('getValue'),
   		 				"prHard": $("#prHard").textbox('getValue'),
-  		 				"prRate": $("#prRate").textbox('getValue'),
+  		 				/* "prRate": $("#prRate").textbox('getValue'), */
   		 				"prIndex": $("#prIndex").textbox('getValue'),
   		 				"prPid":node.prId,
   		 				"otherId":otherId,
@@ -142,7 +147,7 @@
   				success : function(data) {
   					if(data.meta.success){
   						$.messager.alert('提示','保存成功!','warning');
-  						initTree(paperName);
+  						initTree(paperId);
   		           		dialog.close();
   		               }else{
   		                   $.messager.alert('error', 'error');

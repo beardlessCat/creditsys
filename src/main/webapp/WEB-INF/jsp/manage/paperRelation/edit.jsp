@@ -26,24 +26,33 @@
 								data-options="required:true" style="width:250px">				
 						</tr>
 						<tr>
-							<td class="form-label" align="right">得分率：</td>
+							<!-- <td class="form-label" align="right">得分率：</td>
 							<td class="form-control" ><input id="prRate"
 								 class="easyui-textbox"
-								data-options="required:true" style="width:250px"></td>	
+								data-options="required:true" style="width:250px"></td> -->
+								<td class="form-label" align="right">题目序号：</td>
+							<td class="form-control"><input id="prIndex"
+								 class="easyui-textbox"  
+								data-options="required:true" style="width:250px">		
 								<td class="form-label" align="right">资源描述：</td>
 							<td class="form-control"><input id="prDesc"
 								 class="easyui-textbox"  
 								data-options="required:true" style="width:250px">		
 						</tr>						
   				</table>
+  				<div style="margin-top: 10px; margin-left: 50px;">
+  					<p style="color: #666">*注：名称指的是题目的题号，序号指的是所在级别排序的序号</p>  				
+  				</div>
   				</div>
   	</div>
   	<script type="text/javascript">
   		var prId ;
   		var prName;
+  		var paperId ;
 	  	function doInit(dialog){
 	  		prId= dialog.getData("prId");
 	  		prName=dialog.getData("prName");
+	  		paperId=dialog.getData("paperId");
 	  		initDiv(prId);
 	  	}
   		function initDiv(prId){
@@ -58,7 +67,8 @@
   	  				$("#prType").textbox('setValue',data.data.prType);
   	  				$("#prScore").textbox('setValue',data.data.prScore);
   	  				$("#prHard").textbox('setValue',data.data.prHard);
-  	  				$("#prRate").textbox('setValue',data.data.prRate);
+  	  				$("#prIndex").textbox('setValue',data.data.prIndex);
+  	  				/* $("#prRate").textbox('setValue',data.data.prRate); */
 	  				$("#prDesc").textbox('setValue',data.data.prDesc);
   	  			}
   	  		})
@@ -77,7 +87,8 @@
   		 				"prType": $("#prType").textbox("getValue"),
   		 				"prScore":$('#prScore').textbox('getValue'),
   		 				"prHard":$('#prHard').textbox('getValue'),
-  		 				"prRate":$('#prRate').textbox('getValue'),
+  		 				"prIndex":$('#prIndex').textbox('getValue'),
+  		 				/* "prRate":$('#prRate').textbox('getValue'), */
   		 				"prDesc":$('#prDesc').textbox('getValue')
   						})						
   					},
@@ -85,7 +96,7 @@
   				success : function(data) {
   					if(data.meta.success){
   						$.messager.alert('提示','修改成功!','info');
-  						initTree(prName);
+  						initTree(paperId);
   						$('#restree').treegrid('expandAll')
   		           		dialog.close();
   		               }else{

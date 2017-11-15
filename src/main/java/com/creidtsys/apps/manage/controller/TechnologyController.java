@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.creidtsys.apps.manage.entity.CompanyType;
 import com.creidtsys.apps.manage.entity.Technology;
 import com.creidtsys.apps.manage.service.TechnologyService;
 import com.creidtsys.utils.JsonMessage;

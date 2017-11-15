@@ -29,6 +29,8 @@ $(function(){
 			title='添加题目';
 			type=node.type ;
 		}else{
+			$.messager.alert('提示','已经是最下级节点了!','warning');
+			return ;
 			title='添加知识点';
 			type=node.type ;
 			//choosePoint(title,type,node,pr);
@@ -40,7 +42,8 @@ $(function(){
             data: {
             	type:type,
             	node:node,
-            	pr:pr
+            	pr:pr,
+            	paperId:selected.paperId
             	},//扩展属性，给dilog页面传值
             useiframe:false,//默认false，扩展属性
             width:'800px',
@@ -125,7 +128,9 @@ function initTree(paperId){
             customAttr: {
                 parentField: 'prPid'
             },
-            onLoadSuccess: function () {  $('#restree').treegrid('collapseAll')}
+            onLoadSuccess: function () {
+            	//$('#restree').treegrid('collapseAll')
+            	}
         }).treegrid('followCustomHandle');
 	
 }
@@ -180,7 +185,8 @@ function editResource(prId){
         content:'url:paperRelation/toEditJsp', 
         data: {
         	"prId":prId,
-        	"prName":pr
+        	"prName":pr,
+        	"paperId":selected.paperId
         	},//扩展属性，给dilog页面传值
         useiframe:false,//默认false，扩展属性
         width:'800px',
