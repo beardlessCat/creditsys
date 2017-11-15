@@ -16,11 +16,11 @@ public class UtilTools {
 	  public static String getUUID32(){
 		  return UUID.randomUUID().toString().replaceAll("-", "").toUpperCase() ;
 	  }
-	    public static boolean isExcel2003(String filePath)  {  
-	         return filePath.matches("^.+\\.(?i)(xls)$");  
-	     }  
-	   
-	    public static boolean isExcel2007(String filePath)  {  
-	         return filePath.matches("^.+\\.(?i)(xlsx)$");  
-	     }  
+    public static boolean isExcel2003(String filePath)  {  
+         return filePath.matches("^.+\\.(?i)(xls)$");  
+     }  
+   
+    public static boolean isExcel2007(String filePath)  {  
+         return filePath.matches("^.+\\.(?i)(xlsx)$");  
+     }  
 }
