@@ -58,6 +58,7 @@ public class PaperRelationServiceImpl implements PaperRelationService{
 		paperRelationDao.eidtByOtherId(paperRelation) ;
 	}
 
+	
 	@Override
 	public List<PaperRelation> selectByOtherId(String otherId) {
 		// TODO Auto-generated method stub

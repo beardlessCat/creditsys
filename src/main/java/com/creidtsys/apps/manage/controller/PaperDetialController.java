@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.creidtsys.apps.manage.entity.Paper;
 import com.creidtsys.apps.manage.entity.PaperDetial;
 import com.creidtsys.apps.manage.entity.PaperRelation;
 import com.creidtsys.apps.manage.service.PaperDetialService;
