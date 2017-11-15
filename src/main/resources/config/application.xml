@@ -13,11 +13,12 @@
 				http://www.springframework.org/schema/cache 
            		http://www.springframework.org/schema/cache/spring-cache-3.1.xsd">
 	<!-- 引入jdbc配置文件 -->
-	<!-- <bean id="propertyConfigurer"
+	 <bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:config/jdbc.properties" />
-	</bean> -->
-	<context:property-placeholder location="classpath:config/jdbc.properties" ignore-resource-not-found="true" ignore-unresolvable="true" />
+		<property name="location" value="classpath:config/config.properties" />
+	</bean> 
+	<context:property-placeholder location="classpath:config/config.properties" ignore-resource-not-found="true" ignore-unresolvable="true" />
+
 	<!-- 配置数据源 -->
 	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
 		<property name="driverClassName"> <value>${jdbc_driverClassName}</value> 
