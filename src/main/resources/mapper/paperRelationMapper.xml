@@ -23,10 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into paper_relation(pr_id,pr_pid,type,pr_name,pr_type,pr_desc,pr_score,pr_hard,other_id,pr_index) values (#{prId,jdbcType=NUMERIC},#{prPid,jdbcType=VARCHAR},#{type,jdbcType=VARCHAR},#{prName,jdbcType=VARCHAR},#{prType,jdbcType=NUMERIC},#{prDesc,jdbcType=VARCHAR},#{prScore,jdbcType=VARCHAR},#{prHard,jdbcType=VARCHAR},#{otherId,jdbcType=VARCHAR},#{prIndex,jdbcType=VARCHAR})
 	</insert>
 	<delete id="delRelation" parameterType="String">
-		delete from paper_relation where pr_id in(
-			select pr_id from paper_relation
-			CONNECT BY PRIOR pr_id = pr_pid start WITH pr_id = #{prId} 
-		)
+		delete from paper_relation where FIND_IN_SET (pr_id ,getPaperReChild(#{prId}))
 	</delete>
 	<select id="getRealtionById" parameterType="String" resultMap="paperRelation">
 		select * from paper_relation where pr_id = #{prId}
@@ -64,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      </set>
 		where  other_id =#{otherId}
 	</update>
+	<!-- xxxxxxxxxxxxxxxxxxx -->
 	<select id="selectByOtherId" parameterType="String" resultMap="paperRelation">
 		select * from paper_relation CONNECT BY PRIOR pr_id = pr_pid start WITH  other_id = #{otherId}
 	</select>

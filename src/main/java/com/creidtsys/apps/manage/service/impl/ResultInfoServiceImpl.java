@@ -42,7 +42,7 @@ public class ResultInfoServiceImpl  implements ResultInfoService{
 	public Boolean isExist(ResultInfo resultInfo) {
 		// TODO Auto-generated method stub
 		boolean flag = false ;
-		List<ResultInfo> list = resultInfoDao.selectList(resultInfo) ;
+		List<ResultInfo> list = resultInfoDao.selectList(resultInfo.getPaperId()) ;
 		if(list.size()!=0){
 			flag = true ;
 		}

@@ -16,7 +16,7 @@ public interface PaperRelationDao {
 
 	void editRelation(PaperRelation paperRelation);
 
-	void deletePosition(String prId);
+	void delRelation(String prId);
 
 	void addRelation(PaperRelation paperRelation);
 

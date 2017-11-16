@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.creidtsys.apps.manage.dao.PaperRelationDao;
+import com.creidtsys.apps.manage.entity.Paper;
 import com.creidtsys.apps.manage.entity.PaperRelation;
 import com.creidtsys.apps.manage.service.PaperRelationService;
 @Service("paperRelationService")
@@ -34,7 +35,7 @@ public class PaperRelationServiceImpl implements PaperRelationService{
 	@Override
 	public void deletePosition(String prId) {
 		// TODO Auto-generated method stub
-		paperRelationDao.deletePosition(prId) ;
+		paperRelationDao.delRelation(prId); ;
 	}
 
 	@Override
@@ -61,11 +62,15 @@ public class PaperRelationServiceImpl implements PaperRelationService{
 		paperRelationDao.eidtByOtherId(paperRelation) ;
 	}
 
-	
+	//需要修改成mysql版本
 	@Override
 	public List<PaperRelation> selectByOtherId(String otherId) {
 		// TODO Auto-generated method stub
-		return paperRelationDao.selectByOtherId(otherId);
+		//先通过otherid得到prId的集合
+		PaperRelation p =  paperRelationDao.getByOtherId(otherId) ;
+		//循环prid的集合，获得所需relationRelation的集合
+		List<PaperRelation> list = paperRelationDao.getChild(p.getPrId()) ;
+		return list;
 	}
 
 	@Override

@@ -20,8 +20,8 @@
 				    success: function(data){
 				    	console.log(data.data)
 				    	  for(var i =0;i<data.data.length;i++){
-				    		initTrees(data.data[i].riPaperId,data.data[i].resultId,data.data[i].userLoginName);
-				      }  
+				    		initTrees(data.data[i].riPaperId,data.data[i].resultId,data.data[i].userNo);
+				    	  }  
 				     	if(data.meta.success){ 
 				    		$.messager.alert('提示','读取成功!','info');
 				    		initdatagrid();

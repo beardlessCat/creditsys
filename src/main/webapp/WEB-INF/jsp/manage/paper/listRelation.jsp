@@ -169,7 +169,7 @@ function delResource(prId){
 		  	        dataType:'json',
 		  	        success: function(data){
 		  	        	$.messager.alert('提示','删除成功!','info');
-		  	        	initTree(selected.paperName);
+		  	        	initTree(selected.paperId);
 		  	        },
 		  	        error: function(){
 		  	            $.messager.alert('提示','删除失败!','warning');

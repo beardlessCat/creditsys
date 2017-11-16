@@ -97,18 +97,22 @@ public class ReadExcelService {
        }
        List<ResultInfo> resultInfoList=new ArrayList<ResultInfo>();//声明一个对象集合
        List<String> nameList = new ArrayList<String>();
+       //循环每行
        for(int r=1;r<totalRows;r++){
     	   ResultInfo  resultInfo = new ResultInfo();
            Row row = sheet.getRow(r);
            String loName = null;
            if (row == null) continue;  
+           //循环每列
            for(int c = 0; c <this.totalCells; c++){ 
                Cell cell = row.getCell(c);
                if (null != cell){
                    if(c==0){
+                	   //获取试卷id
                 	   String paperId = paperService.getIdByCode(getValue(cell));
                 	   resultInfo.setRiPaperId(paperId);
                    }else if(c==3){
+                	   //获取登录名
                 	   String userId = sysUserService.getUserByLoginName(getValue(cell)).getUserId() ;
                 	   resultInfo.setRiUserId(userId);
                 	   loName =getValue(cell) ;
