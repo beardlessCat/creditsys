@@ -45,6 +45,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and t.ri_paper_id=#{_parameter}
 		</if>
 	</select>
+	
+	<select id="isExists" parameterType="com.creidtsys.apps.manage.entity.ResultInfo" resultMap="resultInfo">
+	
+		select * from RESULT_INFO where ri_user_id =#{riUserId,jdbcType=VARCHAR} and ri_paper_id = #{riPaperId,jdbcType=VARCHAR}
+	</select>
+	
 	<insert id="add" parameterType="com.creidtsys.apps.manage.entity.ResultInfo">
 	insert into RESULT_INFO(result_id,ri_paper_id,ri_user_id,ri_result,ri_rate,result_total)
 				values(#{resultId,jdbcType=VARCHAR},#{riPaperId,jdbcType=VARCHAR},#{riUserId,jdbcType=VARCHAR},#{riResult,jdbcType=VARCHAR},#{riRate,jdbcType=VARCHAR},#{resultTotal,jdbcType=VARCHAR})

@@ -23,7 +23,7 @@ import com.creidtsys.apps.manage.entity.ResultInfo;
 import com.creidtsys.utils.UtilTools;
 
 
-@Service
+@Service("readExcelService")
 public class ReadExcelService {
 	@Resource
 	private PaperService paperService ;

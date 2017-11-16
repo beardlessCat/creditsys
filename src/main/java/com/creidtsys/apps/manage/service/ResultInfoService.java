@@ -11,12 +11,14 @@ public interface ResultInfoService {
 	public void add(ResultInfo resultInfo) ;
 
 	public void editresultInfo(ResultInfo resultInfo) ;
-	public void deleteCompany(String resultId) ;
+	
+	public void deleteResult(String resultId) ;
 
 	public Boolean isExist(ResultInfo resultInfo)  ;
 
 	public List<ResultInfo> getChoose(ResultInfo resultInfo) ;
 
 	public void editRe(ResultInfo newResultInfo) 	 ;
+
 
 }

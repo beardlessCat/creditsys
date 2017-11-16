@@ -20,4 +20,6 @@ public interface ResultInfoDao {
 
 	void editRe(ResultInfo newResultInfo);
 
+	List<ResultInfo> isExists(ResultInfo resultInfo);
+
 }

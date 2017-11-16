@@ -22,7 +22,7 @@ $(function(){
 					data :{
 						"data":JSON.stringify({
 							resultId:row.resultId,
-							userLoginName:row.userLoginName
+							userNo:row.userNo
 						})},
 					//成功返回之后调用的函数             
 					success : function(data) {

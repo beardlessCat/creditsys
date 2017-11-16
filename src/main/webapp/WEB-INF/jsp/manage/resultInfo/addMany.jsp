@@ -18,10 +18,6 @@
 					url:"resultInfo/addResults",
 					dataType: "json",
 				    success: function(data){
-				    	console.log(data.data)
-				    	for(var i =0;i<data.data.length;i++){
-				    		initTrees(data.data[i].riPaperId,data.data[i].resultId,data.data[i].userNo);
-				    	  }  
 				     	if(data.meta.success){ 
 				    		$.messager.alert('提示','读取成功!','info');
 				    		initdatagrid();
@@ -33,34 +29,6 @@
 					}
 				});  
 			}
-		    function initTrees(paperId,resultId,userNo){
-				$.ajax({
-					url:'resultDetial/initPaperInfo',
-					type:'POST',
-					dataType:'json',
-					data:{
-						"data":JSON.stringify({
-						    otherId:paperId,
-							resultId:resultId,
-							userNo:userNo
-						})
-					},
-					success:function(data){
-						initDetial();
-					}
-					
-				}); 
-		  	}
-		    function initDetial(){
-		    	$.ajax({
-					url:'resultInfo/initDetial',
-					type:'POST',
-					dataType:'json',
-					success:function(data){
-						initdatagrid();
-					}
-				}); 
-		    }
 		  //提交前的一些校验
 		    function showRequest(formData, jqForm, options){
 		      if(formData[0].value=="" || formData[0].value==null){

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.creidtsys.apps.manage.dao.PaperDao;
 import com.creidtsys.apps.manage.dao.ResultInfoDao;
 import com.creidtsys.apps.manage.entity.ResultInfo;
 import com.creidtsys.apps.manage.service.ResultInfoService;
@@ -14,6 +15,8 @@ import com.creidtsys.apps.manage.service.ResultInfoService;
 public class ResultInfoServiceImpl  implements ResultInfoService{
 	@Resource
 	private ResultInfoDao resultInfoDao ;
+	@Resource
+	private PaperDao paperDao ;
 	@Override
 	public List<ResultInfo> findAll(String riPaperId) {
 		// TODO Auto-generated method stub
@@ -33,7 +36,7 @@ public class ResultInfoServiceImpl  implements ResultInfoService{
 	}
 
 	@Override
-	public void deleteCompany(String resultId) {
+	public void deleteResult(String resultId) {
 		// TODO Auto-generated method stub
 		resultInfoDao.delete(resultId) ;
 	}
@@ -42,7 +45,7 @@ public class ResultInfoServiceImpl  implements ResultInfoService{
 	public Boolean isExist(ResultInfo resultInfo) {
 		// TODO Auto-generated method stub
 		boolean flag = false ;
-		List<ResultInfo> list = resultInfoDao.selectList(resultInfo.getPaperId()) ;
+		List<ResultInfo> list = resultInfoDao.isExists(resultInfo) ;
 		if(list.size()!=0){
 			flag = true ;
 		}
@@ -60,5 +63,4 @@ public class ResultInfoServiceImpl  implements ResultInfoService{
 		// TODO Auto-generated method stub
 		resultInfoDao.editRe(newResultInfo) ;
 	}
-
 }
