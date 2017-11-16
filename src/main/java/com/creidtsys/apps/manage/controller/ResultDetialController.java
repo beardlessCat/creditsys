@@ -51,7 +51,7 @@ public class ResultDetialController {
 				resultDetial.setPrName(list.get(i).getPrName());
 				resultDetial.setType(list.get(i).getType());
 				resultDetial.setOtherId(list.get(i).getOtherId());
-				resultDetial.setUserLoginName(map.get("userLoginName"));
+				resultDetial.setUserLoginName(map.get("userNo"));
 				resultDetial.setRdIndex(list.get(i).getPrIndex());
 				resultDetial.setDetialCore(list.get(i).getPrScore());
 				resultDetialService.add(resultDetial) ;

@@ -19,7 +19,7 @@
 					dataType: "json",
 				    success: function(data){
 				    	console.log(data.data)
-				    	  for(var i =0;i<data.data.length;i++){
+				    	for(var i =0;i<data.data.length;i++){
 				    		initTrees(data.data[i].riPaperId,data.data[i].resultId,data.data[i].userNo);
 				    	  }  
 				     	if(data.meta.success){ 
@@ -33,7 +33,7 @@
 					}
 				});  
 			}
-		    function initTrees(paperId,resultId,userLoginName){
+		    function initTrees(paperId,resultId,userNo){
 				$.ajax({
 					url:'resultDetial/initPaperInfo',
 					type:'POST',
@@ -42,9 +42,10 @@
 						"data":JSON.stringify({
 						    otherId:paperId,
 							resultId:resultId,
-							userLoginName:userLoginName
+							userNo:userNo
 						})
-					},success:function(data){
+					},
+					success:function(data){
 						initDetial();
 					}
 					
